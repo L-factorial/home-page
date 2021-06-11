@@ -33,7 +33,7 @@ phases:
     commands:
       # - Install dependencies into the node_modules/ directory
       - echo Insatlling react-scripts ...
-      - npm install react-scripts
+      - cd front-end && npm install && npm install react-scripts   && cd .. 
       - echo Insatlling dependencies...
       - npm install
   build:
