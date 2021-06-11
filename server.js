@@ -1,7 +1,9 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 
-const routeHandler = require('./routes/handler.js');
+// const routeHandler = require('./routes/handler.js');
+const routeHandler = require('/routes/handler.js'); //done this to debug eb 502 issue
+
 const path = require('path');
 
 // const cors = require('cors');
