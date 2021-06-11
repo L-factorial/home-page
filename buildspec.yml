@@ -52,9 +52,17 @@ phases:
     #base-directory: location
     #discard-paths: yes
     #file-format: JunitXml | CucumberJson
-#artifacts:
-  #files:
-    # - location
+artifacts:
+  files:
+     - /front-end/src/**/*
+     - /front-end/package.json
+     - /front-end/build/**/*
+     - /scripts/**/*
+     - appspec.yml
+     - package.json
+     - server.js
+
+
     # - location
   #name: $(date +%Y-%m-%d)
   #discard-paths: yes
