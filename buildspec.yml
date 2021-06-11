@@ -54,7 +54,7 @@ phases:
     #file-format: JunitXml | CucumberJson
 artifacts:
   files:
-    - /**/*
+    - "**/*"
     #  - /front-end/src/**/*
     #  - /front-end/package.json
     #  - /front-end/build/**/*
