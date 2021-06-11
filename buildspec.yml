@@ -54,13 +54,14 @@ phases:
     #file-format: JunitXml | CucumberJson
 artifacts:
   files:
-     - /front-end/src/**/*
-     - /front-end/package.json
-     - /front-end/build/**/*
-     - /scripts/**/*
-     - appspec.yml
-     - package.json
-     - server.js
+    - /**/*
+    #  - /front-end/src/**/*
+    #  - /front-end/package.json
+    #  - /front-end/build/**/*
+    #  - /scripts/**/*
+    #  - appspec.yml
+     #- package.json
+     #- server.js
 
 
     # - location
