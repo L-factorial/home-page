@@ -1,0 +1,27 @@
+{
+  "name": "lfactorial-home-page",
+  "version": "1.0.0",
+  "description": "lfactorial's home page",
+  "main": "server.js",
+  "devDependencies": {
+    "nodemon": "^2.0.7"
+  },
+  "dependencies": {
+    "axios": "^0.21.1",
+    "body-parser": "^1.19.0",
+    "concurrently": "^6.2.0",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "node-fetch": "^2.6.1"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "server": "node server.js",
+    "client": "npm run start --prefix /front-end",
+    "devstart":"nodemon server.js",
+    "dev": "concurrently --kill-others-on-fail \"npm run server\" \"npm run client\"",
+    "bc":"npm run build --prefix ./front-end"
+  },
+  "author": "lfactorial",
+  "license": "ISC"
+}
