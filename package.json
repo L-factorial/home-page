@@ -20,7 +20,7 @@
     "client": "npm run start --prefix /front-end",
     "devstart":"nodemon server.js",
     "dev": "concurrently --kill-others-on-fail \"npm run server\" \"npm run client\"",
-    "bc":"npm run build --prefix ./front-end"
+    "buildclient":"npm run build --prefix ./front-end"
   },
   "author": "lfactorial",
   "license": "ISC"
