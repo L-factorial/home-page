@@ -32,6 +32,9 @@ phases:
   pre_build:
     commands:
       # - Install dependencies into the node_modules/ directory
+      - echo Insatlling react-scripts ...
+      - npm install react-scripts
+      - echo Insatlling dependencies...
       - npm install
   build:
     commands:
