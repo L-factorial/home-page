@@ -1,8 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 
-// const routeHandler = require('./routes/handler.js');
-const routeHandler = require('/routes/handler.js'); //done this to debug eb 502 issue
+const routeHandler = require('./routes/handler.js');
 
 const path = require('path');
 
@@ -15,8 +14,7 @@ app.use(bodyParser.urlencoded({extended:false}));
 app.use(express.static(path.join(__dirname, '/front-end/build')));
 app.use('/', routeHandler);
 
-//const PORT = 4000; // backend routing port
-const PORT = 8080; // changed to debug eb 502 gateway
+const PORT = 4000; // backend routing port
 
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}.`);
