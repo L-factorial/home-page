@@ -255,6 +255,10 @@ elastic-collision-canvas {
     padding: 0.5rem 1rem;
   }
 
+  .navigation-item a {
+    color: white;
+  }
+
   .navigation-list-header.active {
     display: flex;
   }

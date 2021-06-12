@@ -7,26 +7,6 @@ import blog from '../blogImg.png'
 
 
 function BlogCategories() {
-
-
-    // const [blogs, setBlogs] = useState([
-    //     {
-    //         title: 'JeevanKaKura',
-    //         id: 1,
-
-    //     },
-    //     {
-    //         title: 'Food',
-    //         id: 2,
-
-    //     },
-    //     {
-    //         title: 'TM',
-    //         id: 3,
-
-    //     },
-    // ]);
-
     const [blogCategories, setBlogCategories] = useState([]);
     useEffect(() => {
         fetchBlogCategories();

@@ -23,12 +23,12 @@ function Blog({ match }) {
     return (
         <div className="home">
             <CardDeck >
-                <Card style={{ width: '30rem', height: '40rem' }}>
-                    <Card.Img src={blogImg} />
+                <Card style={{ width: '45rem', height: '50rem',  overflowY: 'scroll'}}>
                     <Card.Body>
                         <Card.Title>
                             {blog.tittle}
                         </Card.Title>
+                        <Card.Subtitle><h7>Published : ${blog.published_at}  Last updated: ${blog.updated_at}</h7></Card.Subtitle>
                         <Card.Text>
                             {blog.content}
                         </Card.Text>

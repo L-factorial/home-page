@@ -40,13 +40,13 @@ function Footer() {
     <footer className="footer">
       <ul className="navigation-list-footer">
         <li className="navigation-item">
-          <div><Link to="/">Kathmandu University</Link></div>
+          <Link to="/"><div>Kathmandu University</div></Link>
         </li>
         <li className="navigation-item">
-          <div><Link to="/">MyWife</Link></div>
+          <Link to="/"><div>MyWife</div></Link>
         </li>
         <li className="navigation-item">
-          <div><Link to="/">VivAndRay</Link></div>
+          <Link to="/"><div>VivAndRay</div></Link>
         </li>
       </ul>
     </footer>

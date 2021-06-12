@@ -5,50 +5,6 @@ import { useState, useEffect } from 'react';
 import blog from '../blogImg.png'
 
 function BlogCategory({ match }) {
-    // const jeevanKaaKura = {
-    //     id: 1,
-    //     blogs: [
-    //         {
-    //             id: 1,
-    //             title: 'Earth and mars',
-
-    //         },
-    //         {
-    //             id: 2,
-    //             title: '20 kai de',
-
-    //         },
-    //         {
-    //             id: 3,
-    //             title: 'Big car',
-
-    //         },
-    //     ],
-    // }
-
-    // const food = {
-    //     id: 2,
-    //     blogs: [
-    //         {
-    //             id: 5,
-    //             title: 'Falooda',
-
-    //         },
-    //         {
-    //             id: 4,
-    //             title: 'Kimchi',
-
-    //         },
-    //         {
-    //             id: 6,
-    //             title: 'Sushi',
-
-    //         },
-    //     ],
-    // }
-
-    // const allBlogs = [jeevanKaaKura, food];
-
     const [catetgorizedBlogs, setCatetgorizedBlogs] = useState([])
 
     useEffect(() => {

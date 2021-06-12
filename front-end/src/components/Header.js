@@ -27,13 +27,13 @@ function Header() {
             </div>
             <ul className="navigation-list-header">
                 <li className="navigation-item">
-                    <div><Link to="/">Home</Link></div>
+                    <Link to="/"><div className="heade-anchor">Home</div></Link>
                 </li>
                 <li className="navigation-item">
-                    <div><Link to="/about">About</Link></div>
+                    <Link to="/about"><div>About</div></Link>
                 </li>
                 <li className="navigation-item">
-                    <div><Link to="/contactme">ContactMe</Link></div>
+                    <Link to="/contactme"><div>ContactMe</div></Link>
                 </li>
             </ul>
             <a href="#"  className="burger">
