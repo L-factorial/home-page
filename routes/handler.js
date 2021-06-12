@@ -23,7 +23,7 @@ router.get('/categories', async (req, res) => {
     // const categories = await fetch('http://localhost:1337/cateogories');
     // console.log(categories);
     // res.end(categories);
-    axios.get('http://localhost:1337/cateogories')
+    axios.get('https://lfactorial-strapi.wl.r.appspot.com/cateogories')
     .then(result => {
         res.end(JSON.stringify(result.data))
         console.log(result.data)
@@ -31,10 +31,7 @@ router.get('/categories', async (req, res) => {
 });
 
 router.get('/categories/:id', async (req, res) => {
-    // const categories = await fetch('http://localhost:1337/cateogories');
-    // console.log(categories);
-    // res.end(categories);
-    axios.get(`http://localhost:1337/cateogories/${req.params.id}`)
+    axios.get(`https://lfactorial-strapi.wl.r.appspot.com/cateogories/${req.params.id}`)
     .then(result => {
         res.end(JSON.stringify(result.data))
         console.log(result.data)
@@ -43,7 +40,7 @@ router.get('/categories/:id', async (req, res) => {
 
 
 router.get('/blogsByCategory/:categoryId', async(req, res) => {
-    const allBlogs = await axios.get('http://localhost:1337/blogs');
+    const allBlogs = await axios.get('https://lfactorial-strapi.wl.r.appspot.com/blogs');
     // const blogsJson = JSON.stringify(allBlogs.data);
     console.log(JSON.stringify(allBlogs.data))
     const categorizedBlogs = allBlogs.data.filter(blog => blog.category.id == req.params.categoryId);
@@ -51,7 +48,7 @@ router.get('/blogsByCategory/:categoryId', async(req, res) => {
 });
 
 router.get('/blogs/:id', async(req, res) => {
-    const blog = await axios.get(`http://localhost:1337/blogs/${req.params.id}`);
+    const blog = await axios.get(`https://lfactorial-strapi.wl.r.appspot.com/blogs/${req.params.id}`);
     res.end(JSON.stringify(blog.data));
 })
 
