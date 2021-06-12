@@ -5,9 +5,6 @@ const axios = require('axios')
 const path = require('path');
 
 
-router.get('(/*)?', async (req, res, next) => {
-    res.sendFile(path.join(__dirname, './../front-end/build/index.html'));
-});
 router.get('/tweets', (req, res) => {
     const str =[{
         "name":"Lfactorial",

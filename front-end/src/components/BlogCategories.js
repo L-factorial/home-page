@@ -33,6 +33,8 @@ function BlogCategories() {
     }, [])
     const fetchBlogCategories = async () => {
         const categories = await fetch('/categories');
+        console.log(categories.text())
+
         const categoriesJson = await categories.json();
         console.log(categories)
         setBlogCategories(categoriesJson)
