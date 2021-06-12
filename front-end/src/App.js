@@ -12,11 +12,6 @@ import BlogCategory from './components/BlogCategory';
 import Blog from './components/Blog';
 import CreativeProgrammingList from './components/CreativeProgrammingList';
 import CreativeProgrammingDisplay from './components/CreativeProgrammingDisplay';
-import Header1 from './components/Header1';
-import Footer1 from './components/Footer1';
-
-
-
 
 
 function App() {

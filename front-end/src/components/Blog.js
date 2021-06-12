@@ -21,8 +21,8 @@ function Blog({ match }) {
         console.log(blog)
     }
     return (
-        <div>
-            <CardDeck>
+        <div className="home">
+            <CardDeck >
                 <Card style={{ width: '30rem', height: '40rem' }}>
                     <Card.Img src={blogImg} />
                     <Card.Body>

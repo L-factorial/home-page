@@ -5,7 +5,7 @@ function stateCompare(s1, s2) {
     return (s1.cost + s1.manhattanDistToGoal()) - (s2.cost + s2.manhattanDistToGoal());
 }
 
-class EightPuzzle {
+class EightPuzzleSimulation {
     constructor(arr) {
         this.initialState = new State(arr, 0);
         this.path = [];
@@ -49,4 +49,4 @@ class EightPuzzle {
 
 }
 
-export default EightPuzzle;
+export default EightPuzzleSimulation;

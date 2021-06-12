@@ -86,3 +86,4 @@ class PrioityQueue {
         console.log(this.heap.slice(0, this.size))
     }
 }
+ export default PrioityQueue

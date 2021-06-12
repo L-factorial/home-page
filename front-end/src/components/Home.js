@@ -8,7 +8,6 @@ import cp from '../creativeProgramming.png'
 import blog from '../blogImg.png'
 import octoCat from '../Octocat.png'
 
-// import 'bootstrap/dist/css/bootstrap.min.css'
 
 function Home() {
     return(
