@@ -14,9 +14,11 @@ function BlogCategories() {
     const fetchBlogCategories = async () => {
         const categories = await fetch('/categories');
         const categoriesJson = await categories.json();
-        console.log(categories);
         setBlogCategories(categoriesJson)
+        console.log(blogCategories)
     }
+    console.log(blogCategories);
+
     return (
         <div className="home">
                 <CardDeck>

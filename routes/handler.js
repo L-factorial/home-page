@@ -32,7 +32,7 @@ router.get('/categories/:id', async (req, res) => {
     .then(result => {
         res.end(JSON.stringify(result.data))
         console.log(result.data)
-    }).catch(error => console.log(error))
+    }).catch(error => console.log(error)) 
 });
 
 
@@ -47,6 +47,45 @@ router.get('/blogsByCategory/:categoryId', async(req, res) => {
 router.get('/blogs/:id', async(req, res) => {
     const blog = await axios.get(`https://lfactorial-strapi.wl.r.appspot.com/blogs/${req.params.id}`);
     res.end(JSON.stringify(blog.data));
+})
+
+router.get('/blogs', async(req, res) => {
+    const allBlogs = await axios.get('https://lfactorial-strapi.wl.r.appspot.com/blogs');
+    res.end(JSON.stringify(allBlogs.data));
+})
+
+router.get('/blogsGroupedByCategory', async(req, res) => {
+    const allBlogs = await axios.get('https://lfactorial-strapi.wl.r.appspot.com/blogs');
+    const blogsMap = new Map();
+
+    allBlogs.data.forEach(blog => {
+        if(!blogsMap.has(blog.category.id )){
+            blogsMap.set(blog.category.id, [])
+        }
+        blogsMap.get(blog.category.id).push(blog)
+    });
+    let values = [];
+    for (const [key, value] of blogsMap.entries()) {
+        values.push(value)
+      }
+    
+    // const categorizedBlogs = values.map(sameCategoryBlogs => {blogs : sameCategoryBlogs, b:'aa' })
+    // console.log(categorizedBlogs)
+    // res.end(JSON.stringify(categorizedBlogs))
+    res.end(JSON.stringify(values));
+
+})
+
+router.get('/blogsAndCategory', async(req, res) => {
+    const allBlogs = await axios.get('https://lfactorial-strapi.wl.r.appspot.com/blogs');
+    const allCategories = await axios.get('https://lfactorial-strapi.wl.r.appspot.com/cateogories')
+
+    const blogsAndCategory= {blogs:allBlogs.data, categories: allCategories.data};
+
+    console.log(blogsAndCategory);
+    res.end(JSON.stringify(blogsAndCategory))
+    //res.end(JSON.stringify(values));
+
 })
 
 module.exports = router;

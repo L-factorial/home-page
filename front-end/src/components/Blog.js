@@ -28,7 +28,7 @@ function Blog({ match }) {
                         <Card.Title>
                             {blog.tittle}
                         </Card.Title>
-                        <Card.Subtitle><h7>Published : ${blog.published_at}  Last updated: ${blog.updated_at}</h7></Card.Subtitle>
+                        <Card.Subtitle>Published : ${blog.published_at}  Last updated: ${blog.updated_at}</Card.Subtitle>
                         <Card.Text>
                             {blog.content}
                         </Card.Text>

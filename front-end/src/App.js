@@ -7,9 +7,9 @@ import Home from './components/Home';
 
 import About from './components/About';
 import Contact from './components/Contact';
-import BlogCategories from './components/BlogCategories';
+import BlogCategories1 from './components/BlogCategories1';
 import BlogCategory from './components/BlogCategory';
-import Blog from './components/Blog';
+import Blog1 from './components/Blog1';
 import CreativeProgrammingList from './components/CreativeProgrammingList';
 import CreativeProgrammingDisplay from './components/CreativeProgrammingDisplay';
 
@@ -25,9 +25,9 @@ function App() {
           <Route path="/" component={Home} exact />
           <Route path="/about" component={About} />
           <Route path="/contactme" component={Contact} />
-          <Route path="/blogCategories" component={BlogCategories} exact />
+          <Route path="/blogCategories" component={BlogCategories1} exact />
           <Route path="/blogCategories/:id" component={BlogCategory} />
-          <Route path="/blogs/:id" component={Blog} />
+          <Route path="/blogs/:id" component={Blog1} />
           <Route path="/creativeProgramming" component={CreativeProgrammingList} exact />
           <Route path="/creativeProgramming/:id" component={CreativeProgrammingDisplay} />
         </Switch>
