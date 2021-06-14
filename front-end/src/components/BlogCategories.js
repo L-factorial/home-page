@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container, Card , CardDeck, Row} from 'react-bootstrap';
+import { Card , CardDeck, Row} from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import blog from '../blogImg.png'
