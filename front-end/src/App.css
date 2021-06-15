@@ -35,16 +35,13 @@
 }
 
 .home {
-  /* background: #18ffff; */
   background-color: white;
-  /* height:100%; */
   grid-area: mid-area;
   display: flex;
   flex-direction: row;
   justify-content:center;
   align-items: center;
   box-sizing: border-box;
-  /* border: 1px solid black; */
   border-radius: 10px;
   padding: 5px;
 }
@@ -149,9 +146,12 @@
 .simulation-title-container{
   grid-area: title;
   background-color:  rgb(81, 179, 166);
-  border-radius: 10px;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
   text-align: center;
-
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
   color: black;
   box-shadow: 2px 2px 4px rgba(0,0,0, 0.7);
 
@@ -233,14 +233,47 @@ elastic-collision-canvas {
   overflow: hidden;
 
 }
-
-
-
 /* Home cards end ***********/
+
+
+/* Creative programming card stars *************/
+.creative-programming-card .card {
+  border-radius: 10px;
+  width: 20rem;
+  height: 30rem;
+}
+.creative-programming-card .card-body {
+  padding: 0px;
+  overflow-y: scroll;
+}
+.creative-programming-card .row {
+  margin:5px;
+}
+.creative-programming-card .card-title {
+  background-color:rgb(81, 179, 166);
+  min-height: 50px;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+
+  padding-left: 20px;
+  margin: 0px;
+}
+.creative-programming-card .h5 {
+  font-size: 2rem;
+  color: white;
+}
+
+
+
+/* Creative programming card ends *************/
+
+
 
 /* Categories cards start ***********/
 .blog-categories-cards .card {
   border-radius: 10px;
+  width: 20rem;
+  height: 30rem;
 }
 .blog-categories-cards .card-body {
   padding: 0px;
@@ -250,7 +283,7 @@ elastic-collision-canvas {
   margin:5px;
 }
 .blog-categories-cards .card-title {
-  background-color: #22346A;
+  background-color:rgb(81, 179, 166);
   min-height: 50px;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
@@ -278,7 +311,7 @@ elastic-collision-canvas {
   margin:5px;
 }
 .blog-card .card-title {
-  background-color: #22346A;
+  background-color: rgb(81, 179, 166);
   min-height: 50px;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
@@ -308,6 +341,37 @@ elastic-collision-canvas {
 }
 
 /* Blog card ends ************/
+
+/* About me card starts ***********/
+.aboutme-card .card {
+  border-radius: 10px;
+  max-width: 40rem;
+}
+.aboutme-card .card-body {
+  padding: 0px;
+  overflow-y: scroll;
+}
+
+.aboutme-card .card-title {
+  background-color: rgb(81, 179, 166);
+  min-height: 50px;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+
+  padding-left: 20px;
+  margin: 0px;
+}
+
+.aboutme-card .h5 {
+  font-size: 2rem;
+  color: white;
+}
+
+.aboutme-card .card-text {
+  margin-left: 10px;
+}
+
+/* About me card ends ************/
 
 
 /* Blog boxes satrts ********/
@@ -346,6 +410,9 @@ elastic-collision-canvas {
 
 }
 /* Blog boxes ends ********/
+
+
+
 
 
 

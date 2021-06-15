@@ -27,8 +27,7 @@ function BlogCategories1() {
     const renderCards = () => {
         return (
             blogsGroupedByCategory.map(blogsByGroup =>
-                <Card style={{ width: '20rem', height: '30rem' }}>
-                    {/* <Card.Img src={blog} /> */}
+                <Card>
                     <Card.Body>
                         <Card.Title>
                             {blogsByGroup[0].category.name}
@@ -84,13 +83,27 @@ function BlogCategories1() {
         );
     }
 
+    const renderLoading = () => {
+        return(
+            <>
+                <Spinner animation="border" size="sm" />
+                <Spinner animation="border" />
+                <Spinner animation="grow" size="sm" />
+                <Spinner animation="grow" />
+                <Spinner animation="border" variant="primary" />
+                <Spinner animation="grow" variant="info" />
+                <div><h6>Loading ...</h6></div>
+            </>
+        )
+    }
+
     return (
         
         <div className="home">
             <div className="blog-categories-cards">
             <CardDeck>
               {
-                loading ? <Spinner animation="grow" /> :   renderCards()
+                loading ? renderLoading() :  renderCards()
               }
             </CardDeck>
             </div>
