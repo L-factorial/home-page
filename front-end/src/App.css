@@ -189,9 +189,7 @@ elastic-collision-canvas {
 
 
 /* Cards statrts *****************/
-.card{
-  width: 20rem;
-}
+
 
 .card:hover{
   box-shadow: 5px 10px 20px 1px rgba(0,0,0, 0.253) !important;
@@ -201,12 +199,115 @@ elastic-collision-canvas {
   padding: 3 rem 0 !important;
 }
 
-.card-text{
+/* .card-text{
   font-size: 0.9rem;
   padding: 0.4rem 1.9rem;
+} */
+/* Cards ends **************************/
+
+/* Home cards start *************/
+.home-card .card{
+  width: 20rem;
+}
+.home-card .card {
+  border-radius: 10px;
+  height: '21rem';
+  width: '18rem';
 }
 
-/* Cards ends **************************/
+.home-card img {
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  height: 120px;
+}
+
+.home-card .card-img-top {
+  transform: scale;
+  transition: trasform 0.5s ease;
+}
+
+.home-card .card-img-top:hover {
+  transform: scale(1.8);
+}
+.overflow {
+  overflow: hidden;
+
+}
+
+
+
+/* Home cards end ***********/
+
+/* Categories cards start ***********/
+.blog-categories-cards .card {
+  border-radius: 10px;
+}
+.blog-categories-cards .card-body {
+  padding: 0px;
+  overflow-y: scroll;
+}
+.blog-categories-cards .row {
+  margin:5px;
+}
+.blog-categories-cards .card-title {
+  background-color: blue;
+  min-height: 50px;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+
+  padding-left: 20px;
+  margin: 0px;
+}
+.blog-categories-cards .h5 {
+  font-size: 2rem;
+  color: white;
+}
+/* Cattegories cards end ************/
+
+/* Blog card starts ***********/
+.blog-card .card {
+  border-radius: 10px;
+  max-width: 45rem;
+  height: 50rem;
+}
+.blog-card  .card-body {
+  padding: 0px;
+  overflow-y: scroll;
+}
+.blog-card  .row {
+  margin:5px;
+}
+.blog-card .card-title {
+  background-color: blue;
+  min-height: 50px;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+
+  padding-left: 20px;
+  margin: 0px;
+}
+.blog-card .card-subtitle {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+.blog-card .h5 {
+  font-size: 2rem;
+  color: white;
+}
+
+.blog-card  .h6 {
+  font-size: 0.7rem;
+  font-weight:inherit;
+}
+.blog-card .card-text {
+  margin-left: 10px;
+}
+
+.blog-card .card-subtitle {
+  margin-left: 10px;
+}
+
+/* Blog card ends ************/
 
 
 /* Blog boxes satrts ********/
@@ -244,7 +345,6 @@ elastic-collision-canvas {
   overflow-y: scroll;
 
 }
-
 /* Blog boxes ends ********/
 
 @media only screen and (max-width: 700px){

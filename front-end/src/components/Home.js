@@ -1,20 +1,21 @@
 import '../App.css';
 
 import React from 'react'
-import { Container, Row, Col, Card ,CardDeck} from 'react-bootstrap';
+import { Container, Row, Col, Card, CardDeck } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
-import cp from '../creativeProgramming.png'
-import blog from '../blogImg.png'
-import octoCat from '../Octocat.png'
+import cp from '../img/creativeProgramming.png'
+import blog from '../img/liveLaughLove.png'
+import octoCat from '../img/octocat.png'
 
 
 function Home() {
-    return(
+    return (
         <div className="home">
-            <CardDeck>
-                    <Card style={{ height: '21rem', width:'18rem'}}>
-                        <Card.Img src={cp} />
+            <div className="home-card">
+                <CardDeck>
+                    <Card className="overflow">
+                        <Card.Img src={cp} className="card-img-top"/>
                         <Link to="/creativeProgramming">
                             <Card.Body>
                                 <Card.Title>
@@ -27,9 +28,9 @@ function Home() {
                         </Link>
 
                     </Card>
-                    
-                    <Card style={{height: '21rem'  }}>
-                        <Card.Img  src={blog} />
+
+                    <Card className="overflow">
+                        <Card.Img src={blog} className="card-img-top"/>
                         <Link to="/blogCategories">
                             <Card.Body>
                                 <Card.Title>
@@ -43,8 +44,8 @@ function Home() {
 
                     </Card>
 
-                    <Card style={{ height: '21rem',  overflow: 'hidden'}}>
-                        <Card.Img  src={octoCat} style={{overflow: 'hidden'}}/>
+                    <Card className="overflow">
+                        <Card.Img src={octoCat} className="card-img-top" />
                         <Link>
                             <Card.Body>
                                 <Card.Title>
@@ -57,7 +58,8 @@ function Home() {
                         </Link>
 
                     </Card>
-                    </CardDeck>
+                </CardDeck>
+            </div>
         </div>
     )
 }

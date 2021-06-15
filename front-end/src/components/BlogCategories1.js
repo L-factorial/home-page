@@ -2,11 +2,12 @@ import React from 'react';
 import { Container, Card, CardDeck, Row } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
-import blog from '../blogImg.png'
+import { Spinner } from 'react-bootstrap';
 
 function BlogCategories1() {
 
     const [blogsGroupedByCategory, setBlogsGroupedByCategory] = useState([])
+    const [loading, setLoading] = useState(false)
     useEffect(() => {
         fetchBlogsGroupedByCategory();
     }, [])
@@ -14,9 +15,11 @@ function BlogCategories1() {
 
 
     const fetchBlogsGroupedByCategory = async() => {
+        setLoading(true)
         const groupedBlogs = await fetch('/blogsGroupedByCategory');
         const groupedBlogsJson = await groupedBlogs.json();
         setBlogsGroupedByCategory(groupedBlogsJson)
+        setLoading(false);
     }
 
 
@@ -24,8 +27,8 @@ function BlogCategories1() {
     const renderCards = () => {
         return (
             blogsGroupedByCategory.map(blogsByGroup =>
-                <Card style={{ width: '30rem', height: '40rem' }}>
-                    <Card.Img src={blog} />
+                <Card style={{ width: '20rem', height: '30rem' }}>
+                    {/* <Card.Img src={blog} /> */}
                     <Card.Body>
                         <Card.Title>
                             {blogsByGroup[0].category.name}
@@ -41,6 +44,36 @@ function BlogCategories1() {
                                     </Row>
                                 ))
                             }
+                            <Row ><Link to="#jpt">Scroll test</Link></Row>
+                            <Row ><Link to="#jpt">Scroll test</Link></Row>
+
+                            <Row ><Link to="#jpt">Scroll test</Link></Row>
+
+                            <Row ><Link to="#jpt">Scroll test</Link></Row>
+
+                            <Row ><Link to="#jpt">Scroll test</Link></Row>
+
+                            <Row ><Link to="#jpt">Scroll test</Link></Row>
+
+                            <Row ><Link to="#jpt">Scroll test</Link></Row>
+
+                            <Row ><Link to="#jpt">Scroll test</Link></Row>
+                            <Row ><Link to="#jpt">Scroll test</Link></Row>
+                            <Row ><Link to="#jpt">Scroll test</Link></Row>
+                            <Row ><Link to="#jpt">Scroll test</Link></Row>
+                            <Row ><Link to="#jpt">Scroll test</Link></Row>
+                            <Row ><Link to="#jpt">Scroll test</Link></Row>
+                            <Row ><Link to="#jpt">Scroll test</Link></Row>
+                            <Row ><Link to="#jpt">Scroll test</Link></Row>
+                            <Row ><Link to="#jpt">Scroll test</Link></Row>
+                            <Row ><Link to="#jpt">Scroll test</Link></Row>
+                            <Row ><Link to="#jpt">Scroll test</Link></Row>
+                            <Row ><Link to="#jpt">Scroll test</Link></Row>
+                            <Row ><Link to="#jpt">Scroll test</Link></Row>
+                            <Row ><Link to="#jpt">Scroll test</Link></Row>
+                            <Row ><Link to="#jpt">Scroll test</Link></Row>
+                            <Row ><Link to="#jpt">Scroll test</Link></Row>
+
 
                         </Card.Text>
                     </Card.Body>
@@ -54,11 +87,13 @@ function BlogCategories1() {
     return (
         
         <div className="home">
+            <div className="blog-categories-cards">
             <CardDeck>
               {
-                  renderCards()
+                loading ? <Spinner animation="grow" /> :   renderCards()
               }
             </CardDeck>
+            </div>
         </div>
     )
 }

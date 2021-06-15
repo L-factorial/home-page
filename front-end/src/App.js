@@ -9,7 +9,7 @@ import About from './components/About';
 import Contact from './components/Contact';
 import BlogCategories1 from './components/BlogCategories1';
 import BlogCategory from './components/BlogCategory';
-import Blog1 from './components/Blog1';
+import Blog from './components/Blog';
 import CreativeProgrammingList from './components/CreativeProgrammingList';
 import CreativeProgrammingDisplay from './components/CreativeProgrammingDisplay';
 
@@ -27,7 +27,7 @@ function App() {
           <Route path="/contactme" component={Contact} />
           <Route path="/blogCategories" component={BlogCategories1} exact />
           <Route path="/blogCategories/:id" component={BlogCategory} />
-          <Route path="/blogs/:id" component={Blog1} />
+          <Route path="/blogs/:id" component={Blog} />
           <Route path="/creativeProgramming" component={CreativeProgrammingList} exact />
           <Route path="/creativeProgramming/:id" component={CreativeProgrammingDisplay} />
         </Switch>

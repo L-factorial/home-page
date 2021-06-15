@@ -23,7 +23,6 @@ function BlogCategories() {
         <div className="home">
                 <CardDeck>
                 <Card style={{ width: '30rem', height: '40rem' }}>
-                    <Card.Img src={blog} />
                     <Card.Body>
                         <Card.Title>
                             Blog
