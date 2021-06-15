@@ -250,7 +250,7 @@ elastic-collision-canvas {
   margin:5px;
 }
 .blog-categories-cards .card-title {
-  background-color: blue;
+  background-color: #22346A;
   min-height: 50px;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
@@ -278,7 +278,7 @@ elastic-collision-canvas {
   margin:5px;
 }
 .blog-card .card-title {
-  background-color: blue;
+  background-color: #22346A;
   min-height: 50px;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
@@ -347,8 +347,9 @@ elastic-collision-canvas {
 }
 /* Blog boxes ends ********/
 
-@media only screen and (max-width: 700px){
 
+
+@media only screen and (max-width: 700px){
   .root-container{
     margin: 0;
     display:grid;
