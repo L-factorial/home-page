@@ -441,8 +441,8 @@ elastic-collision-canvas {
     grid-template-rows: 60px auto;
     grid-template-areas:
       "title "
-      "description"
-      "canvas";
+      "canvas"
+      "description";
     grid-gap: 0.5rem;
     background-color:  whitesmoke;
   }

@@ -71,7 +71,7 @@ function EightPuzzle() {
         console.log("Inside solved draawing ...")
     
         ctx.font = (block/10) + "px Arial";
-        ctx.fillStyle = "black";
+        ctx.fillStyle = "white";
         ctx.fillText("Solved. Wait for new ...", rectX +75, (canvas.height / 2) + 75);
     }
     function animate() {
