@@ -1,9 +1,14 @@
 import React from 'react'
-
+import ParticleBackground from './ParticleBackground';
 function Contact() {
     return (
         <div>
-            Contact me : prajwal@lfactorial.com
+            <ParticleBackground/>
+        <div className="home">
+            <div>
+                Contact me : prajwal@lfactorial.com
+            </div>
+        </div>
         </div>
     )
 }

@@ -3,7 +3,7 @@ import ConvexHull from '../convex-hull/ConvexHull';
 import Particle from './Particle';
 
 class Simulation {
-    constructor(ctx, particles, width, height, margin) {
+    constructor(ctx, particles, width, height, margin, Hz) {
         this.ctx = ctx;
         this.time = 0.0;
         this.particles = particles;
@@ -14,6 +14,9 @@ class Simulation {
         this.gridR = 0;
         this.gridC = 0;
         this.margin = margin;
+        this.Hz = Hz;
+        this.lastHitParticleMatrix = [];
+
     }
 
     addParticleInGrid(i) {
@@ -75,6 +78,14 @@ class Simulation {
         }
 
         for(let i = 0; i < this.particles.length; ++i) {
+            let row = [];
+            for(let j = 0; j < this.particles.length; ++j) {
+                row.push(-1);
+            }
+            this.lastHitParticleMatrix.push(row);
+        }
+
+        for(let i = 0; i < this.particles.length; ++i) {
             this.addParticleInGrid(i);
         }
         console.table(this.grid);
@@ -98,6 +109,16 @@ class Simulation {
         }
     }
 
+    haveRecentlyCollided(i, j) {
+        if(this.lastHitParticleMatrix[i][j] == -1) {
+            return false;
+        }
+        if(this.time - this.lastHitParticleMatrix[i][j] > 2*this.Hz) {
+            return false;
+        }
+        return true;
+    }
+
     particleBounce(k, currBouncedParticles) {
         if(currBouncedParticles.has(k)){
             return;
@@ -113,10 +134,12 @@ class Simulation {
                     if( l == k || currBouncedParticles.has(k)) {
                         continue;
                     }
-                    if(this.particles[k].checkCollisionWith(this.particles[l])){
+                    if(this.particles[k].checkCollisionWith(this.particles[l])  && !this.haveRecentlyCollided(k, l)){
                         this.particles[k].bounceOff(this.particles[l]);
                         currBouncedParticles.add(k);
                         currBouncedParticles.add(l);
+                        this.lastHitParticleMatrix[k][l] = this.time;
+                        this.lastHitParticleMatrix[l][k] = this.time;
                         return;
                     }
                 }

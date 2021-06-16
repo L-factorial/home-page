@@ -47,7 +47,7 @@ function ElasticCollision() {
         canvas.height = parent.offsetHeight;
         
         init(canvas);
-        let simulator = new Simulation(ctx, particlesArray, canvas.width, canvas.height, margin);
+        let simulator = new Simulation(ctx, particlesArray, canvas.width, canvas.height, margin, Hz);
         const simulate = () => {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
             simulator.simulate(Hz)
