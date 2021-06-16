@@ -29,24 +29,18 @@ function EightPuzzle() {
 
     let canvas = null;
     let ctx = null;
-
+    let blockMargin  = 0;
 
     function init(){
         canvas = canvasRef.current;
         ctx = canvas.getContext("2d");
-
-        // canvas.width = 700;
-        // canvas.height = 800;
-        // canvas.width = window.innerWidth;
-        // canvas.height = window.innerHeight
         var parent = document.getElementById("canvadDivId");
-
         canvas.width  = parent.offsetWidth;
         canvas.height = parent.offsetHeight;
+        blockMargin =  Math.min(canvas.width, canvas.height)/10;
 
-        block = Math.min(canvas.width, canvas.height)/3 - 100;
-    
-        rectWidth = (block * 3) + 10;
+        block = Math.min(canvas.width, canvas.height)/3 - blockMargin;
+        rectWidth = (block * 3) + blockMargin/10;
         rectHeight = rectWidth;
         
         rectX = (canvas.width / 2) - (rectWidth / 2);
@@ -92,14 +86,13 @@ function EightPuzzle() {
         var k = 0;
     
         if (pathPos < path.length) {
-            console.log("Inside grid draawing ...")
             for (let r = 0; r < 3; ++r) {
                 x = rectX;
                 for (let c = 0; c < 3; ++c) {
                     let c = path[pathPos][k];
                     let empty = c == '9';
                     ctx.beginPath();
-                    ctx.font = (block - 5) + "px Arial";
+                    ctx.font = (block - 10) + "px Arial";
                     ctx.fillStyle = 'red';
                     if (empty) {
                         ctx.fillStyle = 'white';
@@ -110,7 +103,7 @@ function EightPuzzle() {
                     ctx.stroke();
                     ctx.fillStyle = "white"
                     if (!empty) {
-                        ctx.fillText("" + path[pathPos][k], (x + block / 2) - 75, (y + block / 2) + 75);
+                        ctx.fillText("" + path[pathPos][k], (x + block / 2) - blockMargin*0.75, (y + block / 2) + blockMargin*0.75);
                     }
                     ++k;
                     x = x + block;

@@ -37,15 +37,9 @@ function ElasticCollision() {
     useEffect(() => {
         const canvas = canvasRef.current;
         const ctx = canvas.getContext("2d");
-
-        // canvas.width = 700;
-        // canvas.height = 800;
-
         var parent = document.getElementById("canvadDivId");
-
         canvas.width  = parent.offsetWidth;
         canvas.height = parent.offsetHeight;
-        
         init(canvas);
         let simulator = new Simulation(ctx, particlesArray, canvas.width, canvas.height, margin, Hz);
         const simulate = () => {
