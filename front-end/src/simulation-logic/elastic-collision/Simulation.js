@@ -3,7 +3,7 @@ import ConvexHull from '../convex-hull/ConvexHull';
 import Particle from './Particle';
 
 class Simulation {
-    constructor(ctx, particles, width, height, margin, Hz) {
+    constructor(ctx, particles, width, height, margin, Hz, withConvexHull) {
         this.ctx = ctx;
         this.time = 0.0;
         this.particles = particles;
@@ -16,6 +16,11 @@ class Simulation {
         this.margin = margin;
         this.Hz = Hz;
         this.lastHitParticleMatrix = [];
+
+        this.lastHitVerticalWall=[];
+        this.lastHitHorizontalWall=[];
+
+        this.withConvexHull =  withConvexHull;
 
     }
 
@@ -83,6 +88,8 @@ class Simulation {
                 row.push(-1);
             }
             this.lastHitParticleMatrix.push(row);
+            this.lastHitHorizontalWall.push(-1);
+            this.lastHitVerticalWall.push(-1);
         }
 
         for(let i = 0; i < this.particles.length; ++i) {
@@ -91,21 +98,45 @@ class Simulation {
         console.table(this.grid);
     }
 
+
+    hasRecentlyCollidedWithVerticalWall(i) {
+        if(this.lastHitVerticalWall[i] == -1) {
+            return false;
+        }
+        if(this.time - this.lastHitVerticalWall[i] > 2*this.Hz) {
+            return false;
+        }
+        return true;
+    }
+
+    hasRecentlyCollidedWithHorizontalWall(i) {
+        if(this.lastHitHorizontalWall[i] == -1) {
+            return false;
+        }
+        if(this.time - this.lastHitHorizontalWall[i] > 2*this.Hz) {
+            return false;
+        }
+        return true;
+    }
     wallBounce(i, currBouncedParticles) {
         if(currBouncedParticles.has(i)){
             return;
         }
         let x = this.particles[i].rx;
         let y = this.particles[i].ry;
+        let r =this.particles[i].radius;
 
-        if(x <= this.margin || x >= this.width - this.margin) {
+        if( (x <= (this.margin + r) || (x + r ) >= this.width - this.margin)    && !this.hasRecentlyCollidedWithVerticalWall(i)) {
             this.particles[i].bounceOffVerticalWall();
-
             currBouncedParticles.add(i);
+
+            this.lastHitVerticalWall[i] = this.time;
         }
-        if(y <= this.margin || y >= this.height - this.margin) {
+        if( (y <= (this.margin +r) || (y +r) >= this.height - this.margin) && !this.hasRecentlyCollidedWithHorizontalWall(i) ) {
             this.particles[i].bounceOffHorizontalWall();
             currBouncedParticles.add(i);
+
+            this.lastHitHorizontalWall[i] = this.time;
         }
     }
 
@@ -157,16 +188,19 @@ class Simulation {
         let points = [];
         for (let i = 0; i < this.particles.length; ++i) {
             this.particles[i].draw(this.ctx, this.height);
-            points.push(new Point(this.particles[i].rx, this.particles[i].ry));
+            if(this.withConvexHull) {
+                points.push(new Point(this.particles[i].rx, this.particles[i].ry));
+            }
 
         }
 
-        // console.log("Sorted points");
-        // console.table(points);
-        let convexHull = new ConvexHull(points);
-        convexHull.draw(this.ctx, this.height);
-        let currBouncedParticles = new Set();
+        if(this.withConvexHull) {
+            let convexHull = new ConvexHull(points);
+            convexHull.draw(this.ctx, this.height);
+        }
 
+        let currBouncedParticles = new Set();
+        
         //Move all the particles to be redrawn in the next frame
         for (let i = 0; i < this.particles.length; ++i) {
             this.bounceParticleIfNeeded(i, currBouncedParticles)

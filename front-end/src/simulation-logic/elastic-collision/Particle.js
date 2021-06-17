@@ -1,6 +1,6 @@
 class Particle{
 
-    constructor(rx, ry, vx, vy, mass, radius, id){
+    constructor(rx, ry, vx, vy, mass, radius, id, color, withText){
         this.rx = rx;
         this.ry = ry;
         this.vx = vx;
@@ -9,6 +9,8 @@ class Particle{
         this.radius = radius;
         this.count = 0;
         this.id = id;
+        this.color = color;
+        this.withText = withText;
     }
     getLineConstantsABC(x1, y1, x2, y2) {
         let A = y2-y1;
@@ -132,13 +134,19 @@ class Particle{
     draw(ctx, height){
         ctx.beginPath();
         ctx.font = this.radius+"px Arial";
-        ctx.fillStyle = 'red';
+        ctx.fillStyle = this.color;
         ctx.strokeStyle = 'black';
         ctx.arc(this.rx, height - this.ry, this.radius, 0, Math.PI * 2);
         ctx.fill();
         ctx.stroke();
-        ctx.fillStyle = "white"
-        ctx.fillText(""+this.id, this.rx-5, height - this.ry+5);   
+
+        let textVertticalShift = 5;
+        let textHorizontalShift = this.id < 10 ? 5 : 8;
+        
+        if(this.withText) {
+            ctx.fillStyle = this.color == "yellow" ? "black" : "white";
+            ctx.fillText(""+this.id, this.rx-textHorizontalShift, height - this.ry+textVertticalShift);   
+        }
     }
 
 }

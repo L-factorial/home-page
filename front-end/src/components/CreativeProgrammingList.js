@@ -2,7 +2,6 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import { Card, CardDeck, Row } from 'react-bootstrap';
 import { useState } from 'react';
-import cp from '../creativeProgramming.png'
 
 function CreativeProgrammingList() {
 
@@ -10,10 +9,22 @@ function CreativeProgrammingList() {
     const [creativeProgrammingList, setCreativeProgrammingList] = useState([
         {
             id: 1,
-            title: "Elastic Collision"
+            title: "Elastic Collision - Random"
         },
         {
             id: 2,
+            title: "Convex Hull/ Elastic Collision"
+        },
+        {
+            id: 3,
+            title: "Snooker board - Elastic Collision"
+        },
+        {
+            id: 4,
+            title: "Elastic Collision - Pollen Grain",
+        },
+        {
+            id: 5,
             title: "Eight Puzzle"
         },
     ])

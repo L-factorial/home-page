@@ -2,7 +2,11 @@ import React from 'react'
 import { useState, useEffect } from 'react';
 import '../App.css';
 import EightPuzzle from  './simulations/eightPuzzle/EightPuzzle';
-import ElasticCollision from './simulations/elasticCollision/ElasticCollision';
+import ElasticCollisionRandomConfig from './simulations/elasticCollision/ElasticCollisionRandomConfig';
+import ElasticCollisionRandomConfigWithConvexHull from './simulations/elasticCollision/ElasticCollisionRandomConfigWithConvexHull';
+import ElasticCollisionSnookerBoard from './simulations/elasticCollision/ElasticCollisionSnookerBoard';
+import ElasticCollisionPollenGrain from './simulations/elasticCollision/ElasticCollisionPollenGrain';
+
 
 function CreativeProgrammingDisplay({match}) {
 
@@ -10,10 +14,25 @@ function CreativeProgrammingDisplay({match}) {
         {
             id: 1,
             title: "Elastic Collision",
-            canvas: <ElasticCollision />,
+            canvas: <ElasticCollisionRandomConfig />,
         },
         {
             id: 2,
+            title: "Elastic Collision",
+            canvas: <ElasticCollisionRandomConfigWithConvexHull />,
+        },
+        {
+            id: 3,
+            title: "Elastic Collision",
+            canvas: <ElasticCollisionSnookerBoard />,
+        },
+        {
+            id: 4,
+            title: "Elastic Collision - Pollen Grain",
+            canvas: <ElasticCollisionPollenGrain />,
+        },
+        {
+            id: 5,
             title: "Eight Puzzle",
             canvas: <EightPuzzle />
         },
