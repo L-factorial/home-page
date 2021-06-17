@@ -14,7 +14,7 @@ class SnookerConfig{
 
 
         this.particlesArray = [];
-        this.margin = canvas.width/12;
+        this.margin = canvas.width/50;
 
         this.topGap =this.margin/2;
 

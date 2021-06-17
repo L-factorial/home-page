@@ -106,6 +106,39 @@ class Particle{
 
     }
 
+
+    /**
+     * Updates the velocities of this particle and the specified particle according
+     * to the laws of elastic collision. Assumes that the particles are colliding
+     * at this instant.
+     *
+     */
+    bounceOff1(that) {
+            let dx  = that.rx - this.rx;
+            let dy  = that.ry - this.ry;
+            let dvx = that.vx - this.vx;
+            let dvy = that.vy - this.vy;
+            let dvdr = dx*dvx + dy*dvy;             // dv dot dr
+            let dist = this.radius + that.radius;   // distance between particle centers at collison
+    
+            // magnitude of normal force
+            let magnitude = 2 * this.mass * that.mass * dvdr / ((this.mass + that.mass) * dist);
+    
+            // normal force, and in x and y directions
+            let fx = magnitude * dx / dist;
+            let fy = magnitude * dy / dist;
+    
+            // update velocities according to normal force
+            this.vx += fx / this.mass;
+            this.vy += fy / this.mass;
+            that.vx -= fx / that.mass;
+            that.vy -= fy / that.mass;
+    
+            // update collision counts
+            // this.count++;
+            // that.count++;
+        }
+
     checkCollisionWith(that) {
         let dx = this.rx - that.rx;
         let dy = this.ry - that.ry;

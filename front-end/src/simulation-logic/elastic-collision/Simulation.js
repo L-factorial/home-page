@@ -165,7 +165,7 @@ class Simulation {
                         continue;
                     }
                     if(this.particles[k].checkCollisionWith(this.particles[l])  && !this.haveRecentlyCollided(k, l)){
-                        this.particles[k].bounceOff(this.particles[l]);
+                        this.particles[k].bounceOff1(this.particles[l]);
                         currBouncedParticles.add(k);
                         currBouncedParticles.add(l);
                         this.lastHitParticleMatrix[k][l] = this.time;

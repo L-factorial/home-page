@@ -10,7 +10,7 @@ class PollenGrainConfig{
 
         this.numberOfParticles = 200;
         this.particlesArray = [];
-        this.margin = canvas.width/12;
+        this.margin = canvas.width/60;
         this.Hz = 1.75;
 
         this.velocityX = [1, 2, -1, 2, -2];

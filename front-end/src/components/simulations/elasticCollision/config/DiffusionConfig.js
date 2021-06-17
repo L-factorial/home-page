@@ -10,7 +10,7 @@ class DiffusionConfig{
 
         this.numberOfParticles = 200;
         this.particlesArray = [];
-        this.margin = canvas.width/12;
+        this.margin = canvas.width/60;
         this.Hz = 1.75;
 
         this.velocityX = [1, 2, -1, 2, -2];
@@ -35,8 +35,8 @@ class DiffusionConfig{
         let blockBallYBottom = this.margin + blockBallRadius;
 
         for(let l = 0; l < blockingBalls; ++l) {
-            let topBall =  new Particle(blockBallX, blockBallYTop, 0, 0, blockBallRadius*1000000, blockBallRadius, l, 'white', false); 
-            let bottomBall =  new Particle(blockBallX, blockBallYBottom, 0, 0, blockBallRadius*1000000, blockBallRadius, l+blockingBalls, 'white', false); 
+            let topBall =  new Particle(blockBallX, blockBallYTop, 0, 0, blockBallRadius*10000, blockBallRadius, l, 'white', false); 
+            let bottomBall =  new Particle(blockBallX, blockBallYBottom, 0, 0, blockBallRadius*10000, blockBallRadius, l+blockingBalls, 'white', false); 
             blockBallYTop = blockBallYTop - 2*blockBallRadius
             blockBallYBottom = blockBallYBottom + 2*blockBallRadius;
             this.particlesArray.push(topBall);
