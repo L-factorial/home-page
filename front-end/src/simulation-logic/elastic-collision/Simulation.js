@@ -1,6 +1,5 @@
 import Point from '../convex-hull/Point';
 import ConvexHull from '../convex-hull/ConvexHull';
-import Particle from './Particle';
 
 class Simulation {
     constructor(ctx, particles, width, height, margin, Hz, withConvexHull) {
