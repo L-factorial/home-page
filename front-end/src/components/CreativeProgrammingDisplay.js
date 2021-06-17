@@ -7,6 +7,7 @@ import ElasticCollisionRandomConfig from './simulations/elasticCollision/Elastic
 import ElasticCollisionRandomConfigWithConvexHull from './simulations/elasticCollision/ElasticCollisionRandomConfigWithConvexHull';
 import ElasticCollisionSnookerBoard from './simulations/elasticCollision/ElasticCollisionSnookerBoard';
 import ElasticCollisionPollenGrain from './simulations/elasticCollision/ElasticCollisionPollenGrain';
+import ElasticCollisionDiffusion from './simulations/elasticCollision/ElasticCollisionDiffusion';
 
 
 function CreativeProgrammingDisplay({match}) {
@@ -34,6 +35,12 @@ function CreativeProgrammingDisplay({match}) {
         },
         {
             id: 5,
+            title: "Elastic Collision - Diffusion",
+            canvas: <ElasticCollisionDiffusion />,
+        },
+
+        {
+            id: 6,
             title: "Eight Puzzle",
             canvas: <EightPuzzle />
         },

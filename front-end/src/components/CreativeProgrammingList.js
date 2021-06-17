@@ -25,6 +25,10 @@ function CreativeProgrammingList() {
         },
         {
             id: 5,
+            title: "Elastic Collision - Diffusion",
+        },
+        {
+            id: 6,
             title: "Eight Puzzle"
         },
     ])

@@ -1,9 +1,9 @@
 import React from 'react'
 import {useEffect, useRef} from 'react'
-import SnookerConfig from './config/SnookerConfig';
+import DiffusionConfig from './config/DiffusionConfig';
 
 
-function ElasticCollisionSnookerBoard() {
+function ElasticCollisionDiffusion() {
     const canvasRef = useRef(null)
 
     useEffect(() => {
@@ -13,7 +13,7 @@ function ElasticCollisionSnookerBoard() {
         canvas.width  = parent.clientWidth;
         canvas.height = parent.clientHeight;
 
-        let config = new SnookerConfig(canvas, ctx);
+        let config = new DiffusionConfig(canvas, ctx);
 
         const simulate = () => {
 
@@ -31,4 +31,4 @@ function ElasticCollisionSnookerBoard() {
     );
 }
 
-export default ElasticCollisionSnookerBoard
+export default ElasticCollisionDiffusion
