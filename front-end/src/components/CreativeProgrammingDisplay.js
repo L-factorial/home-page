@@ -1,5 +1,6 @@
 import React from 'react'
 import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import '../App.css';
 import EightPuzzle from  './simulations/eightPuzzle/EightPuzzle';
 import ElasticCollisionRandomConfig from './simulations/elasticCollision/ElasticCollisionRandomConfig';
@@ -46,7 +47,10 @@ function CreativeProgrammingDisplay({match}) {
     return (
         <div className="home">
         <div className = "simulation-container">
-            <div className = "simulation-title-container"><h4>{simulation.title}</h4></div>
+            <div className = "simulation-title-container">
+                    <Link to="/creativeProgramming"> GoBack </Link>
+                    <h4>{simulation.title}</h4>
+            </div>
             <div className = "simulation-description-container"></div>
             <div id= "canvadDivId" className = "simulation-canvas-container">
                 {simulation.canvas}
