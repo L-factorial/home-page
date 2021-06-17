@@ -48,8 +48,8 @@ function CreativeProgrammingDisplay({match}) {
         <div className="home">
         <div className = "simulation-container">
             <div className = "simulation-title-container">
-                    <Link to="/creativeProgramming"> GoBack </Link>
-                    <h4>{simulation.title}</h4>
+                <Link to="/creativeProgramming"> GoBack </Link>
+                <h4>{simulation.title}</h4>
             </div>
             <div className = "simulation-description-container"></div>
             <div id= "canvadDivId" className = "simulation-canvas-container">

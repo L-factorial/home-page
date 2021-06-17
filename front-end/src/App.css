@@ -150,11 +150,24 @@
   border-top-right-radius: 10px;
   text-align: center;
   display: flex;
-  flex-direction: column;
+  flex-direction: col;
   justify-content:space-around;
   align-content: center;
+  align-items: center;
   color: black;
   box-shadow: 2px 2px 4px rgba(0,0,0, 0.7);
+}
+
+/* .simulation-title-container-text{
+  display: flex;
+  flex-direction: col;
+  justify-content:space-around;
+  top: 50%;
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+} */
+.simulation-title-container a {
+  color: white;
 }
 
 
