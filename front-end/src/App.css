@@ -158,14 +158,6 @@
   box-shadow: 2px 2px 4px rgba(0,0,0, 0.7);
 }
 
-/* .simulation-title-container-text{
-  display: flex;
-  flex-direction: col;
-  justify-content:space-around;
-  top: 50%;
-  -ms-transform: translateY(-50%);
-  transform: translateY(-50%);
-} */
 .simulation-title-container a {
   color: white;
 }
@@ -476,6 +468,10 @@ elastic-collision-canvas {
   .footer {
     flex-direction: column;
     align-items: flex-start;
+  }
+
+  .header-logo {
+    margin-left: 60px;
   }
   .navigation-list-header {
     display: none;

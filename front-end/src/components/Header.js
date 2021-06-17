@@ -23,7 +23,7 @@ function Header() {
     return (
         <header className="header">
             <div className="header-logo">
-                <img src={logo} />
+                <Link to="/"><img src={logo} /></Link>
             </div>
             <ul className="navigation-list-header">
                 <li className="navigation-item">

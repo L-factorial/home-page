@@ -52,8 +52,17 @@ class SnookerConfig{
         }
 
 
-        let cueBall = new Particle(this.particlesArray[this.particlesArray.length-1].rx, this.margin+this.radius+10, 2.5, 3, this.radius, this.radius, this.particlesArray.length, "red", false);
-        this.particlesArray.push(cueBall);
+        let cueBall1 = new Particle(this.particlesArray[this.particlesArray.length-1].rx, this.margin+this.radius+10, 0, 3, this.radius, 1.2*this.radius, this.particlesArray.length, "white", false);
+
+        let cueBall2 = new Particle(this.margin+this.radius*2, this.margin+this.radius*10, 2.5, 1.5, this.radius, 1.2*this.radius, this.particlesArray.length, "white", false);
+
+        let cueBall3 = new Particle(this.canvas.width - this.margin - this.radius*2, this.canvas.height - this.margin-this.radius*10, -3, -1, this.radius, 1.2*this.radius, this.particlesArray.length, "white", false);
+
+
+        this.particlesArray.push(cueBall1);
+        this.particlesArray.push(cueBall2);
+        this.particlesArray.push(cueBall3);
+
         console.log(this.particlesArray);
 
         let simulator = new Simulation(this.ctx, this.particlesArray, this.canvas.width, this.canvas.height, this.margin, this.Hz, false);

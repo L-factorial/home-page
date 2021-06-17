@@ -102,7 +102,7 @@ class Simulation {
         if(this.lastHitVerticalWall[i] == -1) {
             return false;
         }
-        if(this.time - this.lastHitVerticalWall[i] > 2*this.Hz) {
+        if(this.time - this.lastHitVerticalWall[i] > 3*this.Hz) {
             return false;
         }
         return true;
@@ -112,7 +112,7 @@ class Simulation {
         if(this.lastHitHorizontalWall[i] == -1) {
             return false;
         }
-        if(this.time - this.lastHitHorizontalWall[i] > 2*this.Hz) {
+        if(this.time - this.lastHitHorizontalWall[i] > 3*this.Hz) {
             return false;
         }
         return true;
@@ -143,7 +143,7 @@ class Simulation {
         if(this.lastHitParticleMatrix[i][j] == -1) {
             return false;
         }
-        if(this.time - this.lastHitParticleMatrix[i][j] > 2*this.Hz) {
+        if(this.time - this.lastHitParticleMatrix[i][j] > 3*this.Hz) {
             return false;
         }
         return true;
