@@ -54,7 +54,7 @@ class ConvexHull {
         ctx.beginPath();
         ctx.strokeStyle = 'white';
         ctx.moveTo(this.ch[0].x, height - this.ch[0].y);
-        ctx.lineWidth = "0.2";
+        ctx.lineWidth = "0.5";
 
         for(let i = 1; i < this.ch.length; ++i){
             ctx.lineTo(this.ch[i].x, height - this.ch[i].y);

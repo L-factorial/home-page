@@ -66,7 +66,7 @@ class PollenGrainConfig{
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
         this.ctx.beginPath();
-        this.ctx.lineWidth = "2";
+        this.ctx.lineWidth = "10";
         this.ctx.strokeStyle = "red";
         this.ctx.rect(this.margin, this.margin, this.canvas.width-2*this.margin, this.canvas.height-2*this.margin);
         this.ctx.stroke();

@@ -136,6 +136,8 @@ class Particle{
         ctx.font = this.radius+"px Arial";
         ctx.fillStyle = this.color;
         ctx.strokeStyle = 'black';
+        ctx.lineWidth = "1";
+
         ctx.arc(this.rx, height - this.ry, this.radius, 0, Math.PI * 2);
         ctx.fill();
         ctx.stroke();
