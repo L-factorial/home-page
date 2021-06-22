@@ -15,10 +15,10 @@ export NVM_DIR="$HOME/.nvm"
 
 # installing nginx
 yum update -y
-amazon-linux-extras  install nginx1.12
+sudo amazon-linux-extras  install nginx1.12
 nginx -v 
 
-sudo chmod 2775 /usr/share/nginx/html
+sudo chmod 777 /usr/share/nginx/html
 sudo find /usr/share/nginx/html -type d -exec chmod 2775 {} \;
 sudo find /usr/share/nginx/html -type f -exec chmod 0664 {} \;
 
