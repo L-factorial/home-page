@@ -14,6 +14,8 @@ export NVM_DIR="$HOME/.nvm"
 
 
 # installing nginx
+# [ Note : edit the file  /etc/nginx/nginx.conf in the host for revese proxy]
+
 #yum update -y
 #sudo amazon-linux-extras  install nginx1.12
 #nginx -v 

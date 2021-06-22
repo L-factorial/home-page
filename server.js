@@ -17,8 +17,8 @@ app.use('/', routeHandler);
 const PORT = 4000; // backend routing port
 
 // Index route
-app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, '/front-end/build'));
+app.get('/*', (req, res) => {
+    res.sendFile(path.join(__dirname, '/front-end/build', 'index.html'));
   });
 
 app.listen(PORT, () => {
