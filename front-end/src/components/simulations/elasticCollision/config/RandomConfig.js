@@ -1,18 +1,17 @@
 import Simulation from './../../../../simulation-logic/elastic-collision/Simulation';
 import Particle from './../../../../simulation-logic/elastic-collision/Particle';
+import EventDrivenSimulation from './../../../../simulation-logic/elastic-collision/EventDrivenSimulation';
+
 
 
 class RandomConfig{
     constructor(canvas, ctx, withConvexHull){
         this.canvas = canvas;
         this.ctx = ctx;
-
-
-        this.numberOfParticles = 20;
+        this.numberOfParticles = 100;
         this.particlesArray = [];
         this.margin = canvas.width/60;
-        this.Hz = 1.75;
-
+        this.Hz = 1;
         this.velocityX = [1, 2, -1, 2, -2];
         this.velocityY = [-2, -1, 1, 2, -1];
         this.withConvexHull = withConvexHull;
@@ -55,6 +54,8 @@ class RandomConfig{
         }
 
         let simulator = new Simulation(this.ctx, this.particlesArray, this.canvas.width, this.canvas.height, this.margin, this.Hz, this.withConvexHull );
+        // let simulator = new EventDrivenSimulation(this.ctx, this.particlesArray, this.canvas.width, this.canvas.height, this.margin, this.Hz, this.withConvexHull );
+        
         simulator.initSimulation();
         return simulator;
     }

@@ -7,11 +7,6 @@ import { useEffect } from 'react';
 
 
 function Header() {
-
-
-
-
-
     useEffect(() => {
         const burger = document.getElementsByClassName('burger')[0]
         const navLists = document.getElementsByClassName('navigation-list-header')[0]

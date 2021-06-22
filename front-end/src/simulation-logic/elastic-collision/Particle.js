@@ -135,8 +135,8 @@ class Particle{
             that.vy -= fy / that.mass;
     
             // update collision counts
-            // this.count++;
-            // that.count++;
+            this.count++;
+            that.count++;
         }
 
     checkCollisionWith(that) {
@@ -157,6 +157,36 @@ class Particle{
         this.vx = -1.0 * this.vx;
         this.count++;
     }
+
+    timeToHitVerticalWall(leftX, rightX) {
+        if      (this.vx > 0) return (rightX - this.rx - this.radius) / this.vx;
+        else if (this.vx < 0) return (leftX + this.radius - this.rx) / this.vx;  
+        else             return -1;
+    }
+
+    timeToHitHorizontalWall(bottomY, topY) {
+        if      (this.vy > 0) return (topY- this.ry - this.radius) / this.vy;
+        else if (this.vy < 0) return (bottomY + this.radius - this.ry) / this.vy;
+        else             return -1;
+    }
+
+    timeToHit(that) {
+        if (this === that) return -1;
+        let dx  = that.rx - this.rx;
+        let dy  = that.ry - this.ry;
+        let dvx = that.vx - this.vx;
+        let dvy = that.vy - this.vy;
+        let dvdr = dx*dvx + dy*dvy;
+        if (dvdr > 0) return -1;
+        let dvdv = dvx*dvx + dvy*dvy;
+        if (dvdv == 0) return -1;
+        let drdr = dx*dx + dy*dy;
+        let sigma = this.radius + that.radius;
+        let d = (dvdr*dvdr) - dvdv * (drdr - sigma*sigma);
+        if (d < 0) return -1;
+        return -(dvdr + Math.sqrt(d)) / dvdv;
+    }
+
     move(dt){
         let rx1 = this.rx + this.vx*dt;
         let ry1 = this.ry +this.vy*dt;
