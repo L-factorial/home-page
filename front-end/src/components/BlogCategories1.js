@@ -16,8 +16,7 @@ function BlogCategories1() {
 
     const fetchBlogsGroupedByCategory = async() => {
         setLoading(true)
-        //const groupedBlogs = await fetch('/blogsGroupedByCategory'); // This did not work when deployed to nginix. Need to debug with the proxu
-        const groupedBlogs = await fetch('http://localhost:4000/blogsGroupedByCategory');
+        const groupedBlogs = await fetch('/blogsGroupedByCategory');
         const groupedBlogsJson = await groupedBlogs.json();
         setBlogsGroupedByCategory(groupedBlogsJson)
         setLoading(false);

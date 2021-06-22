@@ -14,8 +14,7 @@ function Blog({ match }) {
     }, [])
 
     const fetchBlog = async () => {
-        // const blogData = await fetch(`/blogs/${match.params.id}`); //This is not working when deployed to nginix
-        const blogData = await fetch(`http://localhost:4000/blogs/${match.params.id}`);
+        const blogData = await fetch(`/blogs/${match.params.id}`);
         console.log(blogData)
         const blogJson = await blogData.json();
         setBlog(blogJson)
