@@ -14,18 +14,18 @@ export NVM_DIR="$HOME/.nvm"
 
 
 # installing nginx
-yum update -y
-sudo amazon-linux-extras  install nginx1.12
-nginx -v 
+#yum update -y
+#sudo amazon-linux-extras  install nginx1.12
+#nginx -v 
 
-sudo chmod 777 /usr/share/nginx/html
-sudo find /usr/share/nginx/html -type d -exec chmod 2775 {} \;
-sudo find /usr/share/nginx/html -type f -exec chmod 0664 {} \;
+#sudo chmod 777 /usr/share/nginx/html
+#sudo find /usr/share/nginx/html -type d -exec chmod 2775 {} \;
+#sudo find /usr/share/nginx/html -type f -exec chmod 0664 {} \;
 
 sudo rm -r /usr/share/nginx/html/*
 sudo cp -r /home/ec2-user/lfactorial-home-page/front-end/build/. /usr/share/nginx/html
 sudo systemctl start nginx
-sudo systemctl enable nginx
+#sudo systemctl enable nginx
 
 
 #install node modules
