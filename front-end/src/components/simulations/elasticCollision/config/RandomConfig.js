@@ -8,7 +8,7 @@ class RandomConfig{
     constructor(canvas, ctx, withConvexHull){
         this.canvas = canvas;
         this.ctx = ctx;
-        this.numberOfParticles = 100;
+        this.numberOfParticles = 20;
         this.particlesArray = [];
         this.margin = canvas.width/60;
         this.Hz = 1;
