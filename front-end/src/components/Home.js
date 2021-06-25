@@ -19,7 +19,7 @@ function Home() {
                         <Link to="/creativeProgramming">
                             <Card.Body>
                                 <Card.Title>
-                                    Creative Prograamming
+                                    Creative Programming
                                 </Card.Title>
                                 <Card.Text>
                                     All about algorithm and computational geometry.
@@ -46,10 +46,10 @@ function Home() {
 
                     <Card className="overflow">
                         <Card.Img src={octoCat} className="card-img-top" />
-                        <Link>
+                        <Link to="/projects">
                             <Card.Body>
                                 <Card.Title>
-                                    Projects
+                                    Projects - Codelets
                                 </Card.Title>
                                 <Card.Text>
                                     Cool coding with github link  and many more.

@@ -8,16 +8,9 @@ import { Link } from 'react-router-dom';
 function Footer() {
   return (
     <footer className="footer">
-      <ul className="navigation-list-footer">
-        <li className="navigation-item">
-          <Link to="/"><div>Kathmandu University</div></Link>
-        </li>
-        <li className="navigation-item">
-          <Link to="/"><div>MyWife</div></Link>
-        </li>
-        <li className="navigation-item">
-          <Link to="/"><div>VivAndRay</div></Link>
-        </li>
+      <ul className="footer-list">
+        <li className="footer-list-item">&copy; Copyright 2021 lfactorial.com</li>
+        <li className="footer-list-item">Contact: prajwal@lfactorial.com</li>
       </ul>
     </footer>
   );

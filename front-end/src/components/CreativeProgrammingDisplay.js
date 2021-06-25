@@ -8,6 +8,7 @@ import ElasticCollisionRandomConfigWithConvexHull from './simulations/elasticCol
 import ElasticCollisionSnookerBoard from './simulations/elasticCollision/ElasticCollisionSnookerBoard';
 import ElasticCollisionPollenGrain from './simulations/elasticCollision/ElasticCollisionPollenGrain';
 import ElasticCollisionDiffusion from './simulations/elasticCollision/ElasticCollisionDiffusion';
+import ElasticCollisionFamilyPics from './simulations/elasticCollision/ElasticCollisionFamilyPics'
 
 
 function CreativeProgrammingDisplay({match}) {
@@ -37,6 +38,12 @@ function CreativeProgrammingDisplay({match}) {
             id: 5,
             title: "Elastic Collision - Diffusion",
             canvas: <ElasticCollisionDiffusion />,
+        },
+        {
+            id: 8,
+            title: "My family: Viv, Ray and us",
+            canvas: <ElasticCollisionFamilyPics />,
+
         },
 
         {

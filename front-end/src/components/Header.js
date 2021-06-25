@@ -28,7 +28,10 @@ function Header() {
                     <Link to="/about"><div>About</div></Link>
                 </li>
                 <li className="navigation-item">
-                    <Link to="/contactme"><div>ContactMe</div></Link>
+                    <Link to={`/creativeProgramming/8`}><div>MyFamily</div></Link>
+                </li>
+                <li className="navigation-item">
+                    <a href="http://www.ku.edu.np"><div>MyFavouritePlace</div></a>
                 </li>
             </ul>
             <a href="#"  className="burger">

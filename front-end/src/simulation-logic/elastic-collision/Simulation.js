@@ -20,7 +20,6 @@ class Simulation {
         this.lastHitHorizontalWall=[];
 
         this.withConvexHull =  withConvexHull;
-
     }
 
     addParticleInGrid(i) {
@@ -183,16 +182,14 @@ class Simulation {
     }
 
     simulate(Hz) { 
-        //Draw all the particle first of all
+        //Draw all the particle first of all        
         let points = [];
         for (let i = 0; i < this.particles.length; ++i) {
             this.particles[i].draw(this.ctx, this.height);
             if(this.withConvexHull) {
                 points.push(new Point(this.particles[i].rx, this.particles[i].ry));
             }
-
         }
-
         if(this.withConvexHull) {
             let convexHull = new ConvexHull(points);
             convexHull.draw(this.ctx, this.height);
@@ -210,7 +207,6 @@ class Simulation {
         }
 
         this.time = this.time + Hz;
-
     }
 
 }
