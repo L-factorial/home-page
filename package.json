@@ -15,13 +15,13 @@
     "node-fetch": "^2.6.1"
   },
   "scripts": {
-    "start":"node server.js",
+    "start": "node server.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "server": "node server.js",
     "client": "npm run start --prefix /front-end",
-    "devstart":"nodemon server.js",
+    "devstart": "nodemon server.js",
     "dev": "concurrently --kill-others-on-fail \"npm run server\" \"npm run client\"",
-    "buildclient":"npm run build --prefix ./front-end"
+    "buildclient": "npm run build --prefix ./front-end"
   },
   "author": "lfactorial",
   "license": "ISC"

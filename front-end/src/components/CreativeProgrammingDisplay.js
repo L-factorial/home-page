@@ -64,6 +64,7 @@ function CreativeProgrammingDisplay({match}) {
         <div className = "simulation-container">
             <div className = "simulation-title-container">
                 <Link to="/creativeProgramming"> GoBack </Link>
+                <h4>{simulation.title}</h4>
             </div>
             <CreativeProgrammingDescriptionMarkdown markedDownDocId={match.params.id} />
             <div id= "canvadDivId" className = "simulation-canvas-container">
