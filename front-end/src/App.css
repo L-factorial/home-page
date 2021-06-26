@@ -177,7 +177,9 @@
   background-color:  white;
   border-radius: 10px;
   box-shadow: 2px 2px 4px rgba(0,0,0, 0.7);
-  color:white;
+  color: black;
+  max-height: 65rem;
+  overflow-y: scroll;
 
 
 }

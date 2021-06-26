@@ -58,7 +58,7 @@ class FamilyImagesConfig{
             let x = Math.random() * (maxX - minX + 1) + minX;
             let y = Math.random() * (maxY - minY + 1) + minY;
     
-            let currParticle = new Particle(x, y, this.velocityX[j], this.velocityY[j], radius/12, radius, i, colors[colorIdx], false, this.images[imgIdx]);
+            let currParticle = new Particle(x, y, this.velocityX[j], this.velocityY[j], radius/2, radius, i, colors[colorIdx], false, this.images[imgIdx]);
             let shouldPlace = true;
             for(let j = 0; j < this.particlesArray.length; ++j) {
                 if(currParticle.checkCollisionWith(this.particlesArray[j])) {
@@ -68,7 +68,9 @@ class FamilyImagesConfig{
             if(!shouldPlace) {
                 continue;
             }
-
+            if(imgIdx == 1) {
+                currParticle.mass = currParticle.mass/8;
+            }
             this.particlesArray.push(currParticle);
 
             j = (j + 1) % 5;

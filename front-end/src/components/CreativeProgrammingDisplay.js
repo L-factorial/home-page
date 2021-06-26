@@ -9,6 +9,7 @@ import ElasticCollisionSnookerBoard from './simulations/elasticCollision/Elastic
 import ElasticCollisionPollenGrain from './simulations/elasticCollision/ElasticCollisionPollenGrain';
 import ElasticCollisionDiffusion from './simulations/elasticCollision/ElasticCollisionDiffusion';
 import ElasticCollisionFamilyPics from './simulations/elasticCollision/ElasticCollisionFamilyPics'
+import CreativeProgrammingDescriptionMarkdown from './CreativeProgrammingDescriptionMarkdown'
 
 
 function CreativeProgrammingDisplay({match}) {
@@ -40,7 +41,7 @@ function CreativeProgrammingDisplay({match}) {
             canvas: <ElasticCollisionDiffusion />,
         },
         {
-            id: 8,
+            id: 7,
             title: "My family: Viv, Ray and us",
             canvas: <ElasticCollisionFamilyPics />,
 
@@ -63,9 +64,8 @@ function CreativeProgrammingDisplay({match}) {
         <div className = "simulation-container">
             <div className = "simulation-title-container">
                 <Link to="/creativeProgramming"> GoBack </Link>
-                <h4>{simulation.title}</h4>
             </div>
-            <div className = "simulation-description-container"></div>
+            <CreativeProgrammingDescriptionMarkdown markedDownDocId={match.params.id} />
             <div id= "canvadDivId" className = "simulation-canvas-container">
                 {simulation.canvas}
             </div>

@@ -88,5 +88,10 @@ router.get('/blogsAndCategory', async(req, res) => {
 
 })
 
+router.get('/markedDownDoc/:id', async(req, res) => {
+    const markedDownDoc = await axios.get(`https://lfactorial-strapi.wl.r.appspot.com/marked-down-documents/${req.params.id}`);
+    res.end(JSON.stringify(markedDownDoc.data));
+})
+
 module.exports = router;
 
