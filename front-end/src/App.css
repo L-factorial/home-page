@@ -30,7 +30,7 @@
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  border-radius: 10px;
+  /* border-radius: 10px; */
   box-shadow: -2px -2px 4px rgba(0,0,0, 0.7);
 }
 
@@ -74,7 +74,7 @@
   /* background:#1dcae9; */
   /* background:rgb(61, 49, 46); */
   background-color: #22346A;
-  border-radius: 10px;
+  /* border-radius: 10px; */
 
   grid-area: footer;
   box-shadow: -2px -2px 4px rgba(0,0,0, 0.7);
@@ -154,6 +154,7 @@
 .simulation-title-container{
   grid-area: title;
   background-color:  rgb(81, 179, 166);
+  background-image: linear-gradient(to right, rgb(81, 179, 166), #22346A);
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
   text-align: center;
@@ -175,10 +176,13 @@
 .simulation-description-container{
   grid-area: description;
   background-color:  white;
-  border-radius: 10px;
+  /* border-radius: 10px; */
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
   box-shadow: 2px 2px 4px rgba(0,0,0, 0.7);
   color: black;
-  max-height: 65rem;
+  /* height: 65rem; */
+  height:100%;
   overflow-y: scroll;
 
 
@@ -188,9 +192,10 @@
   grid-area: canvas;
   /* background-color:  white; */
   background-color: black;
-
-  border-radius: 10px;
-  box-shadow: 2px 2px 4px rgba(0,0,0, 0.7);
+  height: 100%;
+  /* border-radius: 10px; */
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;  box-shadow: 2px 2px 4px rgba(0,0,0, 0.7);
 }
 
 
@@ -268,6 +273,7 @@ elastic-collision-canvas {
 }
 .creative-programming-card .card-title {
   background-color:rgb(81, 179, 166);
+  background-image: linear-gradient(to right, rgb(81, 179, 166), #22346A);
   min-height: 50px;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
@@ -301,6 +307,8 @@ elastic-collision-canvas {
 }
 .blog-categories-cards .card-title {
   background-color:rgb(81, 179, 166);
+  background-image: linear-gradient(to right, rgb(81, 179, 166), #22346A);
+
   min-height: 50px;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
@@ -329,6 +337,7 @@ elastic-collision-canvas {
 }
 .blog-card .card-title {
   background-color: rgb(81, 179, 166);
+  background-image: linear-gradient(to right, rgb(81, 179, 166), #22346A);
   min-height: 50px;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
@@ -371,6 +380,7 @@ elastic-collision-canvas {
 
 .aboutme-card .card-title {
   background-color: rgb(81, 179, 166);
+  background-image: linear-gradient(to right, rgb(81, 179, 166), #22346A);
   min-height: 50px;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
@@ -389,48 +399,6 @@ elastic-collision-canvas {
 }
 
 /* About me card ends ************/
-
-
-/* Blog boxes satrts ********/
-.blog-box {
-  width: 50%;
-  height: 50rem;
-  background-color: white;
-  overflow-y: scroll;
-  border-radius: 10px;
-  padding: 20px;
-  border-style:outset;
-  border-color: red;
-  
-}
-.blog-box:hover {
-  box-shadow: 5px 10px 20px 1px rgba(0,0,0, 0.253) !important;
-
-}
-
-.blog-box-title {
-  background-color: #63729cd7;
-  margin-bottom: 10px;
-  max-height: 150px;
-}
-
-.blog-box-date-info {
-
-}
-
-.blog-box-main-content {
-  border-style: solid;
-  border-color: green;
-}
-.blog-box-main-content > p {
-  overflow-y: scroll;
-
-}
-/* Blog boxes ends ********/
-
-
-
-
 
 
 @media only screen and (max-width: 700px){

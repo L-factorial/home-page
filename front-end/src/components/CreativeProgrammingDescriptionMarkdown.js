@@ -1,8 +1,9 @@
 import React from 'react';
-import ReactMarkdown from 'react-markdown';
+import Markdown from 'react-markdown';
 import { useState, useEffect } from 'react';
 import SyntaxHighlighter from 'react-syntax-highlighter';
-import { docco } from 'react-syntax-highlighter/dist/esm/styles/hljs';
+// import { docco } from 'react-syntax-highlighter/dist/esm/styles/hljs';
+import rehypeHighlight from 'rehype-highlight';
 
 
 function CreativeProgrammingDescriptionMarkdown(props) {
@@ -20,22 +21,20 @@ function CreativeProgrammingDescriptionMarkdown(props) {
     }
     return (
         <div className = "simulation-description-container"> 
-           <ReactMarkdown renderers = {{
-               code: Component,
-           }}>
+           <Markdown rehypePlugins={[rehypeHighlight]}>
                {markedDownDoc.content}
-            </ReactMarkdown>
+            </Markdown>
         </div>
     );
 }
 
 
-const Component = ({value, language}) => {
-  return (
-    <SyntaxHighlighter language={language ?? null} style={docco}>
-      {value ?? ''}
-    </SyntaxHighlighter>
-  );
-};
+// const Component = ({value, language}) => {
+//   return (
+//     <SyntaxHighlighter language={language ?? null} style={docco}>
+//       {value ?? ''}
+//     </SyntaxHighlighter>
+//   );
+// };
 
 export default CreativeProgrammingDescriptionMarkdown;
