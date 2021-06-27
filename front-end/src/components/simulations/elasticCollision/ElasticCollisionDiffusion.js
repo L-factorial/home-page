@@ -46,7 +46,7 @@ function ElasticCollisionDiffusion() {
 
     return (
         <div>
-        <canvas id="elastic-collision-canvas" ref={canvasRef}></canvas>
+        <canvas id="elastic-collision-canvas-diffusion" ref={canvasRef}></canvas>
         </div>
     );
 }

@@ -47,7 +47,7 @@ function ElasticCollisionFamilyPics() {
 
     return (
         <div>
-            <canvas id="elastic-collision-canvas" ref={canvasRef}></canvas>
+            <canvas id="elastic-collision-canvas-family" ref={canvasRef}></canvas>
         </div>
     );
 }

@@ -46,9 +46,7 @@ function ElasticCollisionPollenGrain() {
     }, [])
 
     return (
-        <div>
-        <canvas id="elastic-collision-canvas" ref={canvasRef}></canvas>
-        </div>
+        <canvas id="elastic-collision-canvas-pollen" ref={canvasRef}></canvas>
     );
 }
 

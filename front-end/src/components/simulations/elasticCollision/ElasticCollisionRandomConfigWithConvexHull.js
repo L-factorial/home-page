@@ -46,7 +46,7 @@ function ElasticCollisionRandomConfigWithConvexHull() {
     }, [])
     return (
         <div>
-        <canvas id="elastic-collision-canvas" ref={canvasRef}></canvas>
+        <canvas id="elastic-collision-canvas-ch" ref={canvasRef}></canvas>
         </div>
     );
 }

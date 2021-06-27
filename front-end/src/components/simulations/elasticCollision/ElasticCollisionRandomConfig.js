@@ -47,7 +47,7 @@ function ElasticCollisionRandomConfig() {
 
     return (
         <div>
-        <canvas id="elastic-collision-canvas" ref={canvasRef}></canvas>
+        <canvas id="elastic-collision-canvas-random" ref={canvasRef}></canvas>
         </div>
     );
 }

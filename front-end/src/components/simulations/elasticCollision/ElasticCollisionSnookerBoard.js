@@ -23,7 +23,8 @@ function ElasticCollisionSnookerBoard() {
         const canvas = canvasRef.current;
         const ctx = canvas.getContext("2d");
         var parent = document.getElementById("canvadDivId");
-
+        console.log(parent.clientHeight);
+        console.log(parent.clientWidth);
         canvas.width  = parent.clientWidth;
         canvas.height = parent.clientHeight;
 
@@ -49,7 +50,7 @@ function ElasticCollisionSnookerBoard() {
 
     return (
         <div>
-        <canvas id="elastic-collision-canvas" ref={canvasRef}></canvas>
+        <canvas id="elastic-collision-canvas-snooker" ref={canvasRef}></canvas>
         </div>
     );
 }
