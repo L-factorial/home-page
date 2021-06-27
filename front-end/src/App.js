@@ -12,6 +12,7 @@ import Blog from './components/Blog';
 import CreativeProgrammingList from './components/CreativeProgrammingList';
 import CreativeProgrammingDisplay from './components/CreativeProgrammingDisplay';
 import Projects from './components/Projects'
+import NotFound from './components/NotFound';
 
 
 function App() {
@@ -23,14 +24,14 @@ function App() {
         <Header />
         <Switch>
           <Route path="/" component={Home} exact />
-          <Route path="/about" component={About} />
+          <Route path="/about" component={About} exact />
           <Route path="/blogCategories" component={BlogCategories1} exact />
-          <Route path="/blogCategories/:id" component={BlogCategory} />
-          <Route path="/blogs/:id" component={Blog} />
+          <Route path="/blogCategories/:id" component={BlogCategory} exact />
+          <Route path="/blogs/:id" component={Blog} exact/>
           <Route path="/creativeProgramming" component={CreativeProgrammingList} exact />
-          <Route path="/creativeProgramming/:id" component={CreativeProgrammingDisplay} />
-          <Route path="/projects" component={Projects} />
-
+          <Route path="/creativeProgramming/:id" component={CreativeProgrammingDisplay} exact />
+          <Route path="/projects" component={Projects} exact />
+          <Route component={NotFound} />
         </Switch>
         <Footer />
 
