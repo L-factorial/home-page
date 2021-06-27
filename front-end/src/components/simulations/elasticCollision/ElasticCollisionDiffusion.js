@@ -1,6 +1,7 @@
 import React from 'react'
 import {useEffect, useRef} from 'react'
 import DiffusionConfig from './config/DiffusionConfig';
+import {isMobile} from "react-device-detect";
 
 
 function ElasticCollisionDiffusion() {
@@ -8,6 +9,9 @@ function ElasticCollisionDiffusion() {
     const animationRef = useRef(null);
 
     const handleResize = () => {
+        if(isMobile) {
+            return;
+        }
         if(animationRef != null) {
             cancelAnimationFrame(animationRef.current);
         }

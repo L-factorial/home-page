@@ -1,6 +1,7 @@
 import React from 'react'
 import { useEffect, useRef } from 'react'
 import FamilyImagesConfig from './config/FamilyImagesConfig';
+import {isMobile} from "react-device-detect";
 
 
 function ElasticCollisionFamilyPics() {
@@ -8,6 +9,9 @@ function ElasticCollisionFamilyPics() {
     const animationRef = useRef(null);
 
     const handleResize = () => {
+        if(isMobile) {
+            return;
+        }
         if(animationRef != null) {
             cancelAnimationFrame(animationRef.current);
         }
@@ -40,22 +44,6 @@ function ElasticCollisionFamilyPics() {
         }
 
     }, [])
-
-    // useEffect(() => {
-    //     const canvas = canvasRef.current;
-    //     const ctx = canvas.getContext("2d");
-    //     var parent = document.getElementById("canvadDivId");
-    //     canvas.width = parent.clientWidth;
-    //     canvas.height = parent.clientHeight;
-
-    //     let config = new FamilyImagesConfig(canvas, ctx, false);
-    //     const simulate = () => {
-    //         config.simulate();
-    //         requestAnimationFrame(simulate);
-    //     }
-    //     simulate();
-        
-    // }, [])
 
     return (
         <div>
