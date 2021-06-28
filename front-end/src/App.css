@@ -13,7 +13,8 @@
   display:grid;
   height:100vh;
   grid-template-columns: 1fr 1fr 1fr 1fr;
-  grid-template-rows: 80px auto 60px;
+  grid-template-rows: 80px 1fr 60px; 
+
   grid-template-areas:
     "nav nav nav nav"
     "mid-area mid-area mid-area mid-area"
@@ -44,6 +45,8 @@
   box-sizing: border-box;
   border-radius: 10px;
   padding: 5px;
+
+  overflow: hidden;
 }
 
 .header-logo {
@@ -71,16 +74,9 @@
   height : 100%;
 }
 .footer {
-  /* background:#1dcae9; */
-  /* background:rgb(61, 49, 46); */
   background-color: #22346A;
-  /* border-radius: 10px; */
-
   grid-area: footer;
   box-shadow: -2px -2px 4px rgba(0,0,0, 0.7);
-  /* place-items: center;
-  display: grid; */
-
 }
 .footer-list{
   list-style: none;
@@ -149,6 +145,8 @@
     "description description canvas canvas canvas";
   grid-gap: 0.5rem;
   background-color:  whitesmoke;
+
+  overflow:hidden; 
 }
 
 .simulation-title-container{
@@ -181,8 +179,6 @@
   border-bottom-right-radius: 10px;
   box-shadow: 2px 2px 4px rgba(0,0,0, 0.7);
   color: black;
-  /* height: 65rem; */
-  height:100%;
   overflow-y: scroll;
 
 
@@ -190,29 +186,14 @@
 
 .simulation-canvas-container{
   grid-area: canvas;
-  /* background-color:  white; */
   background-color: black;
-  height: 100%;
-  /* border-radius: 10px; */
   border-bottom-left-radius: 10px;
   border-bottom-right-radius: 10px;  box-shadow: 2px 2px 4px rgba(0,0,0, 0.7);
+  overflow-y: scroll; 
 }
 
 
-elastic-collision-canvas { 
-  /* width: 100%;  
-  min-width: 100%; 
- 
-  min-height: 100%;
-  height: 100%;  */
-} 
- 
-
-
-
 /* Cards statrts *****************/
-
-
 .card:hover{
   box-shadow: 5px 10px 20px 1px rgba(0,0,0, 0.253) !important;
 }
@@ -220,12 +201,9 @@ elastic-collision-canvas {
 .card-body{
   padding: 3 rem 0 !important;
 }
-
-/* .card-text{
-  font-size: 0.9rem;
-  padding: 0.4rem 1.9rem;
-} */
 /* Cards ends **************************/
+
+
 
 /* Home cards start *************/
 .home-card .card{
@@ -405,9 +383,8 @@ elastic-collision-canvas {
   .root-container{
     margin: 0;
     display:grid;
-    height:100vh;
     grid-template-columns: 1fr ;
-    grid-template-rows: 0.2fr 2fr 0.2fr;
+    grid-template-rows: 0.2fr 2fr 0.15fr;
     grid-template-areas:
       "nav"
       "mid-area"
@@ -421,12 +398,10 @@ elastic-collision-canvas {
   .simulation-container {
     margin: 10;
     display:grid;
-    height:100vh;
     grid-template-columns: 1fr;
-    /* grid-template-rows: 60px auto; */
-    grid-template-rows: 60px 1fr 1fr;
+    grid-template-rows: 60px 1fr 1fr; 
     grid-template-areas:
-      "title "
+      "title"
       "canvas"
       "description";
     grid-gap: 0.5rem;
