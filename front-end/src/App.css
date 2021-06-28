@@ -206,13 +206,11 @@
 
 
 /* Home cards start *************/
-.home-card .card{
-  width: 20rem;
-}
+
 .home-card .card {
   border-radius: 10px;
-  height: '21rem';
-  width: '18rem';
+  height: 20rem;
+  width: 18rem;
 }
 
 .home-card img {
@@ -301,10 +299,14 @@
 /* Cattegories cards end ************/
 
 /* Blog card starts ***********/
+.blog-card {
+  height:100%;
+}
 .blog-card .card {
   border-radius: 10px;
   width: 45rem;
-  height: 50rem;
+  /* height: 50rem; */
+  height:100%;
 }
 .blog-card  .card-body {
   padding: 0px;
@@ -456,8 +458,28 @@
   .blog-box {
     width: 80%;
     height: 80%;
-
   }
+
+
+  .home-card {
+    height:100%;
+    width: 100%;
+    overflow-y: scroll;
+  }
+  .blog-categories-cards {
+    height:100%;
+    width:100%;
+    overflow-y: scroll;
+  }
+  .blog-card{
+    height:100%;
+    width: 100%;
+    overflow-y: scroll;
+  }
+  .blog-card .card {
+    width: 100%;
+  }
+
 }
 
 
