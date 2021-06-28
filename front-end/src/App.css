@@ -462,11 +462,32 @@
 
 
   .home-card {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
     height:100%;
     width: 100%;
     overflow-y: scroll;
   }
+  .home-card .card-deck{
+    height: 100%;
+  }
+  .creative-programming-card {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    height:100%;
+    width: 100%;
+    overflow-y: scroll;
+  }
+
   .blog-categories-cards {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
     height:100%;
     width:100%;
     overflow-y: scroll;
