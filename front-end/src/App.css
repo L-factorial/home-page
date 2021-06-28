@@ -492,6 +492,9 @@
     width:100%;
     overflow-y: scroll;
   }
+  .blog-categories-cards .card-deck{
+    height: 100%;
+  }
   .blog-card{
     height:100%;
     width: 100%;
