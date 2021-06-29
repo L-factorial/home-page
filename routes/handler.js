@@ -17,9 +17,6 @@ router.get('/tweets', (req, res) => {
 
 
 router.get('/categories', async (req, res) => {
-    // const categories = await fetch('http://localhost:1337/cateogories');
-    // console.log(categories);
-    // res.end(categories);
     axios.get('https://lfactorial-strapi.wl.r.appspot.com/cateogories')
     .then(result => {
         res.end(JSON.stringify(result.data))
@@ -38,7 +35,6 @@ router.get('/categories/:id', async (req, res) => {
 
 router.get('/blogsByCategory/:categoryId', async(req, res) => {
     const allBlogs = await axios.get('https://lfactorial-strapi.wl.r.appspot.com/blogs');
-    // const blogsJson = JSON.stringify(allBlogs.data);
     console.log(JSON.stringify(allBlogs.data))
     const categorizedBlogs = allBlogs.data.filter(blog => blog.category.id == req.params.categoryId);
     res.end(JSON.stringify(categorizedBlogs));
@@ -68,10 +64,7 @@ router.get('/blogsGroupedByCategory', async(req, res) => {
     for (const [key, value] of blogsMap.entries()) {
         values.push(value)
       }
-    
-    // const categorizedBlogs = values.map(sameCategoryBlogs => {blogs : sameCategoryBlogs, b:'aa' })
-    // console.log(categorizedBlogs)
-    // res.end(JSON.stringify(categorizedBlogs))
+
     res.end(JSON.stringify(values));
 
 })
@@ -84,7 +77,6 @@ router.get('/blogsAndCategory', async(req, res) => {
 
     console.log(blogsAndCategory);
     res.end(JSON.stringify(blogsAndCategory))
-    //res.end(JSON.stringify(values));
 
 })
 
