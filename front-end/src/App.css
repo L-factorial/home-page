@@ -312,7 +312,11 @@
   padding: 10px;
 }
 .blog:hover{
-  box-shadow: 5px 10px 20px 1px rgba(0,0,0, 0.253) !important;
+  box-shadow: 5px 10px 20px 1px rgba(0,0,0, 0.253);
+}
+.blog img {
+  width: 100%;
+  height: auto;
 }
 .blog-date {
   margin: 3px;
@@ -478,14 +482,11 @@
   .blog-categories-cards .card-deck{
     height: 100%;
   }
-  /* .blog-card{
-    height:100%;
-    width: 100%;
-    overflow-y: scroll;
+
+  .blog img {
+    max-width: 100%;
+    height: auto;
   }
-  .blog-card .card {
-    width: 100%;
-  } */
 
 }
 

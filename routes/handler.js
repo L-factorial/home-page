@@ -1,20 +1,7 @@
 const express = require('express');
 const router = express.Router();
-const fetch = require('node-fetch');
 const axios = require('axios')
 const path = require('path');
-
-
-router.get('/tweets', (req, res) => {
-    const str =[{
-        "name":"Lfactorial",
-        "msg": "Live love laugh",
-        "usernaame":"cali-hadraj"
-    }];
-
-    res.end(JSON.stringify(str));
-});
-
 
 router.get('/categories', async (req, res) => {
     axios.get('https://lfactorial-strapi.wl.r.appspot.com/cateogories')

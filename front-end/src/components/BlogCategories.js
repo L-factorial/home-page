@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container, Card, CardDeck, Row } from 'react-bootstrap';
+import {Card, CardDeck, Row } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { Spinner } from 'react-bootstrap';
@@ -43,37 +43,6 @@ function BlogCategories() {
                                     </Row>
                                 ))
                             }
-                            <Row ><Link to="#jpt">Scroll test</Link></Row>
-                            <Row ><Link to="#jpt">Scroll test</Link></Row>
-
-                            <Row ><Link to="#jpt">Scroll test</Link></Row>
-
-                            <Row ><Link to="#jpt">Scroll test</Link></Row>
-
-                            <Row ><Link to="#jpt">Scroll test</Link></Row>
-
-                            <Row ><Link to="#jpt">Scroll test</Link></Row>
-
-                            <Row ><Link to="#jpt">Scroll test</Link></Row>
-
-                            <Row ><Link to="#jpt">Scroll test</Link></Row>
-                            <Row ><Link to="#jpt">Scroll test</Link></Row>
-                            <Row ><Link to="#jpt">Scroll test</Link></Row>
-                            <Row ><Link to="#jpt">Scroll test</Link></Row>
-                            <Row ><Link to="#jpt">Scroll test</Link></Row>
-                            <Row ><Link to="#jpt">Scroll test</Link></Row>
-                            <Row ><Link to="#jpt">Scroll test</Link></Row>
-                            <Row ><Link to="#jpt">Scroll test</Link></Row>
-                            <Row ><Link to="#jpt">Scroll test</Link></Row>
-                            <Row ><Link to="#jpt">Scroll test</Link></Row>
-                            <Row ><Link to="#jpt">Scroll test</Link></Row>
-                            <Row ><Link to="#jpt">Scroll test</Link></Row>
-                            <Row ><Link to="#jpt">Scroll test</Link></Row>
-                            <Row ><Link to="#jpt">Scroll test</Link></Row>
-                            <Row ><Link to="#jpt">Scroll test</Link></Row>
-                            <Row ><Link to="#jpt">Scroll test</Link></Row>
-
-
                         </Card.Text>
                     </Card.Body>
                 </Card>

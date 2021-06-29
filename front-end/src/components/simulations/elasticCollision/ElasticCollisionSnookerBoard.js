@@ -39,10 +39,13 @@ function ElasticCollisionSnookerBoard() {
 
     useEffect(() => {
         window.addEventListener('resize', handleResize);
+        const burger = document.getElementsByClassName('burger')[0];
+        burger.addEventListener('click', handleResize);
         initAndAnimate();
         return () => {
             window.removeEventListener('resize', handleResize);
             window.cancelAnimationFrame(animationRef.current);
+            burger.removeEventListener('click', handleResize);
         }
 
     }, [])

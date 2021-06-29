@@ -8,8 +8,8 @@ class SnookerConfig{
         this.ctx = ctx;
 
 
-        this.row = 6;
-        this.radius = canvas.width/60;
+        this.row = (canvas.width > 700) ? 6 : 4;
+        this.radius = canvas.width/30;
 
 
 

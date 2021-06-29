@@ -31,7 +31,7 @@ function Header() {
                     <Link to={`/creativeProgramming/7`}><div>MyFamily</div></Link>
                 </li>
                 <li className="navigation-item">
-                    <a href="http://www.ku.edu.np"><div>MyFavouritePlace</div></a>
+                    <Link to="/kathmanduUniversity"><div>Kathmandu University</div></Link>
                 </li>
             </ul>
             <a href="#"  className="burger">

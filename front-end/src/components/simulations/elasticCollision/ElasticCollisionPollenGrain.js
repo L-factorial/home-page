@@ -36,11 +36,14 @@ function ElasticCollisionPollenGrain() {
     }
 
     useEffect(() => {
+        const burger = document.getElementsByClassName('burger')[0];
+        burger.addEventListener('click', handleResize);
         window.addEventListener('resize', handleResize);
         initAndAnimate();
         return () => {
             window.removeEventListener('resize', handleResize);
             window.cancelAnimationFrame(animationRef.current);
+            burger.removeEventListener('click', handleResize);
         }
 
     }, [])

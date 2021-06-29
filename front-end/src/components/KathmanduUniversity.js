@@ -2,12 +2,12 @@ import React, { Component } from 'react'
 import { Card, CardDeck } from 'react-bootstrap';
 import BasicContent from './BasicContent';
 
-function About() {
+function KathmanduUniversity() {
 
     return (
-            <BasicContent markedDownDocId='8' />
+            <BasicContent markedDownDocId='9' />
     )
 
 }
 
-export default About
+export default KathmanduUniversity

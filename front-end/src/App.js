@@ -12,6 +12,7 @@ import CreativeProgrammingList from './components/CreativeProgrammingList';
 import CreativeProgrammingDisplay from './components/CreativeProgrammingDisplay';
 import Projects from './components/Projects'
 import NotFound from './components/NotFound';
+import KathmanduUniversity from './components/KathmanduUniversity';
 
 function App() {
   return (
@@ -21,6 +22,8 @@ function App() {
         <Switch>
           <Route path="/" component={Home} exact />
           <Route path="/about" component={About} exact />
+          <Route path="/kathmanduUniversity" component={KathmanduUniversity} exact />
+
           <Route path="/blogCategories" component={BlogCategories} exact />
           <Route path="/blogs/:id" component={Blog} exact/>
           <Route path="/creativeProgramming" component={CreativeProgrammingList} exact />
