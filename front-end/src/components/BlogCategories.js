@@ -37,7 +37,7 @@ function BlogCategories() {
 
                                 blogsByGroup.map(blog => (
                                     <Row key={blog.id} >
-                                        <Link to={`/blogs/${blog.id}`}>
+                                        <Link to={`/blog/${blog.id}`}>
                                             {blog.tittle}
                                         </Link>
                                     </Row>

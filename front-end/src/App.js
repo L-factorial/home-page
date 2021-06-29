@@ -25,7 +25,7 @@ function App() {
           <Route path="/kathmanduUniversity" component={KathmanduUniversity} exact />
 
           <Route path="/blogCategories" component={BlogCategories} exact />
-          <Route path="/blogs/:id" component={Blog} exact/>
+          <Route path="/blog/:id" component={Blog} exact/>
           <Route path="/creativeProgramming" component={CreativeProgrammingList} exact />
           <Route path="/creativeProgramming/:id" component={CreativeProgrammingDisplay} exact />
           <Route path="/projects" component={Projects} exact />
