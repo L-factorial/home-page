@@ -11,6 +11,7 @@ import ElasticCollisionDiffusion from './simulations/elasticCollision/ElasticCol
 import ElasticCollisionFamilyPics from './simulations/elasticCollision/ElasticCollisionFamilyPics'
 import CreativeProgrammingDescriptionMarkdown from './CreativeProgrammingDescriptionMarkdown'
 import NotFound from './NotFound';
+import { FiArrowLeft } from "react-icons/fi"
 
 
 function CreativeProgrammingDisplay({match}) {
@@ -69,7 +70,7 @@ function CreativeProgrammingDisplay({match}) {
                 Object.keys(simulation).length > 0 ? 
                     <div className = "simulation-container">
                         <div className = "simulation-title-container">
-                            <Link to="/creativeProgramming"> GoBack </Link>
+                            <Link to="/creativeProgramming"> <FiArrowLeft /> </Link>
                             <h4>{simulation.title}</h4>
                         </div>
                         <CreativeProgrammingDescriptionMarkdown markedDownDocId={match.params.id} />

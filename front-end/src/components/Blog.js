@@ -1,8 +1,8 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { Container, Card, CardDeck } from 'react-bootstrap';
 import { useState, useEffect } from 'react';
-import blogImg from '../blogImg.png'
+import { FiArrowLeft } from "react-icons/fi";
+import Markdown from 'react-markdown';
 
 
 
@@ -22,20 +22,17 @@ function Blog({ match }) {
     }
     return (
         <div className="home">
-            <div className="blog-card">
-                <CardDeck >
-                    <Card>
-                        <Card.Body>
-                            <Card.Title>
-                                {blog.tittle}
-                            </Card.Title>
-                            <Card.Subtitle>Published : {blog.published_at}    Last updated: {blog.updated_at}</Card.Subtitle>
-                            <Card.Text>
-                                {blog.content}
-                            </Card.Text>
-                        </Card.Body>
-                    </Card>
-                </CardDeck>
+            <div className="blog">
+            <div>
+                <Link to="/blogCategories"> <FiArrowLeft/></Link>
+            </div>
+                <div className="blog-date">
+                    <div> Published : {blog.published_at}  </div>
+                    <div> Last updated: {blog.updated_at} </div>
+                </div>
+                <div className="blog-content">
+                    <Markdown>{blog.content}</Markdown>
+                </div>
             </div>
         </div>
     )

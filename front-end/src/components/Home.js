@@ -1,7 +1,7 @@
 import '../App.css';
 
 import React from 'react'
-import { Container, Row, Col, Card, CardDeck } from 'react-bootstrap';
+import {Card, CardDeck } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
 import cp from '../img/creativeProgramming.png'

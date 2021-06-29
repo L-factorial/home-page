@@ -1,7 +1,6 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
 import { Card, CardDeck, Row } from 'react-bootstrap';
-
+import { FaGithubSquare } from "react-icons/fa"
 function Projects() {
     return (
         <div className="home">
@@ -10,7 +9,7 @@ function Projects() {
                     <Card>
                         <Card.Body>
                             <Card.Title>
-                                Projects - Codelets
+                            <FaGithubSquare color="black" /> Projects-Codelets 
                             </Card.Title>
                             <Card.Text>
                                     <Row>

@@ -13,8 +13,6 @@ function CreativeProgrammingDescriptionMarkdown(props) {
     }, [])
     const fetchmarkedDownDoc = async () => {
         const markedDownDocData = await fetch(`/markedDownDoc/${props.markedDownDocId}`);
-        // const markedDownDocData = await fetch('/markedDownDoc/1');
-
         const markedDownDocDataJson = await markedDownDocData.json();
         console.log(markedDownDocDataJson)
         setmarkedDownDoc(markedDownDocDataJson)
