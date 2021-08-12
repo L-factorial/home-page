@@ -2,9 +2,7 @@ const express = require('express');
 const router = express.Router();
 const axios = require('axios')
 const path = require('path');
-//https://lfactorial-strapi-heroku.herokuapp.com/
 router.get('/categories', async (req, res) => {
-    //axios.get('https://lfactorial-strapi.wl.r.appspot.com/cateogories')
     axios.get('https://lfactorial-strapi-heroku.herokuapp.com/cateogories')
     .then(result => {
         res.end(JSON.stringify(result.data))
@@ -13,7 +11,6 @@ router.get('/categories', async (req, res) => {
 });
 
 router.get('/categories/:id', async (req, res) => {
-    // axios.get(`https://lfactorial-strapi.wl.r.appspot.com/cateogories/${req.params.id}`)
     axios.get(`https://lfactorial-strapi-heroku.herokuapp.com/cateogories/${req.params.id}`)
     .then(result => {
         res.end(JSON.stringify(result.data))
@@ -23,7 +20,6 @@ router.get('/categories/:id', async (req, res) => {
 
 
 router.get('/blogsByCategory/:categoryId', async(req, res) => {
-    // const allBlogs = await axios.get('https://lfactorial-strapi.wl.r.appspot.com/blogs');
     const allBlogs = await axios.get('https://lfactorial-strapi-heroku.herokuapp.com/blogs');
 
     console.log(JSON.stringify(allBlogs.data))
@@ -32,21 +28,18 @@ router.get('/blogsByCategory/:categoryId', async(req, res) => {
 });
 
 router.get('/blogs/:id', async(req, res) => {
-    //const blog = await axios.get(`https://lfactorial-strapi.wl.r.appspot.com/blogs/${req.params.id}`);
     const blog = await axios.get(`https://lfactorial-strapi-heroku.herokuapp.com/blogs/${req.params.id}`);
 
     res.end(JSON.stringify(blog.data));
 })
 
 router.get('/blogs', async(req, res) => {
-    //const allBlogs = await axios.get('https://lfactorial-strapi.wl.r.appspot.com/blogs');
     const allBlogs = await axios.get('https://lfactorial-strapi-heroku.herokuapp.com/blogs');
 
     res.end(JSON.stringify(allBlogs.data));
 })
 
 router.get('/blogsGroupedByCategory', async(req, res) => {
-    //const allBlogs = await axios.get('https://lfactorial-strapi.wl.r.appspot.com/blogs');
     const allBlogs = await axios.get('https://lfactorial-strapi-heroku.herokuapp.com/blogs');
     const blogsMap = new Map();
 
@@ -66,8 +59,6 @@ router.get('/blogsGroupedByCategory', async(req, res) => {
 })
 
 router.get('/blogsAndCategory', async(req, res) => {
-    // const allBlogs = await axios.get('https://lfactorial-strapi.wl.r.appspot.com/blogs');
-    // const allCategories = await axios.get('https://lfactorial-strapi.wl.r.appspot.com/cateogories')
 
     const allBlogs = await axios.get('https://lfactorial-strapi-heroku.herokuapp.com/blogs');
     const allCategories = await axios.get('https://lfactorial-strapi-heroku.herokuapp.com/cateogories')
@@ -80,9 +71,7 @@ router.get('/blogsAndCategory', async(req, res) => {
 })
 
 router.get('/markedDownDoc/:id', async(req, res) => {
-    // const markedDownDoc = await axios.get(`https://lfactorial-strapi-heroku.herokuapp.com/marked-down-documents/${req.params.id}`);
     const markedDownDoc = await axios.get(`https://lfactorial-strapi-heroku.herokuapp.com/marked-down-documents/${req.params.id}`);
-
     res.end(JSON.stringify(markedDownDoc.data));
 })
 
