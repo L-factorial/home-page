@@ -23,6 +23,34 @@ function BlogCategories() {
     }
 
 
+    // ************** Old way **********
+    // const renderCards = () => {
+    //     return (
+    //         blogsGroupedByCategory.map(blogsByGroup =>
+    //             <Card>
+    //                 <Card.Body>
+    //                     <Card.Title>
+    //                         {blogsByGroup[0].category.name}
+    //                     </Card.Title>
+    //                     <Card.Text>
+    //                         {
+
+    //                             blogsByGroup.map(blog => (
+    //                                 <Row key={blog.id} >
+    //                                     <Link to={`/blog/${blog.id}`}>
+    //                                         {blog.tittle}
+    //                                     </Link>
+    //                                 </Row>
+    //                             ))
+    //                         }
+    //                     </Card.Text>
+    //                 </Card.Body>
+    //             </Card>
+
+    //         )
+
+    //     );
+    // }
 
     const renderCards = () => {
         return (
@@ -30,12 +58,12 @@ function BlogCategories() {
                 <Card>
                     <Card.Body>
                         <Card.Title>
-                            {blogsByGroup[0].category.name}
+                            {blogsByGroup.category}
                         </Card.Title>
                         <Card.Text>
                             {
 
-                                blogsByGroup.map(blog => (
+                                blogsByGroup.blogs.map(blog => (
                                     <Row key={blog.id} >
                                         <Link to={`/blog/${blog.id}`}>
                                             {blog.tittle}

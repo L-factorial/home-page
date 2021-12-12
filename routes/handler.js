@@ -2,77 +2,84 @@ const express = require('express');
 const router = express.Router();
 const axios = require('axios')
 const path = require('path');
-router.get('/categories', async (req, res) => {
-    axios.get('https://lfactorial-strapi-heroku.herokuapp.com/cateogories')
-    .then(result => {
-        res.end(JSON.stringify(result.data))
-        console.log(result.data)
-    }).catch(error => console.log(error))
-});
 
-router.get('/categories/:id', async (req, res) => {
-    axios.get(`https://lfactorial-strapi-heroku.herokuapp.com/cateogories/${req.params.id}`)
-    .then(result => {
-        res.end(JSON.stringify(result.data))
-        console.log(result.data)
-    }).catch(error => console.log(error)) 
-});
+let markedDownDocMap = new Map();
+let blogMap = new Map();
+let blogsByGroupJson = null
 
-
-router.get('/blogsByCategory/:categoryId', async(req, res) => {
-    const allBlogs = await axios.get('https://lfactorial-strapi-heroku.herokuapp.com/blogs');
-
-    console.log(JSON.stringify(allBlogs.data))
-    const categorizedBlogs = allBlogs.data.filter(blog => blog.category.id == req.params.categoryId);
-    res.end(JSON.stringify(categorizedBlogs));
-});
 
 router.get('/blogs/:id', async(req, res) => {
-    const blog = await axios.get(`https://lfactorial-strapi-heroku.herokuapp.com/blogs/${req.params.id}`);
-
-    res.end(JSON.stringify(blog.data));
+    let blogId = req.params.id
+    if(blogMap.has(blogId)) {
+        res.end(blogMap.get(blogId))
+        console.log("Fetching blog from the cache ....")
+    }
+    else {
+        const blog = await axios.get(`https://lfactorial-strapi-heroku.herokuapp.com/blogs/${req.params.id}`);
+        const blogJson = JSON.stringify(blog.data)
+        //res.end(JSON.stringify(blog.data));
+        blogMap.set(blogId, blogJson)
+        res.end(blogJson)
+    }
 })
 
-router.get('/blogs', async(req, res) => {
-    const allBlogs = await axios.get('https://lfactorial-strapi-heroku.herokuapp.com/blogs');
 
-    res.end(JSON.stringify(allBlogs.data));
-})
 
 router.get('/blogsGroupedByCategory', async(req, res) => {
+    if(blogsByGroupJson != null) {
+        res.end(blogsByGroupJson)
+        console.log("fetching the blogs category from the cache ... ")
+    }
+    else{
+        const allBlogs = await axios.get('https://lfactorial-strapi-heroku.herokuapp.com/blogs');
+        const blogsMap = new Map();
+
+        allBlogs.data.forEach(blog => {
+            if(!blogsMap.has(blog.category.id )){
+                blogsMap.set(blog.category.id, {category: blog.category.name, blogs:[]})
+            }
+            blogsMap.get(blog.category.id).blogs.push({id: blog.id, tittle: blog.tittle})
+        });
+        let values = [];
+        for (const [key, value] of blogsMap.entries()) {
+            values.push(value)
+        }
+        blogsByGroupJson = JSON.stringify(values)
+        res.end(blogsByGroupJson);
+    }
+
+})
+router.get('/blogsGroupedByCategoryRefreshCache', async(req, res) => {
     const allBlogs = await axios.get('https://lfactorial-strapi-heroku.herokuapp.com/blogs');
     const blogsMap = new Map();
 
     allBlogs.data.forEach(blog => {
         if(!blogsMap.has(blog.category.id )){
-            blogsMap.set(blog.category.id, [])
+            blogsMap.set(blog.category.id, {category: blog.category.name, blogs:[]})
         }
-        blogsMap.get(blog.category.id).push(blog)
+        blogsMap.get(blog.category.id).blogs.push({id: blog.id, tittle: blog.tittle})
     });
     let values = [];
     for (const [key, value] of blogsMap.entries()) {
         values.push(value)
-      }
-
-    res.end(JSON.stringify(values));
-
-})
-
-router.get('/blogsAndCategory', async(req, res) => {
-
-    const allBlogs = await axios.get('https://lfactorial-strapi-heroku.herokuapp.com/blogs');
-    const allCategories = await axios.get('https://lfactorial-strapi-heroku.herokuapp.com/cateogories')
-
-    const blogsAndCategory= {blogs:allBlogs.data, categories: allCategories.data};
-
-    console.log(blogsAndCategory);
-    res.end(JSON.stringify(blogsAndCategory))
-
+    }
+    blogsByGroupJson = JSON.stringify(values)
+    res.end(blogsByGroupJson);
 })
 
 router.get('/markedDownDoc/:id', async(req, res) => {
-    const markedDownDoc = await axios.get(`https://lfactorial-strapi-heroku.herokuapp.com/marked-down-documents/${req.params.id}`);
-    res.end(JSON.stringify(markedDownDoc.data));
+    const docId = req.params.id;
+    if(markedDownDocMap.has(docId)) {
+        res.end(markedDownDocMap.get(docId));
+        console.log("fetching markdown via cache ...")
+    }
+    else {
+        const markedDownDoc = await axios.get(`https://lfactorial-strapi-heroku.herokuapp.com/marked-down-documents/${req.params.id}`);
+        const jsonData = JSON.stringify(markedDownDoc.data)
+        markedDownDocMap.set(docId, jsonData)
+        //res.end(JSON.stringify(markedDownDoc.data));
+        res.end(jsonData);
+    }
 })
 
 module.exports = router;
