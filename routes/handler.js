@@ -77,7 +77,7 @@ router.get('/markedDownDoc/:id', async(req, res) => {
         const markedDownDoc = await axios.get(`https://lfactorial-strapi-heroku.herokuapp.com/marked-down-documents/${req.params.id}`);
         const jsonData = JSON.stringify(markedDownDoc.data)
         markedDownDocMap.set(docId, jsonData)
-        //res.end(JSON.stringify(markedDownDoc.data));
+        //res.end(JSON.stringify(markedDownDoc.data)); 
         res.end(jsonData);
     }
 })
