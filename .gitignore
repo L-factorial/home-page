@@ -26,7 +26,7 @@ node_modules
 /front-end/yarn-debug.log*
 /front-end/yarn-error.log*
 .env
-package-lock.json
-front-end/package-lock.json
+#package-lock.json
+#front-end/package-lock.json
 .gitignore
 .DS_Store
