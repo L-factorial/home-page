@@ -4,6 +4,8 @@ const bodyParser = require('body-parser');
 const routeHandler = require('./routes/handler.js');
 
 const path = require('path');
+require('dotenv').config();
+
 
 // const cors = require('cors');
 

@@ -18,39 +18,39 @@ function CreativeProgrammingDisplay({match}) {
 
     const simulatitons = [
         {
-            id: 1,
+            id: 10,
             title: "Elastic Collision",
             canvas: <ElasticCollisionRandomConfig />,
         },
         {
-            id: 2,
+            id: 9,
             title: "Elastic Collision",
             canvas: <ElasticCollisionRandomConfigWithConvexHull />,
         },
         {
-            id: 3,
+            id: 12,
             title: "Elastic Collision",
             canvas: <ElasticCollisionSnookerBoard />,
         },
         {
-            id: 4,
+            id: 7,
             title: "Elastic Collision - Pollen Grain",
             canvas: <ElasticCollisionPollenGrain />,
         },
         {
-            id: 5,
+            id: 11,
             title: "Elastic Collision - Diffusion",
             canvas: <ElasticCollisionDiffusion />,
         },
         {
-            id: 7,
+            id: 6,
             title: "My family: Viv, Ray and us",
             canvas: <ElasticCollisionFamilyPics />,
 
         },
 
         {
-            id: 6,
+            id: 8,
             title: "Eight Puzzle",
             canvas: <EightPuzzle />
         },

@@ -2,22 +2,25 @@ const express = require('express');
 const router = express.Router();
 const axios = require('axios')
 const path = require('path');
+require('dotenv').config();
 
-let markedDownDocMap = new Map();
+
 let blogMap = new Map();
 let blogsByGroupJson = null
+let staticBlogType = new Set(["me", "ku", "codesnippet"])
+
 
 
 router.get('/blogs/:id', async(req, res) => {
     let blogId = req.params.id
+    console.log(process.env.api_domain)
     if(blogMap.has(blogId)) {
         res.end(blogMap.get(blogId))
         console.log("Fetching blog from the cache ....")
     }
     else {
-        const blog = await axios.get(`https://lfactorial-strapi-heroku.herokuapp.com/blogs/${req.params.id}`);
+        const blog = await axios.get(`${process.env.api_domain}/Articles/${req.params.id}?populate=blocks`);
         const blogJson = JSON.stringify(blog.data)
-        //res.end(JSON.stringify(blog.data));
         blogMap.set(blogId, blogJson)
         res.end(blogJson)
     }
@@ -31,18 +34,20 @@ router.get('/blogsGroupedByCategory', async(req, res) => {
         console.log("fetching the blogs category from the cache ... ")
     }
     else{
-        const allBlogs = await axios.get('https://lfactorial-strapi-heroku.herokuapp.com/blogs');
+        const allBlogs = await axios.get(`${process.env.api_domain}/Articles?populate=category`);
         const blogsMap = new Map();
 
-        allBlogs.data.forEach(blog => {
-            if(!blogsMap.has(blog.category.id )){
-                blogsMap.set(blog.category.id, {category: blog.category.name, blogs:[]})
+        allBlogs.data.data.forEach(blog => {
+            if(!blogsMap.has(blog.attributes.category.data.attributes.name )){
+                blogsMap.set(blog.attributes.category.data.attributes.name , {category: blog.attributes.category.data.attributes.name, blogs:[]})
             }
-            blogsMap.get(blog.category.id).blogs.push({id: blog.id, tittle: blog.tittle})
+            blogsMap.get(blog.attributes.category.data.attributes.name ).blogs.push({id: blog.id, tittle: blog.attributes.title})
         });
         let values = [];
         for (const [key, value] of blogsMap.entries()) {
-            values.push(value)
+            if(!staticBlogType.has(key)) {
+                values.push(value)
+            }
         }
         blogsByGroupJson = JSON.stringify(values)
         res.end(blogsByGroupJson);
@@ -50,37 +55,26 @@ router.get('/blogsGroupedByCategory', async(req, res) => {
 
 })
 router.get('/blogsGroupedByCategoryRefreshCache', async(req, res) => {
-    const allBlogs = await axios.get('https://lfactorial-strapi-heroku.herokuapp.com/blogs');
+    const allBlogs = await axios.get(`${process.env.api_domain}/Articles?populate=category`);
     const blogsMap = new Map();
 
-    allBlogs.data.forEach(blog => {
-        if(!blogsMap.has(blog.category.id )){
-            blogsMap.set(blog.category.id, {category: blog.category.name, blogs:[]})
+    allBlogs.data.data.forEach(blog => {
+        if(!blogsMap.has(blog.attributes.category.data.attributes.name )){
+            blogsMap.set(blog.attributes.category.data.attributes.name , {category: blog.attributes.category.data.attributes.name, blogs:[]})
         }
-        blogsMap.get(blog.category.id).blogs.push({id: blog.id, tittle: blog.tittle})
+        blogsMap.get(blog.attributes.category.data.attributes.name ).blogs.push({id: blog.id, tittle: blog.attributes.title})
     });
     let values = [];
     for (const [key, value] of blogsMap.entries()) {
-        values.push(value)
+        if(!staticBlogType.has(key)) {
+            values.push(value)
+        }
     }
     blogsByGroupJson = JSON.stringify(values)
     res.end(blogsByGroupJson);
 })
 
-router.get('/markedDownDoc/:id', async(req, res) => {
-    const docId = req.params.id;
-    if(markedDownDocMap.has(docId)) {
-        res.end(markedDownDocMap.get(docId));
-        console.log("fetching markdown via cache ...")
-    }
-    else {
-        const markedDownDoc = await axios.get(`https://lfactorial-strapi-heroku.herokuapp.com/marked-down-documents/${req.params.id}`);
-        const jsonData = JSON.stringify(markedDownDoc.data)
-        markedDownDocMap.set(docId, jsonData)
-        //res.end(JSON.stringify(markedDownDoc.data)); 
-        res.end(jsonData);
-    }
-})
+
 
 module.exports = router;
 

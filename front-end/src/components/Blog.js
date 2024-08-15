@@ -27,11 +27,13 @@ function Blog({ match }) {
                 <Link to="/blogCategories"> <FiArrowLeft/></Link>
             </div>
                 <div className="blog-date">
-                    <div> Published : {blog.published_at}  </div>
-                    <div> Last updated: {blog.updated_at} </div>
+                    <div> Published : {blog?.data?.attributes?.publishedAt}  </div>
+                    <div> Last updated: {blog?.data?.attributes?.updatedAt} </div>
                 </div>
                 <div className="blog-content">
-                    <Markdown>{blog.content}</Markdown>
+                    {/* <Markdown>{blog.content}</Markdown> */}
+                    <Markdown>{blog?.data?.attributes?.blocks[0]?.body}</Markdown>
+
                 </div>
             </div>
         </div>

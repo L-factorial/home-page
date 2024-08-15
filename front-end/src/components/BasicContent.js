@@ -10,15 +10,17 @@ function BasicContent(props) {
         fetchmarkedDownDoc()
     }, [])
     const fetchmarkedDownDoc = async () => {
-        const markedDownDocData = await fetch(`/markedDownDoc/${props.markedDownDocId}`);
+        const markedDownDocData = await fetch(`/blogs/${props.markedDownDocId}`);
         const markedDownDocDataJson = await markedDownDocData.json();
-        setmarkedDownDoc(markedDownDocDataJson)
+        // console.log(markedDownDocDataJson)
+        // setmarkedDownDoc(markedDownDocDataJson)
+        setmarkedDownDoc({...markedDownDocDataJson})
     }
     return (
         <div className="home">
             <div className="blog">
                 <div className="blog-content">
-                    <Markdown>{markedDownDoc.content}</Markdown>
+                <Markdown>{markedDownDoc?.data?.attributes?.blocks[0]?.body}</Markdown>
                 </div>
             </div>
         </div>

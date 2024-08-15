@@ -5,7 +5,7 @@ import BasicContent from './BasicContent';
 function About() {
 
     return (
-            <BasicContent markedDownDocId='8' />
+            <BasicContent markedDownDocId='2' />
     )
 
 }

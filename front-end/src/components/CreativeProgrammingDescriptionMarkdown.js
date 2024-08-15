@@ -14,10 +14,10 @@ function CreativeProgrammingDescriptionMarkdown(props) {
         fetchmarkedDownDoc()
     }, [])
     const fetchmarkedDownDoc = async () => {
-        const markedDownDocData = await fetch(`/markedDownDoc/${props.markedDownDocId}`);
+        const markedDownDocData = await fetch(`/blogs/${props.markedDownDocId}`);
         const markedDownDocDataJson = await markedDownDocData.json();
         console.log(markedDownDocDataJson)
-        setmarkedDownDoc(markedDownDocDataJson)
+        setmarkedDownDoc({...markedDownDocDataJson})
         setLoading(false)
 
     }
@@ -39,7 +39,9 @@ function CreativeProgrammingDescriptionMarkdown(props) {
     return (
         <div className = "simulation-description-container"> 
            <Markdown rehypePlugins={[rehypeHighlight]}>
-               {loading ? renderLoading() : markedDownDoc.content}
+               {/* {loading ? renderLoading() : markedDownDoc.content} */}
+               {loading ? renderLoading() : markedDownDoc?.data?.attributes?.blocks[0]?.body}
+
             </Markdown>
         </div>
     );

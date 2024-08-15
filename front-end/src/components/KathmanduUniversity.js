@@ -5,7 +5,7 @@ import BasicContent from './BasicContent';
 function KathmanduUniversity() {
 
     return (
-            <BasicContent markedDownDocId='9' />
+            <BasicContent markedDownDocId='3' />
     )
 
 }

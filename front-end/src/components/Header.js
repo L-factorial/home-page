@@ -28,7 +28,7 @@ function Header() {
                     <Link to="/about"><div>About</div></Link>
                 </li>
                 <li className="navigation-item">
-                    <Link to={`/creativeProgramming/7`}><div>MyFamily</div></Link>
+                    <Link to={`/creativeProgramming/6`}><div>MyFamily</div></Link>
                 </li>
                 <li className="navigation-item">
                     <Link to="/kathmanduUniversity"><div>Kathmandu University</div></Link>
