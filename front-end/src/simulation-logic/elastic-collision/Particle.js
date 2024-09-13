@@ -220,6 +220,20 @@ class Particle{
             let dy = height - this.ry - this.radius
             let dWidth = this.radius*2;
             let dHeight = this.radius*2;
+
+
+                    //     // Draw the circular path
+                    //     ctx.beginPath();
+                    //     ctx.arc(this.rx, this.ry, this.radius, 0, Math.PI * 2, true);
+                    //     ctx.closePath();
+            
+                    //     // Clip to the circle
+                    //     ctx.clip();
+
+                    //                        // Reset clipping region
+                    // ctx.restore();
+                    // ctx.save();
+
             ctx.drawImage(this.img,dx, dy, dWidth, dHeight);
         }
     }
