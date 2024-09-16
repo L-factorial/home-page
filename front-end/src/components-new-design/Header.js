@@ -81,7 +81,8 @@ function Header() {
                         <nav className="sidebar-nav-links">
                             <Link to="/home" onClick={handleLinkClick}>Home</Link>
                             <Link to="/about" onClick={handleLinkClick}>About</Link>
-                            <Link to="/kathmanduUniversity" onClick={handleLinkClick}>Kathmandu University</Link>
+                            {/* <Link to="/kathmanduUniversity" onClick={handleLinkClick}>Kathmandu University</Link> */}
+                            <a href='https://ku.edu.np/'>Kathmandu University</a>
                             <Link to="/projects" onClick={handleLinkClick}>Projects</Link>
                             <div className="sidebar-blog-label">Blogs</div> 
                             {getBlogCategories()}

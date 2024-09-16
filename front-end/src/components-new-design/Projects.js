@@ -5,7 +5,10 @@ function Projects() {
     return (
         <div className="main-content">
             <div className="main-content-projects">
-                <ui>
+                <div>
+                    <a href="https://github.com/L-factorial">Follow my github page for more</a>
+                </div>
+                {/* <ui>
                     <li className="main-content-projects-ui-li">
                         <a href="https://github.com/L-factorial/home-page/blob/main/front-end/src/data-structure/PriorityQueue.js">Priority Queue in Java script</a>
                     </li>
@@ -18,7 +21,7 @@ function Projects() {
                     <li className="main-content-projects-ui-li">
                         <a href="https://github.com/L-factorial/home-page/blob/main/front-end/src/simulation-logic/elastic-collision/Simulation.js">Spatial indexing - Particle collisions in 2D</a>
                     </li>
-                </ui>
+                </ui> */}
             </div>
         </div>
     )

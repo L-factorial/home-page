@@ -7,6 +7,8 @@ import ElasticCollisionSnookerBoard from './simulations/elasticCollision/Elastic
 import ElasticCollisionPollenGrain from './simulations/elasticCollision/ElasticCollisionPollenGrain';
 import ElasticCollisionDiffusion from './simulations/elasticCollision/ElasticCollisionDiffusion';
 import ElasticCollisionFamilyPics from './simulations/elasticCollision/ElasticCollisionFamilyPics'
+import Markdown from 'react-markdown';
+
 
 import React, { useEffect, useState } from 'react';
 const simulatitons = [
@@ -133,7 +135,7 @@ function Home() {
                             </div>
       ) : (
         <div className="main-content-blog">
-            {loading ? "Loading ..." : simulationDescriptionBlog?.data?.attributes?.blocks[0]?.body}
+            {loading ? "Loading ..." : <Markdown>{simulationDescriptionBlog?.data?.attributes?.blocks[0]?.body}</Markdown>}
         </div>
       )}
     </div>
