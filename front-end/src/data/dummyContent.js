@@ -24,9 +24,11 @@ This is sample personal-blog content. It demonstrates category navigation and cl
 export const pageContent = {
   about: `# About me
 
-Welcome to my personal website. I enjoy building software, exploring algorithms, and turning mathematical ideas into interactive visualizations.
+I write code for a living, and also for my own creative imagination. The wheel, electricity, airplanes, microprocessors, the internet, and now LLMs are some of mankind’s finest inventions. I also happen to believe the humble HashMap belongs somewhere on that list.
 
-This page currently uses local placeholder content and can be edited in \`src/data/dummyContent.js\`.`,
+[Sir Viv Richards](https://en.wikipedia.org/wiki/Viv_Richards) is the greatest player to ever play the game of cricket. This is not an opinion. We can debate almost anything else.
+
+I love people, stories, arguments, ideas, and good company. Knock on my door anytime — happy to be your unofficial therapist over a chilled beer, strong coffee, or a good cup of tea. Your choice. And we’ll have a factorially good time.`,
   kathmanduUniversity: `# Kathmandu University
 
 This is placeholder content about Kathmandu University.`,
