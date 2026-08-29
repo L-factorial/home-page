@@ -115,30 +115,56 @@ class Particle{
      *
      */
     bounceOff1(that) {
-            let dx  = that.rx - this.rx;
-            let dy  = that.ry - this.ry;
-            let dvx = that.vx - this.vx;
-            let dvy = that.vy - this.vy;
-            let dvdr = dx*dvx + dy*dvy;             // dv dot dr
-            let dist = this.radius + that.radius;   // distance between particle centers at collison
-    
-            // magnitude of normal force
-            let magnitude = 2 * this.mass * that.mass * dvdr / ((this.mass + that.mass) * dist);
-    
-            // normal force, and in x and y directions
-            let fx = magnitude * dx / dist;
-            let fy = magnitude * dy / dist;
-    
-            // update velocities according to normal force
-            this.vx += fx / this.mass;
-            this.vy += fy / this.mass;
-            that.vx -= fx / that.mass;
-            that.vy -= fy / that.mass;
-    
-            // update collision counts
-            this.count++;
-            that.count++;
+        let dx = that.rx - this.rx;
+        let dy = that.ry - this.ry;
+        let centerDistance = Math.sqrt(dx * dx + dy * dy);
+        const collisionDistance = this.radius + that.radius;
+
+        // If centers coincide, choose a stable normal from relative velocity.
+        if (centerDistance < 0.000001) {
+            dx = that.vx - this.vx;
+            dy = that.vy - this.vy;
+            centerDistance = Math.sqrt(dx * dx + dy * dy);
+            if (centerDistance < 0.000001) {
+                dx = 1;
+                dy = 0;
+                centerDistance = 1;
+            }
         }
+
+        const nx = dx / centerDistance;
+        const ny = dy / centerDistance;
+        const overlap = collisionDistance - centerDistance;
+
+        // Correct penetration before applying an impulse. Lighter particles move
+        // farther, which prevents overlapping pairs from becoming interlocked.
+        if (overlap > 0) {
+            const inverseMassA = 1 / this.mass;
+            const inverseMassB = 1 / that.mass;
+            const inverseMassTotal = inverseMassA + inverseMassB;
+            const correction = overlap + 0.01;
+            this.rx -= nx * correction * (inverseMassA / inverseMassTotal);
+            this.ry -= ny * correction * (inverseMassA / inverseMassTotal);
+            that.rx += nx * correction * (inverseMassB / inverseMassTotal);
+            that.ry += ny * correction * (inverseMassB / inverseMassTotal);
+        }
+
+        const relativeVelocityX = that.vx - this.vx;
+        const relativeVelocityY = that.vy - this.vy;
+        const velocityAlongNormal = relativeVelocityX * nx + relativeVelocityY * ny;
+
+        // An overlapping pair that is already separating needs positional
+        // correction only. A second impulse would pull it back together.
+        if (velocityAlongNormal >= 0) return;
+
+        const impulse = (2 * velocityAlongNormal) / ((1 / this.mass) + (1 / that.mass));
+        this.vx += (impulse * nx) / this.mass;
+        this.vy += (impulse * ny) / this.mass;
+        that.vx -= (impulse * nx) / that.mass;
+        that.vy -= (impulse * ny) / that.mass;
+        this.count++;
+        that.count++;
+    }
 
     checkCollisionWith(that) {
         let dx = this.rx - that.rx;

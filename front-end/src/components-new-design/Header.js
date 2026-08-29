@@ -2,7 +2,6 @@ import '../App1.css';
 import { Link } from 'react-router-dom';
 import profilePic from '../profilepic.jpg'
 import { useState, useEffect } from 'react';
-import { blogCategories } from '../data/dummyContent';
 
 function Header() {
     useEffect(() => {
@@ -32,17 +31,6 @@ function Header() {
     const [sidebarMain, setSidebarMain] = useState(null)
     const [mainContent, setMainContent] = useState(null)
 
-    const getBlogCategories = () => {
-            return (
-                blogCategories.map( (category) => (
-                    <Link key={category} to={`/blogListByCategory/${category}`} onClick={handleLinkClick}>{category}</Link>
-                )
-
-                )
-            )
-            
-    }
-
     return (
         <aside className = "sidebar">
             <div className = "sidebar-header">
@@ -71,7 +59,7 @@ function Header() {
                             <a href='https://ku.edu.np/'>Kathmandu University</a>
                             <Link to="/projects" onClick={handleLinkClick}>Projects</Link>
                             <div className="sidebar-blog-label">Blogs</div> 
-                            {getBlogCategories()}
+                            <div className="sidebar-blog-status">Under construction</div>
                         </nav>
                 </div>
 

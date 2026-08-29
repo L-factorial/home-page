@@ -23,6 +23,7 @@ class Simulation {
     }
 
     addParticleInGrid(i) {
+        if (this.particles[i].potted) return;
         let x = this.particles[i].rx;
         let y = this.particles[i].ry;
         let r = Math.floor(x/this.cellWidth);
@@ -62,17 +63,22 @@ class Simulation {
         this.grid[r][c].delete(i);
     }
 
-    initSimulation() {
-        let width = 100;
-        for(let p in this.particles){
-            if(p.radius > width) {
-                width = p.radius;
-            }
+    rebuildGrid() {
+        for (const row of this.grid) {
+            for (const cell of row) cell.clear();
         }
-        this.cellWidth = 2*width;
+        for (let i = 0; i < this.particles.length; ++i) {
+            if (!this.particles[i].potted) this.addParticleInGrid(i);
+        }
+    }
 
-        this.gridR = Math.ceil(this.height / width);
-        this.gridC = Math.ceil(this.width / width);
+    initSimulation() {
+        const maxRadius = Math.max(...this.particles.map((particle) => particle.radius), 1);
+        this.cellWidth = 2 * maxRadius;
+
+        // The first grid index is derived from x, the second from y.
+        this.gridR = Math.ceil(this.width / this.cellWidth);
+        this.gridC = Math.ceil(this.height / this.cellWidth);
         for(let r =0; r < this.gridR; r++) {
             this.grid.push([]);
             for(let c = 0; c < this.gridC; c++) {
@@ -93,7 +99,6 @@ class Simulation {
         for(let i = 0; i < this.particles.length; ++i) {
             this.addParticleInGrid(i);
         }
-        console.table(this.grid);
     }
 
 
@@ -116,25 +121,28 @@ class Simulation {
         }
         return true;
     }
-    wallBounce(i, currBouncedParticles) {
-        if(currBouncedParticles.has(i)){
-            return;
+    wallBounce(i) {
+        const particle = this.particles[i];
+        if (particle.potted) return;
+        const minX = this.margin + particle.radius;
+        const maxX = this.width - this.margin - particle.radius;
+        const minY = this.margin + particle.radius;
+        const maxY = this.height - this.margin - particle.radius;
+
+        if (particle.rx < minX) {
+            particle.rx = minX;
+            if (particle.vx < 0) particle.bounceOffVerticalWall();
+        } else if (particle.rx > maxX) {
+            particle.rx = maxX;
+            if (particle.vx > 0) particle.bounceOffVerticalWall();
         }
-        let x = this.particles[i].rx;
-        let y = this.particles[i].ry;
-        let r =this.particles[i].radius;
 
-        if( (x <= (this.margin + r) || (x + r ) >= this.width - this.margin)    && !this.hasRecentlyCollidedWithVerticalWall(i)) {
-            this.particles[i].bounceOffVerticalWall();
-            currBouncedParticles.add(i);
-
-            this.lastHitVerticalWall[i] = this.time;
-        }
-        if( (y <= (this.margin +r) || (y +r) >= this.height - this.margin) && !this.hasRecentlyCollidedWithHorizontalWall(i) ) {
-            this.particles[i].bounceOffHorizontalWall();
-            currBouncedParticles.add(i);
-
-            this.lastHitHorizontalWall[i] = this.time;
+        if (particle.ry < minY) {
+            particle.ry = minY;
+            if (particle.vy < 0) particle.bounceOffHorizontalWall();
+        } else if (particle.ry > maxY) {
+            particle.ry = maxY;
+            if (particle.vy > 0) particle.bounceOffHorizontalWall();
         }
     }
 
@@ -148,10 +156,8 @@ class Simulation {
         return true;
     }
 
-    particleBounce(k, currBouncedParticles) {
-        if(currBouncedParticles.has(k)){
-            return;
-        }
+    particleBounce(k) {
+        if (this.particles[k].potted) return;
         let x = this.particles[k].rx;
         let y = this.particles[k].ry;
         let r = Math.floor(x/this.cellWidth);
@@ -160,32 +166,30 @@ class Simulation {
         for(let i = Math.max(0, r-1); i <= Math.min(r+1, this.gridR -1); ++i) {
             for(let j = Math.max(0, c-1); j <= Math.min(c+1, this.gridC-1); ++j) {
                 for(let l of this.grid[i][j]) {
-                    if( l == k || currBouncedParticles.has(k)) {
+                    if (this.particles[l].potted) continue;
+                    if (l <= k) {
                         continue;
                     }
-                    if(this.particles[k].checkCollisionWith(this.particles[l])  && !this.haveRecentlyCollided(k, l)){
+                    if(this.particles[k].checkCollisionWith(this.particles[l])){
                         this.particles[k].bounceOff1(this.particles[l]);
-                        currBouncedParticles.add(k);
-                        currBouncedParticles.add(l);
-                        this.lastHitParticleMatrix[k][l] = this.time;
-                        this.lastHitParticleMatrix[l][k] = this.time;
-                        return;
                     }
                 }
             }
         }
     }
 
-    bounceParticleIfNeeded(i, currBouncedParticles) {
-        this.wallBounce(i, currBouncedParticles);
-        this.particleBounce(i, currBouncedParticles);
+    bounceParticleIfNeeded(i) {
+        this.wallBounce(i);
+        this.particleBounce(i);
     }
 
     simulate(Hz) { 
         //Draw all the particle first of all        
         let points = [];
         for (let i = 0; i < this.particles.length; ++i) {
-            this.particles[i].draw(this.ctx, this.height);
+            if (!this.particles[i].potted || this.particles[i].potProgress < 1) {
+                this.particles[i].draw(this.ctx, this.height);
+            }
             if(this.withConvexHull) {
                 points.push(new Point(this.particles[i].rx, this.particles[i].ry));
             }
@@ -195,18 +199,20 @@ class Simulation {
             convexHull.draw(this.ctx, this.height);
         }
 
-        let currBouncedParticles = new Set();
-        
-        //Move all the particles to be redrawn in the next frame
-        for (let i = 0; i < this.particles.length; ++i) {
-            this.bounceParticleIfNeeded(i, currBouncedParticles)
-            
-            this.removeParticleInGrid(i);
-            this.particles[i].move(Hz);
-            this.addParticleInGrid(i);
+        // Smaller fixed substeps reduce tunnelling while keeping the visible
+        // animation speed unchanged.
+        const substeps = 3;
+        const dt = Hz / substeps;
+        for (let step = 0; step < substeps; ++step) {
+            for (let i = 0; i < this.particles.length; ++i) {
+                this.bounceParticleIfNeeded(i);
+            }
+            for (let i = 0; i < this.particles.length; ++i) {
+                if (!this.particles[i].potted) this.particles[i].move(dt);
+            }
+            this.rebuildGrid();
+            this.time += dt;
         }
-
-        this.time = this.time + Hz;
     }
 
 }

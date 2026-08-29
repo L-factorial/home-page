@@ -7,39 +7,60 @@ import ElasticCollisionSnookerBoard from './simulations/elasticCollision/Elastic
 import ElasticCollisionPollenGrain from './simulations/elasticCollision/ElasticCollisionPollenGrain';
 import ElasticCollisionDiffusion from './simulations/elasticCollision/ElasticCollisionDiffusion';
 import ElasticCollisionFamilyPics from './simulations/elasticCollision/ElasticCollisionFamilyPics'
+import FourierNepal from './simulations/fourierNepal/FourierNepal';
+import MagnusEffect from './simulations/magnusEffect/MagnusEffect';
 import Markdown from 'react-markdown';
-import { simulationDescriptions } from '../data/dummyContent';
+import { getSimulationSnippet } from '../data/simulationSnippetRepository';
+import { useNavigate, useParams } from 'react-router-dom';
 
 
-import React, { useState } from 'react';
+import { useEffect, useState } from 'react';
 const simulatitons = [
     {
+        id: 13,
+        slug: 'nepal-fourier-curve',
+        title: "Nepal as a Fourier Curve",
+        canvas: <FourierNepal />,
+    },
+    {
+        id: 14,
+        slug: 'magnus-effect',
+        title: "Magnus Effect — Why a Soccer Ball Curves",
+        canvas: <MagnusEffect />,
+    },
+    {
         id: 10,
+        slug: 'elastic-collision',
         title: "Elastic Collision",
         canvas: <ElasticCollisionRandomConfig />,
     },
     {
         id: 9,
-        title: "Elastic Collision",
+        slug: 'elastic-collision-convex-hull',
+        title: "Elastic Collision with Convex Hull",
         canvas: <ElasticCollisionRandomConfigWithConvexHull />,
     },
     {
         id: 12,
-        title: "Elastic Collision",
+        slug: 'snooker-elastic-collision',
+        title: "Elastic Search - Snooker",
         canvas: <ElasticCollisionSnookerBoard />,
     },
     {
         id: 7,
+        slug: 'pollen-grain-elastic-collision',
         title: "Elastic Collision - Pollen Grain",
         canvas: <ElasticCollisionPollenGrain />,
     },
     {
         id: 11,
+        slug: 'diffusion-elastic-collision',
         title: "Elastic Collision - Diffusion",
         canvas: <ElasticCollisionDiffusion />,
     },
     {
         id: 6,
+        slug: 'family-elastic-collision',
         title: "My family: Viv, Ray and us",
         canvas: <ElasticCollisionFamilyPics />,
 
@@ -47,23 +68,73 @@ const simulatitons = [
 
     {
         id: 8,
+        slug: 'eight-puzzle',
         title: "Eight Puzzle",
         canvas: <EightPuzzle />
     },
 ]
 
 function Home() {
-  const [selectedSimulation, setSelectedSimulation] = useState(simulatitons[0]);
-  const [simulationIdx, setSimulationIdx] = useState(0);
+  const { animationSlug } = useParams();
+  const navigate = useNavigate();
+  const requestedIndex = simulatitons.findIndex(({ slug }) => slug === animationSlug);
+  const initialIndex = requestedIndex >= 0 ? requestedIndex : 0;
+  const [selectedSimulation, setSelectedSimulation] = useState(simulatitons[initialIndex]);
+  const [simulationIdx, setSimulationIdx] = useState(initialIndex);
   const [displayOption, setDisplayOption] = useState('animation');
-    const handleSimulationSelect = (simulation) => {
-      setSelectedSimulation(simulation);
-    };
+  const [codeSnippet, setCodeSnippet] = useState('');
+  const [snippetLoading, setSnippetLoading] = useState(true);
+  const [snippetError, setSnippetError] = useState('');
+
+    useEffect(() => {
+      if (!animationSlug) return;
+      const index = simulatitons.findIndex(({ slug }) => slug === animationSlug);
+      if (index < 0) {
+        navigate(`/animations/${simulatitons[0].slug}`, { replace: true });
+        return;
+      }
+      setSimulationIdx(index);
+      setSelectedSimulation(simulatitons[index]);
+      setDisplayOption('animation');
+      document.title = `${simulatitons[index].title} · LFactorial`;
+    }, [animationSlug, navigate]);
+
+    useEffect(() => {
+      let cancelled = false;
+      setSnippetLoading(true);
+      setSnippetError('');
+
+      getSimulationSnippet(selectedSimulation.id)
+        .then((snippet) => {
+          if (!cancelled) setCodeSnippet(snippet);
+        })
+        .catch(() => {
+          if (!cancelled) setSnippetError('The explanation could not be loaded.');
+        })
+        .finally(() => {
+          if (!cancelled) setSnippetLoading(false);
+        });
+
+      return () => {
+        cancelled = true;
+      };
+    }, [selectedSimulation.id]);
+
     const handleSimulationIdx = () => {
       const nextIndex = (simulationIdx + 1) % simulatitons.length;
       setSimulationIdx(nextIndex)
       setSelectedSimulation(simulatitons[nextIndex]);
+      setDisplayOption('animation');
+      navigate(`/animations/${simulatitons[nextIndex].slug}`);
     }
+
+    const handlePreviousSimulation = () => {
+      const previousIndex = (simulationIdx - 1 + simulatitons.length) % simulatitons.length;
+      setSimulationIdx(previousIndex);
+      setSelectedSimulation(simulatitons[previousIndex]);
+      setDisplayOption('animation');
+      navigate(`/animations/${simulatitons[previousIndex].slug}`);
+    };
   
     const handleDisplayOptionChange = (e) => {
       setDisplayOption(e.target.value);
@@ -103,7 +174,8 @@ function Home() {
             </div>
           </div>
           <div className="main-content-simulation-header-next">
-            <button class="double-arrow-btn" onClick={()=>handleSimulationIdx()}>»</button>
+            <button className="double-arrow-btn" onClick={handlePreviousSimulation} aria-label="Show previous simulation">«</button>
+            <button className="double-arrow-btn" onClick={()=>handleSimulationIdx()} aria-label="Show next simulation">»</button>
           </div>
       </div>
       )
@@ -114,11 +186,15 @@ function Home() {
       <div className = "main-content-simulation-container-display">
       {displayOption === 'animation' ? (
                                 <div id= "canvadDivId" className = "main-content-simulation-animation">
-                                {selectedSimulation.canvas}
+                                <div key={selectedSimulation.slug} className="simulation-route-content">
+                                  {selectedSimulation.canvas}
+                                </div>
                             </div>
       ) : (
-        <div className="main-content-blog">
-            <Markdown>{simulationDescriptions[selectedSimulation.id]}</Markdown>
+        <div className="main-content-blog simulation-code-snippet">
+            {snippetLoading && <p>Loading explanation…</p>}
+            {snippetError && <p>{snippetError}</p>}
+            {!snippetLoading && !snippetError && <Markdown>{codeSnippet}</Markdown>}
         </div>
       )}
     </div>

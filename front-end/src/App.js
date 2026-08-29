@@ -18,6 +18,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} exact />
           <Route path="/home" element={<Home />} exact />
+          <Route path="/animations/:animationSlug" element={<Home />} exact />
           <Route path="/about" element={<About />} exact />
           <Route path="/kathmanduUniversity" element={<KathmanduUniversity />} exact />
 
