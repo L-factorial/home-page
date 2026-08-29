@@ -8,9 +8,10 @@ import ElasticCollisionPollenGrain from './simulations/elasticCollision/ElasticC
 import ElasticCollisionDiffusion from './simulations/elasticCollision/ElasticCollisionDiffusion';
 import ElasticCollisionFamilyPics from './simulations/elasticCollision/ElasticCollisionFamilyPics'
 import Markdown from 'react-markdown';
+import { simulationDescriptions } from '../data/dummyContent';
 
 
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 const simulatitons = [
     {
         id: 10,
@@ -55,31 +56,13 @@ function Home() {
   const [selectedSimulation, setSelectedSimulation] = useState(simulatitons[0]);
   const [simulationIdx, setSimulationIdx] = useState(0);
   const [displayOption, setDisplayOption] = useState('animation');
-  const [simulationDescriptionBlog, setSimulationDescriptionBlog] = useState({})
-  const [loading, setLoading] = useState(false)
-
-
-  useEffect(()=>{
-      fetchSimulationDescriptionBlog()
-    },
-    [selectedSimulation]
-  )
-
-  
-    const fetchSimulationDescriptionBlog = async () => {
-      setLoading(true)
-      const simulationDescriptionBlogData = await fetch(`/blogs/${selectedSimulation.id}`);
-      const simulationDescriptionBlogDataJson = await simulationDescriptionBlogData.json();
-      setSimulationDescriptionBlog({...simulationDescriptionBlogDataJson})
-      setLoading(false)
-
-    }
     const handleSimulationSelect = (simulation) => {
       setSelectedSimulation(simulation);
     };
     const handleSimulationIdx = () => {
-      setSimulationIdx((simulationIdx+1)%simulatitons.length)
-      setSelectedSimulation(simulatitons[simulationIdx]);
+      const nextIndex = (simulationIdx + 1) % simulatitons.length;
+      setSimulationIdx(nextIndex)
+      setSelectedSimulation(simulatitons[nextIndex]);
     }
   
     const handleDisplayOptionChange = (e) => {
@@ -135,7 +118,7 @@ function Home() {
                             </div>
       ) : (
         <div className="main-content-blog">
-            {loading ? "Loading ..." : <Markdown>{simulationDescriptionBlog?.data?.attributes?.blocks[0]?.body}</Markdown>}
+            <Markdown>{simulationDescriptions[selectedSimulation.id]}</Markdown>
         </div>
       )}
     </div>

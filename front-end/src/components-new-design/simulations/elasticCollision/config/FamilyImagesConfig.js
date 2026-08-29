@@ -1,5 +1,6 @@
 import Simulation from './../../../../simulation-logic/elastic-collision/Simulation';
 import Particle from './../../../../simulation-logic/elastic-collision/Particle';
+import drawSimulationFrame from './drawSimulationFrame';
 
 import momImg from './img/mom.JPG';
 import dadImg from './img/dad.JPG';
@@ -48,7 +49,7 @@ class FamilyImagesConfig{
         let imgIdx = 0;
 
         while (i < this.numberOfParticles) {
-            let radius = this.canvas.width/12;
+            let radius = this.canvas.width/24;
 
             let minX = this.margin + radius;
             let maxX = this.canvas.width - this.margin - radius;
@@ -89,11 +90,7 @@ class FamilyImagesConfig{
     simulate(){
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
-        this.ctx.beginPath();
-        this.ctx.lineWidth = "6";
-        this.ctx.strokeStyle = "red";
-        this.ctx.rect(this.margin, this.margin, this.canvas.width-2*this.margin, this.canvas.height-2*this.margin);
-        this.ctx.stroke();
+        drawSimulationFrame(this.ctx, this.canvas, this.margin);
 
         this.simulator.simulate(this.Hz)
     }

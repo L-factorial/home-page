@@ -1,21 +1,22 @@
 import '../App1.css';
-import React from 'react'
 import { Link } from 'react-router-dom';
 import profilePic from '../profilepic.jpg'
 import { useState, useEffect } from 'react';
+import { blogCategories } from '../data/dummyContent';
 
 function Header() {
     useEffect(() => {
-        fetchBlogCategories();
         const burger = document.querySelector('.burger');
         const sidebarMain = document.querySelector('.sidebar-main');
         const mainContent = document.querySelector('.main-content');
         setSidebarMain(sidebarMain)
         setMainContent(mainContent)
-        burger.addEventListener('click', () => {
+        const handleBurgerClick = () => {
             sidebarMain.classList.toggle('active')
             mainContent.classList.toggle('hidden')
-        })
+        };
+        burger.addEventListener('click', handleBurgerClick)
+        return () => burger.removeEventListener('click', handleBurgerClick);
     }, [])
 
     const handleLinkClick = () => {
@@ -28,33 +29,18 @@ function Header() {
         }
     };
 
-    const [blogCategories, setBlogCategories] = useState([])
-    const [loading, setLoading] = useState(false)
     const [sidebarMain, setSidebarMain] = useState(null)
     const [mainContent, setMainContent] = useState(null)
 
-    const fetchBlogCategories = async() => {
-        setLoading(true)
-        const allBlogCategories = await fetch('/blogCategories');
-        const allBlogCategoriesJson = await allBlogCategories.json();
-        setBlogCategories(allBlogCategoriesJson)
-        setLoading(false);
-    }
-
     const getBlogCategories = () => {
-        if(loading) {
-            return <div> Blog Categories loading ...</div>
-        }
-        else {
             return (
-                blogCategories?.map( (category) => (
-                    <Link to={`/blogListByCategory/${category}`} onClick={handleLinkClick}>{category}</Link>
+                blogCategories.map( (category) => (
+                    <Link key={category} to={`/blogListByCategory/${category}`} onClick={handleLinkClick}>{category}</Link>
                 )
 
                 )
             )
             
-        }
     }
 
     return (
@@ -67,7 +53,7 @@ function Header() {
    
                 </div>
                 <div className="sidebar-header-burger-area">
-                    <button class="burger" >&#9776;</button>
+                    <button className="burger" >&#9776;</button>
 
                 </div>                
             </div>

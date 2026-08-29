@@ -214,27 +214,41 @@ class Particle{
         }
 
         if(this.img!= null) {
-            let sx = 0;
-            let sy = 0;
             let dx = this.rx - this.radius;
             let dy = height - this.ry - this.radius
             let dWidth = this.radius*2;
             let dHeight = this.radius*2;
 
+            // Crop from the center of the source image so portraits keep their
+            // proportions, then clip the moving particle to a circle.
+            let sourceSize = Math.min(this.img.naturalWidth, this.img.naturalHeight);
+            let sourceX = (this.img.naturalWidth - sourceSize) / 2;
+            let sourceY = (this.img.naturalHeight - sourceSize) / 2;
 
-                    //     // Draw the circular path
-                    //     ctx.beginPath();
-                    //     ctx.arc(this.rx, this.ry, this.radius, 0, Math.PI * 2, true);
-                    //     ctx.closePath();
-            
-                    //     // Clip to the circle
-                    //     ctx.clip();
+            if (sourceSize > 0) {
+                ctx.save();
+                ctx.beginPath();
+                ctx.arc(this.rx, height - this.ry, this.radius, 0, Math.PI * 2);
+                ctx.clip();
+                ctx.drawImage(
+                    this.img,
+                    sourceX,
+                    sourceY,
+                    sourceSize,
+                    sourceSize,
+                    dx,
+                    dy,
+                    dWidth,
+                    dHeight
+                );
+                ctx.restore();
 
-                    //                        // Reset clipping region
-                    // ctx.restore();
-                    // ctx.save();
-
-            ctx.drawImage(this.img,dx, dy, dWidth, dHeight);
+                ctx.beginPath();
+                ctx.arc(this.rx, height - this.ry, this.radius, 0, Math.PI * 2);
+                ctx.lineWidth = Math.max(2, this.radius * 0.045);
+                ctx.strokeStyle = 'rgba(255, 255, 255, 0.9)';
+                ctx.stroke();
+            }
         }
     }
 

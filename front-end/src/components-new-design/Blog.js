@@ -1,26 +1,15 @@
-import React from 'react'
 import { Link } from 'react-router-dom'
-import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 
 import { FiArrowLeft } from "react-icons/fi";
 import Markdown from 'react-markdown';
+import { getArticleById } from '../data/dummyContent';
 
 
 
 function Blog() {
-    const [blog, setBlog] = useState({})
     const {id, category} = useParams()
-
-    useEffect(() => {
-        fetchBlog()
-    }, [id])
-
-    const fetchBlog = async () => {
-        const blogData = await fetch(`/blogs/${id}`);
-        const blogJson = await blogData.json();
-        setBlog(blogJson)
-    }
+    const blog = getArticleById(id)
     const backArrow = () => {
         return (
             <div>
@@ -33,14 +22,14 @@ function Blog() {
             <div className="main-content-blog-container">
             {backArrow()}
                 <div className="blog-date">
-                    <div> Published : {blog?.data?.attributes?.publishedAt}  </div>
-                    <div> Last updated: {blog?.data?.attributes?.updatedAt} </div>
+                    <div> Published: {blog?.publishedAt || 'Unknown'} </div>
+                    <div> Last updated: {blog?.updatedAt || 'Unknown'} </div>
                 </div>
                 <div className="blog-title">
-                    {blog?.data?.attributes?.title}
+                    {blog?.title || 'Article not found'}
                 </div>
                 <div className="main-content-blog">
-                    <Markdown>{blog?.data?.attributes?.blocks[0]?.body}</Markdown>
+                    <Markdown>{blog?.body || 'The requested dummy article does not exist.'}</Markdown>
                 </div>
             </div>
 

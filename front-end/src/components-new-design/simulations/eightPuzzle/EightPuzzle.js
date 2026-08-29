@@ -1,4 +1,3 @@
-import React from 'react'
 import {useEffect, useRef} from 'react'
 import EightPuzzleBoard from './board/EightPuzzleBoard'
 
@@ -12,7 +11,12 @@ function EightPuzzle() {
         canvas.width  = parent.clientWidth;
         canvas.height = parent.clientHeight;
         const eightPuzzleBoard = new EightPuzzleBoard(canvas,ctx);
-        setInterval(()=> eightPuzzleBoard.showBoard(), 2000);
+        eightPuzzleBoard.showEightPuzzleCurrentBoard();
+        const interval = setInterval(() => eightPuzzleBoard.showBoard(), 1100);
+        return () => {
+            clearInterval(interval);
+            eightPuzzleBoard.destroy();
+        };
     }, [])
 
     return (

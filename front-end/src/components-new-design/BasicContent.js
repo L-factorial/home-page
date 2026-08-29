@@ -1,24 +1,14 @@
-import React from 'react'
-import { useState, useEffect } from 'react';
 import Markdown from 'react-markdown';
+import { pageContent } from '../data/dummyContent';
 
 
 
-function BasicContent(props) {
-    const [markedDownDoc, setmarkedDownDoc] = useState({})
-    useEffect(() => {
-        fetchmarkedDownDoc()
-    }, [])
-    const fetchmarkedDownDoc = async () => {
-        const markedDownDocData = await fetch(`/blogs/${props.markedDownDocId}`);
-        const markedDownDocDataJson = await markedDownDocData.json();
-        setmarkedDownDoc({...markedDownDocDataJson})
-    }
+function BasicContent({ contentKey }) {
     return (
         <div className="main-content">
             <div className="main-content-blog-container">
             <div className="main-content-blog">
-                <Markdown>{markedDownDoc?.data?.attributes?.blocks[0]?.body}</Markdown>
+                <Markdown>{pageContent[contentKey] || '# Content not found'}</Markdown>
             </div>
             </div>
 

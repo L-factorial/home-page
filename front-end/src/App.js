@@ -25,7 +25,7 @@ function App() {
           <Route path="/blog/:category/:id" element={<Blog />} exact/>
 
           <Route path="/projects" element={<Projects />} exact />
-          <Route element={<NotFound />} />
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </Router>
     </div>
