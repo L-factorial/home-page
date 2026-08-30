@@ -107,46 +107,45 @@ export default function FourierNepal() {
       <img className="fourier-nepal-flag" src={nepalFlag} alt="Flag of Nepal" />
       <audio ref={audioRef} src={nepalAnthem} autoPlay loop preload="metadata" />
       <div className={`fourier-nepal-controls floating-controls ${controlsOpen ? '' : 'collapsed'}`}>
-        <button type="button" className="floating-controls-toggle" onClick={() => setControlsOpen((open) => !open)} aria-expanded={controlsOpen} aria-controls="fourier-controls-content">
-          <span>Fourier components</span>
-          <strong>{componentCount}</strong>
-          <span className="floating-controls-chevron" aria-hidden="true">⌃</span>
+        <button type="button" className="floating-controls-toggle" onClick={() => setControlsOpen((open) => !open)} aria-expanded={controlsOpen} aria-controls="fourier-controls-content" aria-label={`${controlsOpen ? 'Hide' : 'Show'} Fourier controls`}>
+          <span>Fourier controls</span>
+          {controlsOpen && <strong>{componentCount} components</strong>}
+          <span className="floating-controls-action">{controlsOpen ? 'Hide' : 'Show controls'}</span>
+          <span className="floating-controls-chevron" aria-hidden="true">{controlsOpen ? '−' : '+'}</span>
         </button>
         <div id="fourier-controls-content" className="floating-controls-content">
-        <input
-          type="range"
-          min="1"
-          max="1001"
-          step="2"
-          value={componentCount}
-          onChange={(event) => changeComponentCount(event.target.value)}
-          aria-label="Number of Fourier components"
-        />
-        <div className="fourier-nepal-presets">
-          {COMPONENT_PRESETS.map((preset) => (
-            <button
-              key={preset}
-              type="button"
-              className={preset === componentCount ? 'active' : ''}
-              onClick={() => changeComponentCount(preset)}
-            >
-              {preset}
-            </button>
-          ))}
-          <button type="button" onClick={togglePaused}>{paused ? 'Resume' : 'Pause'}</button>
-        </div>
-        <div className="fourier-nepal-audio">
-          <button type="button" onClick={toggleMusic} aria-pressed={musicPlaying}>
-            {musicPlaying ? 'Pause anthem' : '♪ Play anthem'}
-          </button>
-          <a
-            href="https://commons.wikimedia.org/wiki/File:Sayaun_Thunga_Phool_Ka_(instrumental).ogg"
-            target="_blank"
-            rel="noreferrer"
-          >
-            U.S. Navy Band · public domain
-          </a>
-        </div>
+          <div className="fourier-control-strip">
+            <div className="fourier-component-stepper">
+              <span>Components <strong>{componentCount}</strong></span>
+              <button type="button" onClick={() => changeComponentCount(Math.max(1, componentCount - 2))} aria-label="Decrease Fourier components">‹</button>
+              <button type="button" onClick={() => changeComponentCount(Math.min(1001, componentCount + 2))} aria-label="Increase Fourier components">›</button>
+            </div>
+            <div className="fourier-nepal-presets" aria-label="Fourier component presets">
+              {COMPONENT_PRESETS.map((preset) => (
+                <button
+                  key={preset}
+                  type="button"
+                  className={preset === componentCount ? 'active' : ''}
+                  onClick={() => changeComponentCount(preset)}
+                >
+                  {preset}
+                </button>
+              ))}
+            </div>
+            <button className="fourier-pause" type="button" onClick={togglePaused}>{paused ? 'Resume' : 'Pause'}</button>
+            <div className="fourier-nepal-audio">
+              <button type="button" onClick={toggleMusic} aria-pressed={musicPlaying}>
+                {musicPlaying ? 'Pause anthem' : '♪ Play anthem'}
+              </button>
+              <a
+                href="https://commons.wikimedia.org/wiki/File:Sayaun_Thunga_Phool_Ka_(instrumental).ogg"
+                target="_blank"
+                rel="noreferrer"
+              >
+                U.S. Navy Band · public domain
+              </a>
+            </div>
+          </div>
         </div>
       </div>
     </div>

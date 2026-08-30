@@ -96,6 +96,22 @@ export default function KittyDeal() {
       )}
 
       <div className={`kitty-deal-area ${phase === 'ready' ? 'ready' : ''} ${phase === 'dealt' || phase === 'solving' ? 'configuring' : ''}`}>
+        {phase === 'ready' && (
+          <section className="kitty-original-deal" aria-label="Cards in their original dealt order">
+            <div className="kitty-original-label">
+              <div className="kitty-mini-deck" aria-hidden="true">
+                <i /><i /><i />
+              </div>
+              <span>Original deal</span>
+              <button className="kitty-original-shuffle" type="button" onClick={() => setDealNumber((value) => value + 1)}>
+                Shuffle again
+              </button>
+            </div>
+            <div className="kitty-original-cards">
+              {dealtCards.map((card, index) => <PlayingCard key={card.id} card={card} cardIndex={index + 1} />)}
+            </div>
+          </section>
+        )}
         <div className="kitty-status" aria-live="polite">
           <span>
             {phase === 'shuffling' && 'Shuffling the deck'}
@@ -108,11 +124,10 @@ export default function KittyDeal() {
           {phase === 'ready' && activeSolution && (
             <div className="kitty-solution-navigation">
               <button type="button" onClick={showPreviousSolution} aria-label="Show previous solution">‹</button>
-              <strong>{solutionIndex + 1} of {solutions.length}</strong>
+              <strong>Solution {solutionIndex + 1} of {solutions.length}</strong>
               <button type="button" onClick={showNextSolution} aria-label="Show next solution">›</button>
             </div>
           )}
-          {phase === 'ready' && <button type="button" onClick={() => setDealNumber((value) => value + 1)}>Shuffle again</button>}
         </div>
         {(phase === 'dealt' || phase === 'solving') && (
           <section className="kitty-weight-controls" aria-label="Solution hand weights">
@@ -145,19 +160,6 @@ export default function KittyDeal() {
             >
               {phase === 'solving' ? 'Solving…' : 'Solve Kitty'}
             </button>
-          </section>
-        )}
-        {phase === 'ready' && (
-          <section className="kitty-original-deal" aria-label="Cards in their original dealt order">
-            <div className="kitty-original-label">
-              <div className="kitty-mini-deck" aria-hidden="true">
-                <i /><i /><i />
-              </div>
-              <span>Original deal</span>
-            </div>
-            <div className="kitty-original-cards">
-              {dealtCards.map((card, index) => <PlayingCard key={card.id} card={card} cardIndex={index + 1} />)}
-            </div>
           </section>
         )}
         {phase !== 'ready' && (

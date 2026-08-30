@@ -61,44 +61,54 @@ export default function MagnusEffect() {
     configRef.current?.setPaused(paused);
   };
 
+  const adjustControl = (name, amount, minimum, maximum, decimals = 0) => {
+    const factor = 10 ** decimals;
+    const value = Math.min(maximum, Math.max(minimum, controls[name] + amount));
+    updateControls({ [name]: Math.round(value * factor) / factor });
+  };
+
   return (
     <div className="magnus-effect" ref={wrapperRef}>
       <div className="magnus-animation-viewport" ref={viewportRef}>
         <canvas ref={canvasRef} aria-label="Interactive Magnus effect soccer ball animation" />
       </div>
       <div className={`magnus-controls floating-controls ${controlsOpen ? '' : 'collapsed'}`}>
-        <button type="button" className="floating-controls-toggle" onClick={() => setControlsOpen((open) => !open)} aria-expanded={controlsOpen} aria-controls="magnus-controls-content">
-          <span>Animation controls</span>
-          <span className="floating-controls-chevron" aria-hidden="true">⌃</span>
+        <button type="button" className="floating-controls-toggle" onClick={() => setControlsOpen((open) => !open)} aria-expanded={controlsOpen} aria-controls="magnus-controls-content" aria-label={`${controlsOpen ? 'Hide' : 'Show'} Magnus controls`}>
+          <span>Magnus controls</span>
+          <span className="floating-controls-action">{controlsOpen ? 'Hide' : 'Show controls'}</span>
+          <span className="floating-controls-chevron" aria-hidden="true">{controlsOpen ? '−' : '+'}</span>
         </button>
         <div id="magnus-controls-content" className="floating-controls-content">
-        <div className="magnus-mode-toggle">
-          <button className={controls.mode === 'trajectory' ? 'active' : ''} onClick={() => updateControls({ mode: 'trajectory' })}>Trajectory</button>
-          <button className={controls.mode === 'airflow' ? 'active' : ''} onClick={() => updateControls({ mode: 'airflow' })}>Airflow</button>
-        </div>
-
-        <label>
-          <span>Spin <strong>{controls.spin.toFixed(1)} rev/s</strong></span>
-          <input type="range" min="-15" max="15" step="0.5" value={controls.spin} onChange={(event) => updateControls({ spin: Number(event.target.value) })} />
-        </label>
-        <label>
-          <span>Speed <strong>{controls.speed} m/s</strong></span>
-          <input type="range" min="10" max="40" step="1" value={controls.speed} onChange={(event) => updateControls({ speed: Number(event.target.value) })} />
-        </label>
-        <label>
-          <span>Magnus strength <strong>{controls.magnusStrength.toFixed(2)}</strong></span>
-          <input type="range" min="0" max="1.2" step="0.02" value={controls.magnusStrength} onChange={(event) => updateControls({ magnusStrength: Number(event.target.value) })} />
-        </label>
-
-        <div className="magnus-actions">
-          <button onClick={() => updateControls({ spin: -controls.spin })}>Reverse spin</button>
-          <button onClick={togglePaused}>{controls.paused ? 'Play' : 'Pause'}</button>
-          <button onClick={() => configRef.current?.restart()}>Reset</button>
-        </div>
-        <div className="magnus-options">
-          <label><input type="checkbox" checked={controls.gravityEnabled} onChange={(event) => updateControls({ gravityEnabled: event.target.checked })} /> Gravity</label>
-          <label><input type="checkbox" checked={controls.dragEnabled} onChange={(event) => updateControls({ dragEnabled: event.target.checked })} /> Drag</label>
-        </div>
+          <div className="magnus-control-strip">
+            <div className="magnus-mode-toggle">
+              <button className={controls.mode === 'trajectory' ? 'active' : ''} onClick={() => updateControls({ mode: 'trajectory' })}>Trajectory</button>
+              <button className={controls.mode === 'airflow' ? 'active' : ''} onClick={() => updateControls({ mode: 'airflow' })}>Airflow</button>
+            </div>
+            <div className="magnus-stepper">
+              <span>Spin <strong>{controls.spin.toFixed(1)}</strong></span>
+              <button onClick={() => adjustControl('spin', -0.5, -15, 15, 1)} aria-label="Decrease spin">‹</button>
+              <button onClick={() => adjustControl('spin', 0.5, -15, 15, 1)} aria-label="Increase spin">›</button>
+            </div>
+            <div className="magnus-stepper">
+              <span>Speed <strong>{controls.speed}</strong></span>
+              <button onClick={() => adjustControl('speed', -1, 10, 40)} aria-label="Decrease speed">‹</button>
+              <button onClick={() => adjustControl('speed', 1, 10, 40)} aria-label="Increase speed">›</button>
+            </div>
+            <div className="magnus-stepper">
+              <span>Strength <strong>{controls.magnusStrength.toFixed(2)}</strong></span>
+              <button onClick={() => adjustControl('magnusStrength', -0.02, 0, 1.2, 2)} aria-label="Decrease Magnus strength">‹</button>
+              <button onClick={() => adjustControl('magnusStrength', 0.02, 0, 1.2, 2)} aria-label="Increase Magnus strength">›</button>
+            </div>
+            <div className="magnus-actions">
+              <button onClick={() => updateControls({ spin: -controls.spin })}>Reverse</button>
+              <button onClick={togglePaused}>{controls.paused ? 'Play' : 'Pause'}</button>
+              <button onClick={() => configRef.current?.restart()}>Reset</button>
+            </div>
+            <div className="magnus-options">
+              <label><input type="checkbox" checked={controls.gravityEnabled} onChange={(event) => updateControls({ gravityEnabled: event.target.checked })} /> Gravity</label>
+              <label><input type="checkbox" checked={controls.dragEnabled} onChange={(event) => updateControls({ dragEnabled: event.target.checked })} /> Drag</label>
+            </div>
+          </div>
         </div>
       </div>
     </div>
