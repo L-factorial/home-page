@@ -1784,14 +1784,47 @@ canvas {
     }
 
     .kitty-hand {
-        width: min(100%, 430px);
-        grid-template-columns: repeat(3, minmax(0, 1fr));
-        gap: 7px;
+        display: flex;
+        width: min(100%, 360px);
+        min-height: 104px;
+        justify-content: center;
+        align-items: center;
+        gap: 0;
+        overflow: visible;
+        padding: 5px 0 8px;
     }
 
     .kitty-playing-card {
         max-height: 17vh;
         justify-self: center;
+    }
+
+    .kitty-solution-cards .kitty-playing-card {
+        width: 100%;
+        min-width: 42px;
+        max-width: 72px;
+        min-height: 72px;
+        max-height: 104px;
+    }
+
+    .kitty-hand .kitty-playing-card {
+        width: 68px;
+        min-width: 68px;
+        max-width: 68px;
+        min-height: 96px;
+        max-height: 96px;
+        flex: 0 0 68px;
+        margin-left: -37px;
+        border-radius: 7px;
+        box-shadow: -4px 7px 13px rgba(0, 0, 0, .28);
+    }
+
+    .kitty-hand .kitty-playing-card:first-child {
+        margin-left: 0;
+    }
+
+    .kitty-hand .kitty-playing-card:last-child {
+        box-shadow: 0 9px 17px rgba(0, 0, 0, .34);
     }
 
     .kitty-solution {
@@ -1835,11 +1868,6 @@ canvas {
     }
 
     .kitty-solution-cards .kitty-playing-card {
-        width: 100%;
-        min-width: 42px;
-        max-width: 72px;
-        min-height: 72px;
-        max-height: 104px;
         justify-self: center;
     }
 
