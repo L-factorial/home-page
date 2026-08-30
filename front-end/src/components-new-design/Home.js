@@ -10,6 +10,7 @@ import ElasticCollisionFamilyPics from './simulations/elasticCollision/ElasticCo
 import FourierNepal from './simulations/fourierNepal/FourierNepal';
 import MagnusEffect from './simulations/magnusEffect/MagnusEffect';
 import KittyDeal from './simulations/kitty/KittyDeal';
+import UsaVoronoi from './simulations/usaVoronoi/UsaVoronoi';
 import Markdown from 'react-markdown';
 import { getSimulationSnippet } from '../data/simulationSnippetRepository';
 import { useNavigate, useParams } from 'react-router-dom';
@@ -17,6 +18,12 @@ import { useNavigate, useParams } from 'react-router-dom';
 
 import { useEffect, useState } from 'react';
 const simulatitons = [
+    {
+        id: 16,
+        slug: 'usa-capitals-voronoi',
+        title: "What If Mainland USA Followed Voronoi State Capital Cells?",
+        canvas: <UsaVoronoi />,
+    },
     {
         id: 15,
         slug: 'nepali-kitty',
