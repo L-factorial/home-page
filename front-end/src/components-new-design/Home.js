@@ -209,7 +209,7 @@ function Home() {
     }
   
     return (
-      <main className="main-content">
+      <main className="main-content simulation-page">
         <div className="main-content-simulation ">
             {header()}
             {toggle()}
