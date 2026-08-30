@@ -18,6 +18,7 @@ export default function MagnusEffect() {
   const configRef = useRef(null);
   const animationRef = useRef(null);
   const [controls, setControls] = useState(initialControls);
+  const [controlsOpen, setControlsOpen] = useState(true);
 
   useEffect(() => {
     const viewport = viewportRef.current;
@@ -65,8 +66,12 @@ export default function MagnusEffect() {
       <div className="magnus-animation-viewport" ref={viewportRef}>
         <canvas ref={canvasRef} aria-label="Interactive Magnus effect soccer ball animation" />
       </div>
-      <div className="magnus-controls">
-        <div className="magnus-controls-heading">Animation controls</div>
+      <div className={`magnus-controls floating-controls ${controlsOpen ? '' : 'collapsed'}`}>
+        <button type="button" className="floating-controls-toggle" onClick={() => setControlsOpen((open) => !open)} aria-expanded={controlsOpen} aria-controls="magnus-controls-content">
+          <span>Animation controls</span>
+          <span className="floating-controls-chevron" aria-hidden="true">⌃</span>
+        </button>
+        <div id="magnus-controls-content" className="floating-controls-content">
         <div className="magnus-mode-toggle">
           <button className={controls.mode === 'trajectory' ? 'active' : ''} onClick={() => updateControls({ mode: 'trajectory' })}>Trajectory</button>
           <button className={controls.mode === 'airflow' ? 'active' : ''} onClick={() => updateControls({ mode: 'airflow' })}>Airflow</button>
@@ -93,6 +98,7 @@ export default function MagnusEffect() {
         <div className="magnus-options">
           <label><input type="checkbox" checked={controls.gravityEnabled} onChange={(event) => updateControls({ gravityEnabled: event.target.checked })} /> Gravity</label>
           <label><input type="checkbox" checked={controls.dragEnabled} onChange={(event) => updateControls({ dragEnabled: event.target.checked })} /> Drag</label>
+        </div>
         </div>
       </div>
     </div>

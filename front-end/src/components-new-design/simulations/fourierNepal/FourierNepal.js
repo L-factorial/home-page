@@ -14,6 +14,7 @@ export default function FourierNepal() {
   const [componentCount, setComponentCount] = useState(51);
   const [paused, setPaused] = useState(false);
   const [musicPlaying, setMusicPlaying] = useState(false);
+  const [controlsOpen, setControlsOpen] = useState(true);
 
   useEffect(() => {
     const wrapper = wrapperRef.current;
@@ -105,11 +106,13 @@ export default function FourierNepal() {
       <canvas ref={canvasRef} aria-label="Fourier epicycle approximation of Nepal's boundary" />
       <img className="fourier-nepal-flag" src={nepalFlag} alt="Flag of Nepal" />
       <audio ref={audioRef} src={nepalAnthem} autoPlay loop preload="metadata" />
-      <div className="fourier-nepal-controls">
-        <div className="fourier-nepal-control-heading">
+      <div className={`fourier-nepal-controls floating-controls ${controlsOpen ? '' : 'collapsed'}`}>
+        <button type="button" className="floating-controls-toggle" onClick={() => setControlsOpen((open) => !open)} aria-expanded={controlsOpen} aria-controls="fourier-controls-content">
           <span>Fourier components</span>
           <strong>{componentCount}</strong>
-        </div>
+          <span className="floating-controls-chevron" aria-hidden="true">⌃</span>
+        </button>
+        <div id="fourier-controls-content" className="floating-controls-content">
         <input
           type="range"
           min="1"
@@ -143,6 +146,7 @@ export default function FourierNepal() {
           >
             U.S. Navy Band · public domain
           </a>
+        </div>
         </div>
       </div>
     </div>

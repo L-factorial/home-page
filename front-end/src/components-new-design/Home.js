@@ -9,6 +9,7 @@ import ElasticCollisionDiffusion from './simulations/elasticCollision/ElasticCol
 import ElasticCollisionFamilyPics from './simulations/elasticCollision/ElasticCollisionFamilyPics'
 import FourierNepal from './simulations/fourierNepal/FourierNepal';
 import MagnusEffect from './simulations/magnusEffect/MagnusEffect';
+import KittyDeal from './simulations/kitty/KittyDeal';
 import Markdown from 'react-markdown';
 import { getSimulationSnippet } from '../data/simulationSnippetRepository';
 import { useNavigate, useParams } from 'react-router-dom';
@@ -16,6 +17,12 @@ import { useNavigate, useParams } from 'react-router-dom';
 
 import { useEffect, useState } from 'react';
 const simulatitons = [
+    {
+        id: 15,
+        slug: 'nepali-kitty',
+        title: "Nepali Kitty — Shuffle and Deal",
+        canvas: <KittyDeal />,
+    },
     {
         id: 13,
         slug: 'nepal-fourier-curve',

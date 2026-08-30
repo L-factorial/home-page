@@ -8,6 +8,7 @@ const snippetLoaders = {
   12: () => import('./simulation-snippets/elasticConfiguration'),
   13: () => import('./simulation-snippets/fourierNepal'),
   14: () => import('./simulation-snippets/magnusEffect'),
+  15: () => import('./simulation-snippets/kitty'),
 };
 
 // This is the boundary between the UI and its content source. To use a backend
