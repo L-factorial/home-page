@@ -50,7 +50,7 @@ const simulatitons = [
     {
         id: 12,
         slug: 'snooker-elastic-collision',
-        title: "Elastic Search - Snooker",
+        title: "Elastic Collision - Snooker Board",
         canvas: <ElasticCollisionSnookerBoard />,
     },
     {
