@@ -11,6 +11,7 @@ import FourierNepal from './simulations/fourierNepal/FourierNepal';
 import MagnusEffect from './simulations/magnusEffect/MagnusEffect';
 import KittyDeal from './simulations/kitty/KittyDeal';
 import UsaVoronoi from './simulations/usaVoronoi/UsaVoronoi';
+import FourierAudioDemo from './simulations/fourierAudio/FourierAudioDemo';
 import Markdown from 'react-markdown';
 import { getSimulationSnippet } from '../data/simulationSnippetRepository';
 import { useNavigate, useParams } from 'react-router-dom';
@@ -23,6 +24,12 @@ const simulatitons = [
         slug: 'nepal-fourier-curve',
         title: "Nepal as a Fourier Curve",
         canvas: <FourierNepal />,
+    },
+    {
+        id: 17,
+        slug: 'fourier-transform-audio',
+        title: "Fourier Transform — Hear the Frequencies",
+        canvas: <FourierAudioDemo />,
     },
     {
         id: 16,

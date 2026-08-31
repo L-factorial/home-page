@@ -210,6 +210,221 @@ body, html {
     /* border-radius: 10px; */
 }
 
+.fourier-audio-demo {
+    width: 100%;
+    height: 100%;
+    min-width: 0;
+    min-height: 0;
+    padding: clamp(14px, 2.2vw, 24px);
+    overflow-y: auto;
+    color: #edf5ef;
+    background: radial-gradient(circle at 55% 20%, #183326, #07120d 72%);
+    border-radius: 20px;
+}
+
+.fourier-audio-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 18px;
+    margin-bottom: 14px;
+}
+
+.fourier-audio-header h2 {
+    margin: 0;
+    color: #f5faf6;
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: clamp(1.35rem, 3vw, 2.1rem);
+    letter-spacing: -0.035em;
+}
+
+.fourier-audio-header p {
+    margin: 3px 0 0;
+    color: rgba(231, 242, 234, 0.58);
+    font-size: 0.78rem;
+}
+
+.fourier-audio-transport,
+.fourier-audio-filter-row {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+}
+
+.fourier-audio-demo button {
+    padding: 7px 11px;
+    color: rgba(239, 247, 241, 0.8);
+    background: rgba(255, 255, 255, 0.065);
+    border: 1px solid rgba(255, 255, 255, 0.11);
+    border-radius: 9px;
+    cursor: pointer;
+    font-size: 0.69rem;
+    font-weight: 700;
+}
+
+.fourier-audio-demo button:hover:not(:disabled) {
+    color: #17231d;
+    background: var(--accent);
+    border-color: var(--accent);
+}
+
+.fourier-audio-demo button:disabled {
+    cursor: not-allowed;
+    opacity: 0.4;
+}
+
+.fourier-audio-transport time {
+    min-width: 94px;
+    color: rgba(235, 245, 238, 0.65);
+    font-family: 'SFMono-Regular', Consolas, monospace;
+    font-size: 0.68rem;
+}
+
+.fourier-audio-content {
+    display: grid;
+    gap: 10px;
+}
+
+.fourier-audio-domain {
+    min-width: 0;
+    padding: 11px;
+    border: 1px solid rgba(255, 255, 255, 0.09);
+    border-radius: 14px;
+    background: rgba(4, 13, 8, 0.42);
+}
+
+.fourier-audio-section-label {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 10px;
+    margin-bottom: 7px;
+    color: rgba(238, 247, 240, 0.84);
+    font-size: 0.72rem;
+    font-weight: 750;
+    letter-spacing: 0.045em;
+    text-transform: uppercase;
+}
+
+.fourier-audio-section-label small {
+    color: rgba(231, 242, 234, 0.44);
+    font-size: 0.62rem;
+    font-weight: 500;
+    letter-spacing: 0;
+    text-transform: none;
+}
+
+.fourier-audio-waveform,
+.fourier-audio-spectrum {
+    display: block;
+    width: 100%;
+    height: clamp(92px, 16vh, 150px);
+    border-radius: 9px;
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.045);
+}
+
+.fourier-audio-spectrum {
+    height: clamp(125px, 21vh, 190px);
+    cursor: crosshair;
+    touch-action: none;
+}
+
+.fourier-audio-transition {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 9px;
+    color: rgba(223, 237, 227, 0.48);
+    font-size: 0.63rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+}
+
+.fourier-audio-transition b,
+.fourier-audio-pipeline span {
+    color: var(--accent);
+}
+
+.fourier-audio-filter-row {
+    justify-content: flex-end;
+    flex-wrap: wrap;
+    margin-top: 9px;
+}
+
+.fourier-audio-selection {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-right: auto;
+    color: rgba(235, 245, 238, 0.56);
+    font-size: 0.67rem;
+}
+
+.fourier-audio-selection strong {
+    color: #ffbf9f;
+    font-family: 'SFMono-Regular', Consolas, monospace;
+}
+
+.fourier-audio-selection span {
+    padding: 3px 7px;
+    color: #ffb598;
+    background: rgba(255, 137, 102, 0.1);
+    border-radius: 999px;
+}
+
+.fourier-audio-remove {
+    color: #17231d !important;
+    background: var(--accent) !important;
+}
+
+.fourier-audio-pipeline {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 7px;
+    color: rgba(231, 242, 234, 0.5);
+    font-size: 0.64rem;
+}
+
+.fourier-audio-pipeline strong {
+    margin-left: 8px;
+    color: #d5ff5f;
+}
+
+.fourier-audio-message {
+    display: grid;
+    min-height: 280px;
+    place-items: center;
+    color: rgba(235, 245, 238, 0.68);
+    text-align: center;
+}
+
+.fourier-audio-message.error {
+    color: #ffad99;
+}
+
+@media only screen and (max-width: 700px) {
+    .fourier-audio-header {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .fourier-audio-filter-row {
+        align-items: stretch;
+        flex-direction: column;
+    }
+
+    .fourier-audio-selection {
+        min-height: 28px;
+        margin-right: 0;
+    }
+
+    .fourier-audio-filter-row button {
+        width: 100%;
+    }
+}
+
 .blog-date {
     margin: 1px;
     display: flex;
