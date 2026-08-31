@@ -28,7 +28,7 @@ I write code for a living, and also for my own creative imagination. The wheel, 
 
 [Sir Viv Richards](https://en.wikipedia.org/wiki/Viv_Richards) is the greatest player to ever play the game of cricket. This is not an opinion. We can debate almost anything else.
 
-I love people, stories, arguments, ideas, and good company. Knock on my door anytime — happy to be your unofficial therapist over a chilled beer, strong coffee, or a good cup of tea. Your choice. And we’ll have a factorially good time.`,
+I love people, stories, arguments, ideas, and good company. Knock on my door anytime — I’m always happy to listen, exchange ideas, and share a strong coffee or a good cup of tea. Your choice — and we’ll have a factorially good time.`,
   kathmanduUniversity: `# Kathmandu University
 
 This is placeholder content about Kathmandu University.`,
