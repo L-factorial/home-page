@@ -29,6 +29,16 @@ This produces exactly:
 
 Each result contains all nine cards exactly once, and no result differs from another only by rearranging cards inside one of its three hands.
 
+## Keeping five meaningfully different solutions
+
+Two hands count as duplicates only when both their category and their rank within that category match. A complete solution is therefore identified by the ordered category-and-rank pairs of its three hands:
+
+    const handRankKey = solution.hands
+      .map((hand) => hand.category + ':' + hand.rank)
+      .join('|');
+
+For every category-and-rank pattern, the solver retains only its highest-scoring arrangement. It then sorts those unique representatives and displays the best five. Hand order remains significant because hands one, two, and three may carry different weights.
+
 ## Scoring a three-card hand
 
 The scorer returns category strength first and the hand's ordinal rank within that category second. Both numbers increase with strength.

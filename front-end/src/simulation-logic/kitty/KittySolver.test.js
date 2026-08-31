@@ -1,5 +1,10 @@
 import Card from './Card';
-import { solveKitty } from './KittySolver';
+import {
+  areDuplicateHands,
+  areDuplicateSolutions,
+  solutionHandRankKey,
+  solveKitty,
+} from './KittySolver';
 import { compareHandScores } from './HandScorer';
 
 const cards = [
@@ -24,4 +29,23 @@ test('returns the five highest-scoring valid Kitty solutions', () => {
   for (let index = 1; index < solutions.length; index += 1) {
     expect(solutions[index - 1].combinationScore).toBeGreaterThanOrEqual(solutions[index].combinationScore);
   }
+
+  expect(new Set(solutions.map(solutionHandRankKey)).size).toBe(solutions.length);
+});
+
+test('detects duplicate hand meanings by category and rank', () => {
+  expect(areDuplicateHands({ category: 'pair', rank: 12 }, { category: 'pair', rank: 12 })).toBe(true);
+  expect(areDuplicateHands({ category: 'pair', rank: 12 }, { category: 'pair', rank: 13 })).toBe(false);
+  expect(areDuplicateHands({ category: 'pair', rank: 12 }, { category: 'color', rank: 12 })).toBe(false);
+});
+
+test('detects duplicate solutions from corresponding hand categories and ranks', () => {
+  const first = { hands: [{ category: 'trial', rank: 13 }, { category: 'pair', rank: 20 }, { category: 'high-card', rank: 4 }] };
+  const sameMeaning = { hands: [{ category: 'trial', rank: 13 }, { category: 'pair', rank: 20 }, { category: 'high-card', rank: 4 }] };
+  const differentRank = { hands: [{ category: 'trial', rank: 13 }, { category: 'pair', rank: 21 }, { category: 'high-card', rank: 4 }] };
+  const differentOrder = { hands: [{ category: 'pair', rank: 20 }, { category: 'trial', rank: 13 }, { category: 'high-card', rank: 4 }] };
+
+  expect(areDuplicateSolutions(first, sameMeaning)).toBe(true);
+  expect(areDuplicateSolutions(first, differentRank)).toBe(false);
+  expect(areDuplicateSolutions(first, differentOrder)).toBe(false);
 });
