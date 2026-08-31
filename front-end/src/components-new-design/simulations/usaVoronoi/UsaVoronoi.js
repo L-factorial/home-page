@@ -94,8 +94,8 @@ export default function UsaVoronoi() {
       redraw = () => drawCells(finalFrame, false, true);
       redraw();
       setStatus(`Voronoi sweep · ${finalFrame.step} / ${finalFrame.totalSteps}`);
-      if (sweep.hasNext()) timer = setTimeout(advance, 1000);
-      else timer = setTimeout(() => { animationFrame = requestAnimationFrame(animateFourier); }, 1000);
+      if (sweep.hasNext()) timer = setTimeout(advance, 250);
+      else timer = setTimeout(() => { animationFrame = requestAnimationFrame(animateFourier); }, 250);
     };
     const restart = () => {
       sweep = new VoronoiSweepIterator(sites, bounds);

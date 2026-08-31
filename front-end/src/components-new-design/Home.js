@@ -19,6 +19,12 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 const simulatitons = [
     {
+        id: 13,
+        slug: 'nepal-fourier-curve',
+        title: "Nepal as a Fourier Curve",
+        canvas: <FourierNepal />,
+    },
+    {
         id: 16,
         slug: 'usa-capitals-voronoi',
         title: "What If Mainland USA Followed Voronoi State Capital Cells?",
@@ -29,12 +35,6 @@ const simulatitons = [
         slug: 'nepali-kitty',
         title: "Nepali Kitty — Shuffle and Deal",
         canvas: <KittyDeal />,
-    },
-    {
-        id: 13,
-        slug: 'nepal-fourier-curve',
-        title: "Nepal as a Fourier Curve",
-        canvas: <FourierNepal />,
     },
     {
         id: 14,
