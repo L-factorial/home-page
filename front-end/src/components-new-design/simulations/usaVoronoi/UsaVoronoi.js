@@ -50,7 +50,7 @@ export default function UsaVoronoi() {
       if (showDiscoveryLabel && frame.activeSites.length) {
         const site = frame.activeSites[frame.activeSites.length - 1];
         const p = toCanvas(site);
-        const labelSize = canvas.width < 560 ? 8 : 10;
+        const labelSize = canvas.width < 560 ? 10 : 12;
         ctx.font = `600 ${labelSize}px sans-serif`;
         ctx.textBaseline = 'middle';
         ctx.lineWidth = 3;
