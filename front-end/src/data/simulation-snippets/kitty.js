@@ -39,7 +39,18 @@ The scorer returns category strength first and the hand's ordinal rank within th
     //   categoryScore: 6,
     //   rank: 13,
     //   rankCount: 13,
+    //   overallRank: 1,
+    //   normalizedScore: 100,
     //   score: [6, 13]
     // }
 
-Categories compare as Trial (6), Double Run (5), Run (4), Color (3), Pair (2), and High Card (1). Run order is A-K-Q, A-2-3, K-Q-J, down through 2-3-4.`;
+Categories compare as Trial (6), Double Run (5), Run (4), Color (3), Pair (2), and High Card (1). Run order is A-K-Q, A-2-3, K-Q-J, down through 2-3-4.
+
+For a single absolute ranking, \`rankHand(cards)\` returns 1 for the strongest hand and 741 for the weakest. Three aces are rank 1, three kings are rank 2, and an unsuited 2-3-5 is rank 741.
+
+The score out of 100 deliberately gives category 85% of the weight and rank within that category 15%. This ensures every Trial beats every Double Run, every Double Run beats every Run, and so on. Three aces score 100, while an unsuited 2-3-5 scores 0:
+
+    const rank = rankHand(cards);
+    const scored = scoreHand(cards);
+    const scoreOutOf100 = normalizedHandScore(scored);
+`;

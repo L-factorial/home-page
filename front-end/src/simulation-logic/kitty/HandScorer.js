@@ -12,6 +12,22 @@ export const CATEGORY_SCORE = {
   trial: 6,
 };
 
+// Category controls most of the final score; ordinal strength inside that
+// category provides the remaining refinement. Values are normalized 0..1.
+export const CATEGORY_WEIGHT = Object.freeze({
+  'high-card': 0,
+  pair: 0.2,
+  color: 0.4,
+  run: 0.6,
+  'double-run': 0.8,
+  trial: 1,
+});
+
+export const HAND_SCORE_WEIGHT = Object.freeze({
+  category: 0.85,
+  rankWithinCategory: 0.15,
+});
+
 export const CATEGORY_RANK_COUNT = {
   trial: 13,
   'double-run': 12,
@@ -20,6 +36,11 @@ export const CATEGORY_RANK_COUNT = {
   pair: 156,
   'high-card': 274,
 };
+
+// There are 741 distinct three-card Kitty strength ranks once suit-equivalent
+// hands are tied. Rank 1 is strongest; rank 741 is weakest.
+export const TOTAL_HAND_RANKS = Object.values(CATEGORY_RANK_COUNT)
+  .reduce((total, count) => total + count, 0);
 
 const CATEGORY_OFFSET = {
   'high-card': 0,
@@ -92,7 +113,10 @@ const validateCards = (cards) => {
   }
 };
 
-/** Returns a score where both numeric values increase with hand strength. */
+/**
+ * Classifies one three-card hand. `rank` remains local to its category for
+ * comparisons and display; `overallRank` uses the public 1 = best convention.
+ */
 export const scoreHand = (cards) => {
   validateCards(cards);
   const ranks = cards.map((card) => RANK_VALUE[card.rank]);
@@ -126,11 +150,23 @@ export const scoreHand = (cards) => {
     rank = HIGH_CARD_RANKS.get(key(ranks));
   }
 
+  const weakToStrongRank = CATEGORY_OFFSET[category] + rank;
+  const overallRank = TOTAL_HAND_RANKS - weakToStrongRank + 1;
+  const rankWithinCategory = CATEGORY_RANK_COUNT[category] === 1
+    ? 1
+    : (rank - 1) / (CATEGORY_RANK_COUNT[category] - 1);
+  const normalizedScore = 100 * (
+    HAND_SCORE_WEIGHT.category * CATEGORY_WEIGHT[category]
+    + HAND_SCORE_WEIGHT.rankWithinCategory * rankWithinCategory
+  );
+
   return Object.freeze({
     category,
     categoryScore: CATEGORY_SCORE[category],
     rank,
     rankCount: CATEGORY_RANK_COUNT[category],
+    overallRank,
+    normalizedScore,
     score: Object.freeze([CATEGORY_SCORE[category], rank]),
   });
 };
@@ -141,7 +177,18 @@ export const compareHandScores = (left, right) =>
 export const globalHandRank = (handScore) =>
   CATEGORY_OFFSET[handScore.category] + handScore.rank;
 
+/** Returns an absolute rank for any valid hand: 1 is best and 741 is worst. */
+export const rankHand = (cards) => scoreHand(cards).overallRank;
+
 export const normalizedHandScore = (handScore) =>
-  1 + (99 * (globalHandRank(handScore) - 1)) / 740;
+  handScore.normalizedScore
+    ?? 100 * (
+      HAND_SCORE_WEIGHT.category * CATEGORY_WEIGHT[handScore.category]
+      + HAND_SCORE_WEIGHT.rankWithinCategory * (
+        CATEGORY_RANK_COUNT[handScore.category] === 1
+          ? 1
+          : (handScore.rank - 1) / (CATEGORY_RANK_COUNT[handScore.category] - 1)
+      )
+    );
 
 export default scoreHand;
