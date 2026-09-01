@@ -11,7 +11,7 @@ export default function FourierNepal() {
   const configRef = useRef(null);
   const animationRef = useRef(null);
   const audioRef = useRef(null);
-  const [componentCount, setComponentCount] = useState(51);
+  const [componentCount, setComponentCount] = useState(1001);
   const [paused, setPaused] = useState(false);
   const [musicPlaying, setMusicPlaying] = useState(false);
   const [controlsOpen, setControlsOpen] = useState(true);
