@@ -1,4 +1,5 @@
 const snippetLoaders = {
+  18: () => import('./simulation-snippets/karmaRealizationBhakti'),
   6: () => import('./simulation-snippets/elasticConfiguration'),
   7: () => import('./simulation-snippets/elasticConfiguration'),
   8: () => import('./simulation-snippets/eightPuzzle'),

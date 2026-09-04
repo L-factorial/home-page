@@ -12,6 +12,7 @@ import MagnusEffect from './simulations/magnusEffect/MagnusEffect';
 import KittyDeal from './simulations/kitty/KittyDeal';
 import UsaVoronoi from './simulations/usaVoronoi/UsaVoronoi';
 import FourierAudioDemo from './simulations/fourierAudio/FourierAudioDemo';
+import KarmaRealizationBhakti from './simulations/karmaRealizationBhakti/KarmaRealizationBhakti';
 import Markdown from 'react-markdown';
 import { getSimulationSnippet } from '../data/simulationSnippetRepository';
 import { useNavigate, useParams } from 'react-router-dom';
@@ -19,6 +20,12 @@ import { useNavigate, useParams } from 'react-router-dom';
 
 import { useEffect, useState } from 'react';
 const simulatitons = [
+    {
+        id: 18,
+        slug: 'karma-realization-bhakti',
+        title: 'Karma → Realization → Bhakti',
+        canvas: <KarmaRealizationBhakti />,
+    },
     {
         id: 13,
         slug: 'nepal-fourier-curve',
