@@ -21,12 +21,6 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 const simulatitons = [
     {
-        id: 18,
-        slug: 'karma-realization-bhakti',
-        title: 'Seven Days — Karma → Realization → Bhakti',
-        canvas: <KarmaRealizationBhakti />,
-    },
-    {
         id: 13,
         slug: 'nepal-fourier-curve',
         title: "Nepal as a Fourier Curve",
@@ -99,6 +93,12 @@ const simulatitons = [
         slug: 'eight-puzzle',
         title: "Eight Puzzle",
         canvas: <EightPuzzle />
+    },
+    {
+        id: 18,
+        slug: 'karma-realization-bhakti',
+        title: 'Seven Days — Karma → Realization → Bhakti',
+        canvas: <KarmaRealizationBhakti />,
     },
 ]
 
