@@ -23,7 +23,7 @@ const simulatitons = [
     {
         id: 18,
         slug: 'karma-realization-bhakti',
-        title: 'Karma → Realization → Bhakti',
+        title: 'Seven Days — Karma → Realization → Bhakti',
         canvas: <KarmaRealizationBhakti />,
     },
     {

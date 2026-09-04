@@ -1,9 +1,9 @@
 import { MODES } from '../../../simulation-logic/karma-realization-bhakti/KarmaRealizationBhaktiSystem';
 
 const LABELS = [
-  { x: 0.06, title: 'KARMA', subtitle: 'many modes · complex motion', note: 'superposition' },
-  { x: 0.36, title: 'REALIZATION', subtitle: 'damping · simplification', note: 'spectral entropy ↓' },
-  { x: 0.72, title: 'BHAKTI', subtitle: 'one mode · equilibrium', note: '(y, dy/dt) → (0, 0)' },
+  { x: 0.06, title: 'KARMA', subtitle: 'action · consequence', note: 'an impulse enters time' },
+  { x: 0.34, title: 'REALIZATION', subtitle: 'seven days · discernment', note: 'attention becomes selective' },
+  { x: 0.72, title: 'BHAKTI', subtitle: 'listening · alignment', note: 'phase difference → 0' },
 ];
 
 export default class KarmaRealizationBhaktiRenderer {
@@ -47,7 +47,7 @@ export default class KarmaRealizationBhaktiRenderer {
   drawLabels(width, activePhase) {
     const ctx = this.context;
     const compact = width < 620;
-    const phaseMap = { karma: 0, realization: 1, bhakti: 2, hold: 2, release: -1 };
+    const phaseMap = { karma: 0, realization: 1, bhakti: 2, transcendence: 2, release: -1 };
     LABELS.forEach((label, index) => {
       const anchor = this.point({ x: label.x, y: 0.43 });
       const active = phaseMap[activePhase] === index;
@@ -72,11 +72,11 @@ export default class KarmaRealizationBhaktiRenderer {
     const ctx = this.context;
     const compact = width < 620;
     const stories = {
-      karma: ['A STRUCK STRING', 'Five simple tones combine into one complex vibration'],
-      realization: ['THE SAME STRING, LOSING ENERGY', 'Higher frequencies fade faster; one clear tone remains'],
-      bhakti: ['THE LAST TONE IN PHASE SPACE', 'Position × velocity spirals naturally toward rest'],
-      hold: ['EQUILIBRIUM', 'position = 0  ·  velocity = 0'],
-      release: ['A NEW IMPULSE', 'Energy returns and the spectrum opens again'],
+      karma: ['PARIKSHIT ACTS IN ANGER', 'The action is brief, but its consequence has entered time'],
+      realization: [`PARIKSHIT LEARNS: ${8 - frame.day} ${8 - frame.day === 1 ? 'DAY' : 'DAYS'} REMAIN`, 'With limited time, ordinary concerns begin to lose their hold'],
+      bhakti: ['PARIKSHIT LISTENS TO SHUKADEVA', 'Many concerns give way to complete attention'],
+      transcendence: ['THE SEVENTH DAY', 'The body reaches its limit; what was understood remains'],
+      release: ['THE STORY BECOMES A NEW IMPULSE', 'What one person understands can awaken another'],
     };
     const [heading, explanation] = stories[frame.phase];
     ctx.save();
@@ -87,6 +87,24 @@ export default class KarmaRealizationBhaktiRenderer {
     ctx.fillStyle = 'rgba(183, 211, 195, 0.42)';
     ctx.font = `${compact ? 7 : 9}px system-ui, sans-serif`;
     ctx.fillText(explanation, width / 2, compact ? 38 : 44);
+    ctx.restore();
+  }
+
+  drawAnalogyKey(frame, width) {
+    const ctx = this.context;
+    const compact = width < 620;
+    const keys = {
+      karma: 'many waves = consequences and competing concerns',
+      realization: 'fading spectrum = attention separating essential from unnecessary',
+      bhakti: 'converging dots = attention aligning with one teaching',
+      transcendence: 'continuing wave = understanding carried beyond the final day',
+      release: 'returning impulse = the story beginning again for a new listener',
+    };
+    ctx.save();
+    ctx.textAlign = 'center';
+    ctx.fillStyle = 'rgba(213, 255, 95, 0.43)';
+    ctx.font = `italic ${compact ? 7 : 8}px Georgia, serif`;
+    ctx.fillText(keys[frame.phase], width / 2, compact ? 54 : 62);
     ctx.restore();
   }
 
@@ -111,7 +129,7 @@ export default class KarmaRealizationBhaktiRenderer {
     ctx.stroke();
     ctx.fillStyle = 'rgba(190, 215, 200, 0.3)';
     ctx.font = 'italic 8px Georgia, serif';
-    ctx.fillText('pluck', x + 25, y - 10);
+    ctx.fillText('impulse', x + 20, y - 10);
     ctx.restore();
   }
 
@@ -148,6 +166,7 @@ export default class KarmaRealizationBhaktiRenderer {
     ctx.save();
     ctx.lineCap = 'round';
     ctx.lineJoin = 'round';
+    ctx.shadowColor = clarity > 0.55 ? 'rgba(213, 255, 95, 0.72)' : 'rgba(137, 255, 199, 0.58)';
     for (let index = 1; index < trail.length; index += 1) {
       const previous = this.point(trail[index - 1]);
       const current = this.point(trail[index]);
@@ -155,19 +174,20 @@ export default class KarmaRealizationBhaktiRenderer {
       ctx.beginPath();
       ctx.moveTo(previous.x, previous.y);
       ctx.lineTo(current.x, current.y);
-      ctx.strokeStyle = `rgba(${Math.round(157 + clarity * 56)}, ${Math.round(213 + clarity * 42)}, ${Math.round(190 - clarity * 95)}, ${0.04 + age * 0.4})`;
-      ctx.lineWidth = 0.5 + age * (0.8 + clarity * 0.55);
+      ctx.strokeStyle = `rgba(${Math.round(157 + clarity * 56)}, ${Math.round(213 + clarity * 42)}, ${Math.round(190 - clarity * 95)}, ${0.08 + age * 0.58})`;
+      ctx.lineWidth = 0.65 + age * (1.05 + clarity * 0.72);
+      ctx.shadowBlur = 2 + age * 10;
       ctx.stroke();
     }
     ctx.restore();
   }
 
   drawSpectrum(frame, width, height) {
-    if (frame.phase === 'bhakti' || frame.phase === 'hold') return;
+    if (frame.phase === 'bhakti' || frame.phase === 'transcendence') return;
     const ctx = this.context;
     const compact = width < 620;
     const barWidth = compact ? 9 : 13;
-    const gap = compact ? 6 : 8;
+    const gap = compact ? 6 : 40;
     const spectrumWidth = MODES.length * barWidth + (MODES.length - 1) * gap;
     const startX = Math.max(compact ? 24 : 42, width * 0.18 - spectrumWidth / 2);
     const baseline = height - (compact ? 28 : 34);
@@ -186,8 +206,87 @@ export default class KarmaRealizationBhaktiRenderer {
       ctx.fillStyle = 'rgba(190, 215, 200, 0.25)';
       ctx.font = `${compact ? 6 : 7}px ui-monospace, monospace`;
       ctx.textAlign = 'center';
-      ctx.fillText(`${MODES[index].harmonic}ω`, x + barWidth / 2, baseline + 10);
+      ctx.fillText(compact ? `${MODES[index].harmonic}ω` : MODES[index].concern, x + barWidth / 2, baseline + 10);
     });
+    ctx.restore();
+  }
+
+  drawSevenDays(frame) {
+    if (frame.phase === 'karma' || frame.phase === 'release') return;
+    const ctx = this.context;
+    const y = this.point({ x: 0, y: 0.29 }).y;
+    ctx.save();
+    ctx.textAlign = 'center';
+    for (let day = 1; day <= 7; day += 1) {
+      const x = this.point({ x: 0.29 + (day - 1) * 0.052, y: 0 }).x;
+      const reached = day <= frame.day;
+      ctx.beginPath();
+      ctx.moveTo(x, y + 5);
+      ctx.lineTo(x, y + 13);
+      ctx.strokeStyle = reached ? 'rgba(213, 255, 95, 0.66)' : 'rgba(190, 215, 200, 0.16)';
+      ctx.stroke();
+      ctx.fillStyle = reached ? 'rgba(225, 244, 232, 0.7)' : 'rgba(190, 215, 200, 0.22)';
+      ctx.font = '7px ui-monospace, monospace';
+      ctx.fillText(String(day), x, y);
+    }
+    ctx.restore();
+  }
+
+  drawTeachingSignal(frame) {
+    if (frame.teachingStrength <= 0.002) return;
+    const ctx = this.context;
+    const strength = frame.teachingStrength * frame.signalOpacity;
+    const startX = 0.54;
+    const endX = 0.96;
+    ctx.save();
+    ctx.beginPath();
+    for (let index = 0; index <= 80; index += 1) {
+      const u = index / 80;
+      const point = this.point({
+        x: startX + (endX - startX) * u,
+        y: -0.31 + Math.sin(u * Math.PI * 6) * 0.018,
+      });
+      if (index === 0) ctx.moveTo(point.x, point.y);
+      else ctx.lineTo(point.x, point.y);
+    }
+    ctx.strokeStyle = `rgba(213, 255, 95, ${0.15 + strength * 0.48})`;
+    ctx.lineWidth = 1.2;
+    ctx.stroke();
+    const label = this.point({ x: 0.75, y: -0.36 });
+    ctx.fillStyle = `rgba(218, 240, 225, ${strength * 0.58})`;
+    ctx.textAlign = 'center';
+    ctx.font = 'italic 8px Georgia, serif';
+    ctx.fillText('Śukadeva’s teaching · reference frequency ω₀', label.x, label.y);
+    ctx.restore();
+  }
+
+  drawAlignment(frame) {
+    if (frame.phase !== 'bhakti' && frame.phase !== 'transcendence') return;
+    const ctx = this.context;
+    const center = this.point(frame.center);
+    const radiusPoint = this.point({ x: frame.center.x + 0.115, y: 0 });
+    const radius = radiusPoint.x - center.x;
+    ctx.save();
+    ctx.beginPath();
+    ctx.arc(center.x, center.y, radius, 0, Math.PI * 2);
+    ctx.strokeStyle = 'rgba(196, 226, 208, 0.12)';
+    ctx.setLineDash([3, 5]);
+    ctx.stroke();
+    ctx.setLineDash([]);
+    frame.alignment.phases.forEach((phase, index) => {
+      const point = this.point({
+        x: frame.center.x + 0.115 * Math.cos(phase),
+        y: 0.115 * 0.72 * Math.sin(phase),
+      });
+      ctx.beginPath();
+      ctx.arc(point.x, point.y, 2.4, 0, Math.PI * 2);
+      ctx.fillStyle = `${MODES[index].color}${Math.round(frame.physicalOpacity * 150).toString(16).padStart(2, '0')}`;
+      ctx.fill();
+    });
+    ctx.fillStyle = `rgba(213, 255, 95, ${0.42 + frame.alignment.coherence * 0.45})`;
+    ctx.textAlign = 'center';
+    ctx.font = '9px ui-monospace, monospace';
+    ctx.fillText(`coherence R = ${frame.alignment.coherence.toFixed(2)}`, center.x, center.y + radius + 24);
     ctx.restore();
   }
 
@@ -215,31 +314,10 @@ export default class KarmaRealizationBhaktiRenderer {
     const ctx = this.context;
     const center = this.point(frame.center);
     const strength = frame.phase === 'karma' ? 0.12 : frame.phase === 'realization' ? 0.35 + frame.spectrum.lambda * 0.45 : 1;
-    if (frame.phase === 'bhakti') {
-      ctx.save();
-      ctx.strokeStyle = 'rgba(213, 255, 95, 0.11)';
-      ctx.setLineDash([3, 5]);
-      ctx.beginPath();
-      ctx.moveTo(center.x - 70, center.y);
-      ctx.lineTo(center.x + 70, center.y);
-      ctx.moveTo(center.x, center.y - 55);
-      ctx.lineTo(center.x, center.y + 55);
-      ctx.stroke();
-      ctx.setLineDash([]);
-      ctx.fillStyle = 'rgba(194, 220, 205, 0.28)';
-      ctx.font = 'italic 8px Georgia, serif';
-      ctx.fillText('y', center.x + 73, center.y + 3);
-      ctx.fillText('dy/dt', center.x + 5, center.y - 58);
-      ctx.textAlign = 'center';
-      ctx.fillStyle = 'rgba(213, 255, 95, 0.42)';
-      ctx.font = 'italic 8px Georgia, serif';
-      ctx.fillText('same vibration, now viewed as state (y, dy/dt)', center.x, center.y + 73);
-      ctx.restore();
-    }
     ctx.save();
     ctx.beginPath();
     ctx.arc(center.x, center.y, 3.2, 0, Math.PI * 2);
-    ctx.fillStyle = `rgba(213, 255, 95, ${0.3 + strength * 0.64})`;
+    ctx.fillStyle = `rgba(213, 255, 95, ${(0.3 + strength * 0.64) * frame.signalOpacity})`;
     ctx.shadowColor = '#d5ff5f';
     ctx.shadowBlur = 6 + strength * 20;
     ctx.fill();
@@ -251,10 +329,10 @@ export default class KarmaRealizationBhaktiRenderer {
     const particle = this.point(frame.particle);
     ctx.save();
     ctx.beginPath();
-    ctx.arc(particle.x, particle.y, frame.phase === 'hold' ? 4.5 : 3.5, 0, Math.PI * 2);
-    ctx.fillStyle = '#f5fff8';
-    ctx.shadowColor = frame.phase === 'hold' ? '#d5ff5f' : '#a9ffd1';
-    ctx.shadowBlur = frame.phase === 'hold' ? 28 : 16;
+    ctx.arc(particle.x, particle.y, frame.phase === 'transcendence' ? 4.5 : 3.5, 0, Math.PI * 2);
+    ctx.fillStyle = `rgba(245, 255, 248, ${frame.physicalOpacity})`;
+    ctx.shadowColor = '#a9ffd1';
+    ctx.shadowBlur = frame.phase === 'transcendence' ? 28 : 16;
     ctx.fill();
     ctx.restore();
   }
@@ -264,9 +342,13 @@ export default class KarmaRealizationBhaktiRenderer {
     this.drawBackground(bounds.width, bounds.height);
     this.drawString(bounds.width);
     this.drawStory(frame, bounds.width);
+    this.drawAnalogyKey(frame, bounds.width);
     this.drawLabels(bounds.width, frame.phase);
+    this.drawSevenDays(frame);
     this.drawHarmonicComponents(frame);
     this.drawTrail(trail, frame);
+    this.drawTeachingSignal(frame);
+    this.drawAlignment(frame);
     this.drawCenter(frame);
     this.drawParticle(frame);
     this.drawSpectrum(frame, bounds.width, bounds.height);

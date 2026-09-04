@@ -1,53 +1,59 @@
-export default String.raw`# Karma → Realization → Bhakti
+export default String.raw`# Seven Days — Karma → Realization → Bhakti
 
-The animation models one natural event: the sound and motion of a struck vibrating body. A bell, string, or membrane begins with many normal modes, loses its higher modes through damping, and eventually returns to equilibrium.
+This visualization is an abstract mathematical retelling of King Parikshit's final seven days. It uses signals rather than literal figures or religious imagery.
 
-## Karma: superposition
+## Karma: an action enters time
 
-Immediately after excitation, several frequencies coexist:
+One impulse disturbs a calm system and unfolds into several frequencies:
 
-    y(t) = Σ Aₖ sin(ωₖt + φₖ)
+    x(t) = Σ Aₖ sin(ωₖt + φₖ)
 
-The displayed trajectory is the sum of five deterministic harmonics. Their interference produces complex motion even though every individual mode is simple. The small spectrum shows the amplitude of each component.
+The impulse represents an action whose consequences have entered time. The secondary frequencies stand for the many concerns competing for attention: achievement, possession, identity, and fear. The first stage is deterministic; complexity comes from superposition rather than randomness.
 
-## Realization: frequency-dependent damping
+## Realization: seven days make time visible
 
-One parameter λ describes dissipation. Higher modes decay more quickly than the fundamental:
+Seven markers represent the interval between learning of the curse and its fulfillment. Across those days, attention behaves like a progressively selective filter:
 
-    Aₖ(λ) = Aₖ(0)(1 − λ)^qₖ
+    Aₖ(d) = Aₖ(0)(1 − λ(d))^qₖ
 
-The exponents qₖ increase for higher modes. As λ moves from zero to one, the spectrum visibly changes from five peaks to one. The trajectory becomes smooth because its high-frequency content has physically disappeared—not because a visual smoothing filter was applied.
+Larger exponents qₖ remove secondary frequencies more quickly, while the fundamental remains. The spectrum therefore changes visibly from five peaks to one.
 
-The energy fraction of each mode is:
+The normalized spectral entropy measures how widely attention is distributed:
 
     pₖ = Aₖ² / Σ Aⱼ²
-
-and the normalized spectral entropy displayed in the animation is:
-
     Hₛ = −Σ pₖ log(pₖ) / log(N)
 
-Karma has distributed spectral energy and high Hₛ. During Realization, Hₛ falls until only the fundamental remains.
+As Hₛ falls, the animation moves from many concerns toward one essential signal. This is discernment, not merely loss of energy.
 
-## Bhakti: equilibrium in phase space
+## Shukadeva: a stable reference
 
-The remaining mode follows the damped harmonic-oscillator equation:
+Late in the seven-day interval, a clean reference frequency appears. It represents Shukadeva's teaching of the Bhagavatam. The representation is deliberately abstract: teaching is modeled as a stable signal ω₀ to which attention can orient itself.
 
-    d²y/dt² + 2γ dy/dt + ω²y = 0
+## Bhakti: phase alignment
 
-Its state is not only position y, but the pair (y, dy/dt). For an underdamped oscillator, this state follows a spiral:
+The surviving oscillations initially have different phases. Their phase error follows a synchronization model:
 
-    r(t) = r₀e^(−γt)
-    θ(t) = θ₀ + ωt
+    d(Δφ)/dt = −K sin(Δφ)
 
-The spiral therefore represents the phase portrait of the same vibration. Its radius approaches zero as both displacement and velocity approach equilibrium:
+Consequently:
 
-    (y, dy/dt) → (0, 0)
+    Δφ → 0
 
-The complete progression is one physical and mathematical story:
+The dots around the phase circle converge until they move together. Their Kuramoto-style coherence is displayed as:
 
-    superposition → dissipation → equilibrium
+    R = |(1/N) Σ exp(iφⱼ)|
 
-or, more poetically:
+Distributed phases have R < 1; complete alignment has R = 1. Bhakti is therefore represented not as silence, but as complete attention and resonance with the signal recognized as essential.
 
-    many voices → one tone → silence`;
+## The seventh day
+
+At the end, the physical particle fades while the coherent reference wave continues. This represents the body's finite deadline without depicting Takshaka literally. The continuing wave folds into the next impulse, closing the loop.
+
+The complete transformation is:
+
+    action → consequence → discernment → alignment
+
+or:
+
+    many concerns → one essential teaching → complete attention`;
 

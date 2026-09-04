@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { getKarmaFrame, LOOP_DURATION } from '../../../simulation-logic/karma-realization-bhakti/KarmaRealizationBhaktiSystem';
 import KarmaRealizationBhaktiRenderer from './KarmaRealizationBhaktiRenderer';
+import parikshitSevenDays from '../../../img/parikshit-seven-days.png';
 
 export default function KarmaRealizationBhakti() {
   const wrapperRef = useRef(null);
@@ -13,6 +14,8 @@ export default function KarmaRealizationBhakti() {
   const elapsedRef = useRef(0);
   const previousTimestampRef = useRef(null);
   const [paused, setPaused] = useState(false);
+  const [visualPhase, setVisualPhase] = useState('karma');
+  const visualPhaseRef = useRef('karma');
 
   useEffect(() => {
     const wrapper = wrapperRef.current;
@@ -36,6 +39,10 @@ export default function KarmaRealizationBhakti() {
       if (!pausedRef.current) elapsedRef.current += delta;
 
       const frame = getKarmaFrame(elapsedRef.current, pointerRef.current, reducedMotion);
+      if (frame.phase !== visualPhaseRef.current) {
+        visualPhaseRef.current = frame.phase;
+        setVisualPhase(frame.phase);
+      }
       const previous = trailRef.current[trailRef.current.length - 1];
       if (!previous || frame.progress >= previous.progress) {
         trailRef.current.push({ ...frame.particle, progress: frame.progress });
@@ -51,6 +58,8 @@ export default function KarmaRealizationBhakti() {
     if (reducedMotion) {
       elapsedRef.current = LOOP_DURATION * 0.68;
       const frame = getKarmaFrame(elapsedRef.current, null, true);
+      visualPhaseRef.current = frame.phase;
+      setVisualPhase(frame.phase);
       rendererRef.current.render(frame, [frame.particle], elapsedRef.current);
     } else {
       animationRef.current = requestAnimationFrame(draw);
@@ -102,15 +111,25 @@ export default function KarmaRealizationBhakti() {
       aria-label="Karma, realization, and bhakti visualized as a dynamical system"
     >
       <canvas ref={canvasRef} aria-hidden="true" />
+      <div className={`karma-story-art phase-${visualPhase}`} aria-hidden="true">
+        <img className="karma-story-panel action" src={parikshitSevenDays} alt="" draggable="false" />
+        <img className="karma-story-panel reflection" src={parikshitSevenDays} alt="" draggable="false" />
+        <img className="karma-story-panel listening" src={parikshitSevenDays} alt="" draggable="false" />
+        <span className="karma-story-label action-label">King Parikshit · action</span>
+        <span className="karma-story-label reflection-label">Seven days · reflection</span>
+        <span className="karma-story-label listening-label">Shukadeva · Bhagavatam</span>
+      </div>
       <div className="karma-system-equation" aria-hidden="true">
-        y(t) = Σ Aₖe⁻ᵞᵏᵗ sin(ωₖt)
+        Aₖ(d) ↓  ·  Δφ → 0  ·  R → 1
       </div>
       <button className="karma-animation-toggle" type="button" onClick={togglePaused} aria-pressed={paused}>
         {paused ? 'Resume motion' : 'Pause motion'}
       </button>
       <p className="sr-only">
-        A particle begins as the superposition of five vibration modes. Higher frequencies dissipate
-        until one tone remains, whose phase-space orbit spirals into equilibrium before the cycle begins again.
+        King Parikshit acts in anger and learns that its consequence will arrive in seven days.
+        As the seven days pass, ordinary concerns fade from the spectrum. He listens to Shukadeva's
+        teaching with complete attention. On the seventh day the physical point disappears, while
+        the coherent signal representing his understanding continues.
       </p>
     </section>
   );

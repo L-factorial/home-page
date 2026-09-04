@@ -1,4 +1,4 @@
-import { getKarmaFrame, getSpectrum, LOOP_DURATION, smoothstep } from './KarmaRealizationBhaktiSystem';
+import { getKarmaFrame, getPhaseAlignment, getSpectrum, LOOP_DURATION, smoothstep } from './KarmaRealizationBhaktiSystem';
 
 describe('KarmaRealizationBhaktiSystem', () => {
   test('returns deterministic state for the same timestamp', () => {
@@ -36,12 +36,26 @@ describe('KarmaRealizationBhaktiSystem', () => {
     expect(final.probabilities.reduce((sum, value) => sum + value, 0)).toBeCloseTo(1);
   });
 
-  test('phase-space radius converges toward equilibrium', () => {
-    const outer = getKarmaFrame(LOOP_DURATION * 0.61);
-    const middle = getKarmaFrame(LOOP_DURATION * 0.72);
-    const inner = getKarmaFrame(LOOP_DURATION * 0.83);
-    expect(outer.spiralRadius).toBeGreaterThan(middle.spiralRadius);
-    expect(middle.spiralRadius).toBeGreaterThan(inner.spiralRadius);
+  test('realization advances through seven explicit days', () => {
+    expect(getKarmaFrame(LOOP_DURATION * 0.251).day).toBe(1);
+    expect(getKarmaFrame(LOOP_DURATION * 0.61).day).toBe(7);
+  });
+
+  test('phase alignment converges to full coherence', () => {
+    const distributed = getPhaseAlignment(0, 0.4);
+    const partial = getPhaseAlignment(0.5, 0.4);
+    const aligned = getPhaseAlignment(1, 0.4);
+    expect(distributed.coherence).toBeLessThan(partial.coherence);
+    expect(partial.coherence).toBeLessThan(aligned.coherence);
+    expect(aligned.coherence).toBeCloseTo(1);
+    aligned.phases.forEach((phase) => expect(phase).toBeCloseTo(0.4));
+  });
+
+  test('the physical point fades on the seventh day while the signal remains', () => {
+    const beginning = getKarmaFrame(LOOP_DURATION * 0.861);
+    const end = getKarmaFrame(LOOP_DURATION * 0.949);
+    expect(beginning.physicalOpacity).toBeGreaterThan(end.physicalOpacity);
+    expect(end.signalOpacity).toBe(1);
   });
 
   test('smoothstep clamps values to its domain', () => {
@@ -49,4 +63,3 @@ describe('KarmaRealizationBhaktiSystem', () => {
     expect(smoothstep(2)).toBe(1);
   });
 });
-

@@ -609,8 +609,97 @@ canvas {
     border-radius: inherit;
 }
 
+.karma-story-art {
+    position: absolute;
+    z-index: 1;
+    inset: 64px 10px 46px;
+    overflow: hidden;
+    border-radius: 16px;
+    pointer-events: none;
+}
+
+.karma-story-panel {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    opacity: .06;
+    filter: saturate(.8) brightness(.78);
+    mix-blend-mode: screen;
+    transition: opacity 800ms ease, filter 800ms ease;
+}
+
+.karma-story-panel.action {
+    clip-path: inset(0 65% 0 0);
+}
+
+.karma-story-panel.reflection {
+    clip-path: inset(0 31% 0 28%);
+}
+
+.karma-story-panel.listening {
+    clip-path: inset(0 0 0 56%);
+}
+
+.karma-story-label {
+    position: absolute;
+    bottom: 9%;
+    padding: 4px 8px;
+    color: rgba(222, 239, 229, .3);
+    border: 1px solid rgba(206, 231, 216, .08);
+    border-radius: 999px;
+    background: rgba(5, 13, 9, .58);
+    font: 600 clamp(.46rem, .8vw, .62rem) system-ui, sans-serif;
+    letter-spacing: .04em;
+    white-space: nowrap;
+    opacity: .2;
+    transition: opacity 800ms ease, color 800ms ease, border-color 800ms ease;
+}
+
+.karma-story-label.action-label {
+    left: 6%;
+}
+
+.karma-story-label.reflection-label {
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.karma-story-label.listening-label {
+    right: 5%;
+}
+
+.karma-story-art.phase-karma .action,
+.karma-story-art.phase-release .action {
+    opacity: .48;
+    filter: saturate(1.15) brightness(1.02);
+}
+
+.karma-story-art.phase-karma .action-label,
+.karma-story-art.phase-release .action-label,
+.karma-story-art.phase-realization .reflection-label,
+.karma-story-art.phase-bhakti .listening-label,
+.karma-story-art.phase-transcendence .listening-label {
+    color: rgba(241, 255, 246, .88);
+    border-color: rgba(213, 255, 95, .3);
+    opacity: 1;
+}
+
+.karma-story-art.phase-realization .reflection {
+    opacity: .5;
+    filter: saturate(1.08) brightness(1.04);
+}
+
+.karma-story-art.phase-bhakti .listening,
+.karma-story-art.phase-transcendence .listening {
+    opacity: .54;
+    filter: saturate(1.12) brightness(1.06);
+}
+
 .karma-system-equation {
     position: absolute;
+    z-index: 2;
     left: clamp(18px, 3.2vw, 42px);
     bottom: clamp(16px, 3vh, 28px);
     color: rgba(201, 224, 211, .3);
@@ -621,6 +710,7 @@ canvas {
 
 .karma-animation-toggle {
     position: absolute;
+    z-index: 3;
     right: clamp(14px, 2vw, 25px);
     bottom: clamp(12px, 2.5vh, 21px);
     padding: 6px 10px;
@@ -656,6 +746,23 @@ canvas {
 }
 
 @media only screen and (max-width: 620px) {
+    .karma-story-art {
+        inset: 58px 4px 42px;
+    }
+
+    .karma-story-art.phase-karma .action,
+    .karma-story-art.phase-realization .reflection,
+    .karma-story-art.phase-bhakti .listening,
+    .karma-story-art.phase-transcendence .listening {
+        opacity: .42;
+    }
+
+    .karma-story-label {
+        bottom: 5%;
+        padding: 3px 5px;
+        font-size: .4rem;
+    }
+
     .karma-system-equation {
         display: none;
     }
