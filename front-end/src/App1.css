@@ -2181,38 +2181,123 @@ canvas {
 
 .projects-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr));
-    gap: 20px;
-}
-
-.project-group {
-    padding: 24px;
-    border: 1px solid var(--line);
-    border-radius: 16px;
-    background: rgba(213, 255, 95, 0.06);
+    gap: 32px;
 }
 
 .project-group h2 {
     margin: 0 0 14px;
-    font-size: 1.4rem;
+    color: var(--ink);
+    font-size: 1.35rem;
 }
 
 .project-group ul {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 225px), 1fr));
+    gap: 16px;
     margin: 0;
-    padding-left: 20px;
-    font-family: Arial, sans-serif;
-    font-size: 1rem;
-    line-height: 1.6;
+    padding: 0;
+    list-style: none;
 }
 
-.project-group li + li {
-    margin-top: 10px;
+.project-group li { min-width: 0; }
+.project-group-external { margin-top: 32px; }
+
+.main-content-projects .project-card {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    overflow: hidden;
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    background: rgba(255, 255, 255, 0.65);
+    color: var(--ink);
+    text-decoration: none;
+    transition: transform 180ms ease, box-shadow 180ms ease;
 }
 
-.project-group a:focus-visible {
-    outline: 2px solid var(--accent-deep);
+.project-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 24px rgba(34, 52, 43, 0.12);
+}
+
+.project-card:focus-visible {
+    outline: 3px solid var(--accent-deep);
     outline-offset: 4px;
-    border-radius: 2px;
+}
+
+.project-card-preview {
+    position: relative;
+    overflow: hidden;
+    background: radial-gradient(ellipse at top right, #365e4a, #192f28);
+}
+
+.project-preview-art {
+    display: block;
+    width: 100%;
+    aspect-ratio: 320 / 165;
+}
+
+.project-card-overlay {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    padding: 18px;
+    background: rgba(18, 37, 29, 0.94);
+    color: #f4f7eb;
+    font: 0.88rem/1.55 Arial, sans-serif;
+    opacity: 0;
+    transition: opacity 180ms ease;
+}
+
+.project-card:hover .project-card-overlay,
+.project-card:focus-visible .project-card-overlay { opacity: 1; }
+
+.project-card-caption {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    flex: 1;
+    padding: 16px;
+}
+
+.project-card-caption h3 {
+    margin: 0;
+    font-size: 1.05rem;
+    line-height: 1.4;
+}
+
+.project-card-caption > span { color: var(--accent-deep); }
+
+.preview-particle { animation: project-drift 3.5s ease-in-out infinite alternate; }
+.preview-orbit { transform-origin: 160px 80px; animation: project-orbit 12s linear infinite; }
+.preview-trace { stroke-dasharray: 550; animation: project-trace 5s ease-in-out infinite alternate; }
+.preview-region { animation: project-glow 4s ease-in-out infinite alternate; }
+.preview-card { animation: project-deal 3s ease-in-out infinite alternate; }
+.preview-tile { animation: project-slide 3s ease-in-out infinite alternate; }
+.preview-football { animation: project-kick 4s ease-in-out infinite alternate; }
+
+@keyframes project-drift { to { transform: translate(var(--drift-x), var(--drift-y)); } }
+@keyframes project-orbit { to { transform: rotate(360deg); } }
+@keyframes project-trace { from { stroke-dashoffset: 550; } to { stroke-dashoffset: 0; } }
+@keyframes project-glow { from { opacity: 0.5; } to { opacity: 1; } }
+@keyframes project-deal { to { transform: translateY(-8px); } }
+@keyframes project-slide { 0%, 25% { transform: translateX(0); } 75%, 100% { transform: translateX(45px); } }
+@keyframes project-kick { from { transform: translate(-62px, 23px); } to { transform: translate(82px, 3px); } }
+
+@media (hover: none), (pointer: coarse), (max-width: 600px) {
+    .project-card-overlay {
+        position: static;
+        opacity: 1;
+        padding: 14px 16px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .project-preview-art * { animation: none; }
+    .main-content-projects .project-card, .project-card-overlay { transition: none; }
+    .project-card:hover { transform: none; }
 }
 
 .projects-message,
