@@ -12,15 +12,19 @@ export default class FourierAudioEngine {
     this.playing = false;
     this.offset = 0;
     this.startedAt = 0;
+    this.starting = false;
+    this.disposed = false;
   }
 
   async load(url) {
     const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+    if (!AudioContextClass) throw new Error('This browser does not support audio playback. Please try another browser.');
     this.context = new AudioContextClass();
     const response = await fetch(url);
     if (!response.ok) throw new Error(`Audio request failed with ${response.status}.`);
     const encodedAudio = await response.arrayBuffer();
     const decoded = await this.context.decodeAudioData(encodedAudio);
+    if (this.disposed) return null;
     const samples = new Float32Array(decoded.getChannelData(0));
     this.processor = new FourierAudioProcessor(samples, decoded.sampleRate);
     this.buffer = this.createBuffer(samples);
@@ -61,13 +65,33 @@ export default class FourierAudioEngine {
   }
 
   async play() {
-    if (!this.buffer || this.playing) return;
-    await this.context.resume();
-    const nodes = this.createSource(this.buffer, this.offset);
-    this.source = nodes.source;
-    this.gain = nodes.gain;
-    this.startedAt = this.context.currentTime;
-    this.playing = true;
+    if (!this.buffer || this.playing || this.starting || this.disposed) return;
+    this.starting = true;
+    let timeout;
+    try {
+      // Resume and start the source during the tap, before yielding the gesture.
+      const resumed = this.context.resume();
+      const nodes = this.createSource(this.buffer, this.offset);
+      this.source = nodes.source;
+      this.gain = nodes.gain;
+      this.startedAt = this.context.currentTime;
+      await Promise.race([
+        resumed,
+        new Promise((resolve, reject) => {
+          timeout = window.setTimeout(() => reject(new Error('Audio could not start. Tap Play to try again.')), 5000);
+        }),
+      ]);
+      if (this.disposed) return;
+      if (this.context.state !== 'running') throw new Error('Audio was interrupted. Tap Play to try again.');
+      this.playing = true;
+    } catch (error) {
+      this.stopCurrentSource();
+      this.playing = false;
+      throw error;
+    } finally {
+      window.clearTimeout(timeout);
+      this.starting = false;
+    }
   }
 
   pause() {
@@ -78,6 +102,7 @@ export default class FourierAudioEngine {
   }
 
   restart() {
+    if (this.starting || this.disposed) return Promise.resolve();
     const wasPlaying = this.playing;
     if (wasPlaying) this.stopCurrentSource();
     this.offset = 0;
@@ -141,6 +166,7 @@ export default class FourierAudioEngine {
   }
 
   async dispose() {
+    this.disposed = true;
     this.stopCurrentSource();
     this.playing = false;
     if (this.context && this.context.state !== 'closed') await this.context.close();

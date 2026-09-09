@@ -32,7 +32,7 @@ export default function FourierAudioDemo() {
       </header>
 
       {audio.status === 'loading' && <div className="fourier-audio-message">Loading and transforming the WAV signal…</div>}
-      {audio.status === 'error' && <div className="fourier-audio-message error">{audio.error}</div>}
+      {audio.error && <div className="fourier-audio-message error" role="alert">{audio.error}</div>}
 
       {audio.visualData && (
         <div className="fourier-audio-content">
@@ -96,4 +96,3 @@ export default function FourierAudioDemo() {
     </section>
   );
 }
-

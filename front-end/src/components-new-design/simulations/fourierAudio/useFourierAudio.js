@@ -34,6 +34,8 @@ export default function useFourierAudio() {
 
     const updateClock = (timestamp) => {
       if (active && timestamp - lastUpdate > 45) {
+        if (engine.playing && engine.context.state !== 'running') engine.pause();
+        setPlaying(engine.playing);
         setCurrentTime(engine.currentTime());
         lastUpdate = timestamp;
       }
@@ -57,17 +59,32 @@ export default function useFourierAudio() {
       setPlaying(false);
       setCurrentTime(engine.currentTime());
     } else {
-      await engine.play();
-      setPlaying(true);
+      setError('');
+      try {
+        await engine.play();
+        if (engineRef.current === engine) setPlaying(engine.playing);
+      } catch (playError) {
+        if (engineRef.current !== engine) return;
+        setPlaying(false);
+        setError(playError.message || 'Audio could not start. Tap Play to try again.');
+      }
     }
   }, [status]);
 
   const restart = useCallback(async () => {
     const engine = engineRef.current;
     if (!engine) return;
-    await engine.restart();
-    setCurrentTime(0);
-    setPlaying(engine.playing);
+    setError('');
+    try {
+      await engine.restart();
+      if (engineRef.current !== engine) return;
+      setCurrentTime(0);
+      setPlaying(engine.playing);
+    } catch (playError) {
+      if (engineRef.current !== engine) return;
+      setPlaying(false);
+      setError(playError.message || 'Audio could not restart. Tap Play to try again.');
+    }
   }, []);
 
   const removeSelectedBand = useCallback(() => {
@@ -115,4 +132,3 @@ export default function useFourierAudio() {
     resetFrequencies,
   };
 }
-
