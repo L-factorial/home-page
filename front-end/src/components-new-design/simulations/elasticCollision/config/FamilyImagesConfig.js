@@ -69,7 +69,9 @@ class FamilyImagesConfig{
             if(!shouldPlace) {
                 continue;
             }
-            if(imgIdx == 1) {
+            // Ray is deliberately the lightest particle; every other family
+            // member keeps the identical base mass supplied to Particle.
+            if(imgIdx === 3) {
                 currParticle.mass = currParticle.mass/8;
             }
             this.particlesArray.push(currParticle);

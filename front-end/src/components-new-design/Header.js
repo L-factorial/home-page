@@ -59,6 +59,7 @@ function Header() {
                             <a href='https://ku.edu.np/'>Kathmandu University</a>
                             <Link to="/projects" onClick={handleLinkClick}>Projects</Link>
                             <a href="https://soccer-agent.lfactorial.com/" target="_blank" rel="noreferrer" onClick={handleLinkClick}>Soccer field analysis agent</a>
+                            <a href="https://prod.bhidne-ho.lfactorial.com" target="_blank" rel="noreferrer" onClick={handleLinkClick}>BhidneHo? - Multiplayer Nepali Card game</a>
                             <div className="sidebar-blog-label">Blogs</div> 
                             <div className="sidebar-blog-status">Under construction</div>
                         </nav>
